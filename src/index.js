@@ -96,11 +96,15 @@ function makeWindow(opts) {
       ...newState
     };
 
+    let { w, h, y, x } = state;
+    if (x < 0) x = 0;
+    if (y < 0) y = 0;
+
     Object.assign(el.style, {
-      width: `${state.w}px`,
-      height: `${state.h}px`,
-      top: `${state.y}px`,
-      left: `${state.x}px`
+      width: `${w}px`,
+      height: `${h}px`,
+      top: `${y}px`,
+      left: `${x}px`
     });
   }
 
@@ -127,6 +131,7 @@ function makeWindow(opts) {
   });
 
   el.querySelector(".close").addEventListener("click", function () {
+    interact(el).unset();
     container.removeChild(el);
     delete windows[id];
   });
@@ -173,28 +178,29 @@ function makeWindow(opts) {
     .draggable({
       allowFrom: ".title-bar",
       ignoreFrom: "button",
+      cursorChecker: () => null,
       listeners: {
         move: function dragMoveListener(event) {
           let { x, y, w, h, snapTo, snapped } = win.state;
+          const padding = 5;
 
           if (snapped) {
             w = win.prevState.w;
             h = win.prevState.h;
             x = event.pageX - event.pageX / (win.state.w / w) + x / 2;
-            y = event.pageY;
+            y = event.pageY - event.pageY / (win.state.h / h) + y / 2;
             snapped = false;
           } else {
             x += event.dx;
             y += event.dy;
           }
-
-          if (event.pageX <= 0) {
+          if (event.pageX - padding <= 0) {
             dropLeft.style.opacity = 1;
             snapTo = "left";
-          } else if (event.pageX >= container.offsetWidth) {
+          } else if (event.pageX + padding >= container.offsetWidth) {
             dropRight.style.opacity = 1;
             snapTo = "right";
-          } else if (event.pageY <= 0) {
+          } else if (event.pageY - padding <= 0) {
             dropFull.style.opacity = 1;
             snapTo = "top";
           } else {
@@ -241,5 +247,3 @@ for (let i = 0; i < 2; i++) {
     </section></div>`)
   });
 }
-
-// interact(target).unset()
