@@ -11,18 +11,9 @@
     "7.css": "0.3.0",
     "interactjs": "1.10.2"
   },
-  "staticFiles": {
-    "staticPath": [
-      {
-        "staticPath": "node_modules/7.css/dist/**",
-        "staticOutDir": "/"
-      }
-    ]
-  },
   "devDependencies": {
     "@babel/core": "7.2.0",
-    "parcel-bundler": "^1.6.1",
-    "parcel-plugin-static-files-copy": "2.5.1"
+    "parcel-bundler": "^1.6.1"
   },
   "keywords": []
 }
