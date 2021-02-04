@@ -18,7 +18,7 @@ html {
   min-width: 320px;
 }
 .window-wrapper.snapping {
-  transition-property: width, height, top, left;
+  transition-property: width, height, top, left, opacity;
   transition-duration: 0.3s;
 }
 .window {
@@ -36,7 +36,7 @@ html {
   justify-content: space-between;
 }
 
-.background {
+.desktop {
   position: absolute;
   top: 0;
   left: 0;
@@ -45,6 +45,59 @@ html {
   background: url("https://source.unsplash.com/random/2048x1536?animal,nature")
     center center;
   display: flex;
+  flex-direction: column;
+}
+
+.window-container {
+  display: flex;
+  flex: 1;
+  position: relative;
+}
+.taskbar-container {
+  height: 45px;
+  border-radius: 0;
+  z-index: 999 !important;
+}
+.taskbar-container::before {
+  border-radius: 0;
+  border-top: #fff 1px solid;
+}
+.taskbar-container .title-bar {
+  border-radius: 0;
+  width: 100%;
+  height: 100%;
+  border-top: #000 1px solid;
+  display: flex;
+  padding: 0;
+  justify-content: flex-start;
+}
+.taskbar-btn {
+  width: 60px;
+  height: 100%;
+  border-radius: 6px;
+  border: #000 1px solid;
+  margin-right: 4px;
+  background: linear-gradient(150deg, #fff 0%, rgba(255, 255, 255, 0.5) 30%, transparent 100%);
+  height: calc(100% + 2px);
+}
+.taskbar-btn > div {
+  border-radius: 6px;
+  border: rgba(255, 255, 255, 0.3) 1px solid;
+  height: 100%;
+  width: 100%;
+}
+.taskbar-btn > div::after {
+  background: radial-gradient(circle, #fff 0%, rgba(255, 255, 255, 0.3) 75%, transparent 100%);
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 0.3s;
+  display: block;
+  content: "";
+  height: 100%;
+  width: 100%;
+}
+.taskbar-btn:hover > div::after {
+  opacity: 1;
 }
 
 .dropzone {
@@ -96,4 +149,8 @@ html {
 .colored::before,
 .colored > .title-bar {
   background: #ec1db8;
+}
+
+.colored {
+  z-index: 1;
 }

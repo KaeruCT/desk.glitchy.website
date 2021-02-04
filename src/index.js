@@ -9,13 +9,20 @@ const winTemplate = `
     <div class="title-bar dbl-maximize">
       <div class="title-bar-text">{title}</div>
       <div class="title-bar-controls">
-        <button aria-label="Minimize"></button>
+        <button aria-label="Minimize" class="minimize"></button>
         <button aria-label="Maximize" class="maximize"></button>
         <button aria-label="Close" class="close"></button>
       </div>
     </div>
     <div class="window-body">
     </div>
+  </div>
+</div>
+`;
+
+const taskbarBtnTemplate = `
+<div class="taskbar-btn">
+  <div>
   </div>
 </div>
 `;
@@ -44,24 +51,33 @@ function getElementOffset(el) {
   };
 }
 
-function snap(win, snapEl) {
-  snapEl.style.opacity = 0;
+function snap(win, snapEl, minimize) {
+  if (!minimize) {
+    snapEl.style.opacity = 0;
+  }
+  
   win.element.classList.add("snapping");
   setTimeout(() => {
     win.element.classList.remove("snapping");
   }, 400);
 
-  if (win.state.status === "maximized" && snapEl === dropFull) {
+  const restore = win.state.status === "minimized" || (win.state.stauts === "maximized" && snapEl === dropFull);
+
+  if (restore) {
     win.saveState({
       ...win.prevState,
-      snapped: false,
-      snapTo: "",
-      status: ""
+      snapTo: ""
     });
   } else {
     let { top: y, left: x } = getElementOffset(snapEl);
     let w = snapEl.offsetWidth;
     let h = snapEl.offsetHeight;
+    let status = snapEl === dropFull ? "maximized" : "";
+
+    if (minimize) {
+      status = "minimized";
+    }
+
     win.saveState({
       w,
       h,
@@ -69,7 +85,7 @@ function snap(win, snapEl) {
       y,
       snapped: true,
       snapTo: "",
-      status: snapEl === dropFull ? "maximized" : ""
+      status
     });
   }
 }
@@ -77,6 +93,7 @@ function snap(win, snapEl) {
 let zIndex = 1;
 let windowId;
 const container = document.querySelector("#container");
+const taskbar = document.querySelector("#taskbar");
 const dropLeft = document.querySelector("#drop-left");
 const dropRight = document.querySelector("#drop-right");
 const dropFull = document.querySelector("#drop-full");
@@ -85,6 +102,7 @@ const windows = [];
 function makeWindow(opts) {
   const { title = "", content = null } = opts;
   const el = htmlToElement(winTemplate.replace("{title}", title));
+  const taskbarBtn = htmlToElement(taskbarBtnTemplate);
   const id = windowId++;
 
   let state = {};
@@ -96,15 +114,29 @@ function makeWindow(opts) {
       ...newState
     };
 
-    let { w, h, y, x } = state;
+    let { w, h, y, x, status } = state;
     if (x < 0) x = 0;
     if (y < 0) y = 0;
+
+    let minimizedStyle = {};
+    if (status === "minimized") {
+      minimizedStyle = {
+        opacity: 0,
+        width: taskbarBtn.offsetWidth,
+        height: taskbarBtn.offsetHeight,
+      };
+    } else {
+      minimizedStyle = {
+        opacity: 1
+      };
+    }
 
     Object.assign(el.style, {
       width: `${w}px`,
       height: `${h}px`,
       top: `${y}px`,
-      left: `${x}px`
+      left: `${x}px`,
+      ...minimizedStyle
     });
   }
 
@@ -122,6 +154,15 @@ function makeWindow(opts) {
   el.querySelector(".window-body").appendChild(content);
   container.appendChild(el);
 
+  taskbar.appendChild(taskbarBtn);
+  taskbarBtn.addEventListener("click", function () {
+    snap(win, taskbarBtn, true);
+  });
+
+  el.querySelector(".minimize").addEventListener("click", function () {
+    snap(win, taskbarBtn, true);
+  });
+
   el.querySelector(".maximize").addEventListener("click", function () {
     snap(win, dropFull);
   });
@@ -133,6 +174,7 @@ function makeWindow(opts) {
   el.querySelector(".close").addEventListener("click", function () {
     interact(el).unset();
     container.removeChild(el);
+    taskbar.removeChild(taskbarBtn);
     delete windows[id];
   });
 
@@ -211,6 +253,11 @@ function makeWindow(opts) {
             dropRight.style.opacity = 0;
             dropFull.style.opacity = 0;
           }
+
+          if (event.pageY + h >= container.offsetHeight) {
+            y = container.offsetHeight - h;
+          }
+
           win.saveState({ x, y, w, h, snapTo, snapped, status: "" });
         },
         end: function () {
