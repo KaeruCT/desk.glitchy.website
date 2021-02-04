@@ -3,6 +3,13 @@ import "./styles.css";
 
 import interact from "interactjs";
 
+const desktopIconTemplate = `
+<div class="desktop-icon">
+  <img src="{icon}" />
+  <div>{title}</div>
+</div>
+`;
+
 const winTemplate = `
 <div class="window-wrapper">
   <div class="window colored glass">
@@ -61,18 +68,18 @@ function snap(win, snapEl, minimize) {
     win.element.classList.remove("snapping");
   }, 400);
 
-  const restore = win.state.status === "minimized" || (win.state.stauts === "maximized" && snapEl === dropFull);
-
+  const restore = win.state.status === "minimized" || (win.state.status === "maximized" && snapEl === dropFull);
+  
   if (restore) {
     win.saveState({
-      ...win.prevState,
+      ...win.prevStates[win.state.status],
       snapTo: ""
     });
   } else {
     let { top: y, left: x } = getElementOffset(snapEl);
     let w = snapEl.offsetWidth;
     let h = snapEl.offsetHeight;
-    let status = snapEl === dropFull ? "maximized" : "";
+    let status = snapEl === dropFull ? "maximized" : "snapped";
 
     if (minimize) {
       status = "minimized";
@@ -83,7 +90,6 @@ function snap(win, snapEl, minimize) {
       h,
       x,
       y,
-      snapped: true,
       snapTo: "",
       status
     });
@@ -93,6 +99,7 @@ function snap(win, snapEl, minimize) {
 let zIndex = 1;
 let windowId;
 const container = document.querySelector("#container");
+const iconContainer = document.querySelector("#icon-container");
 const taskbar = document.querySelector("#taskbar");
 const dropLeft = document.querySelector("#drop-left");
 const dropRight = document.querySelector("#drop-right");
@@ -100,18 +107,26 @@ const dropFull = document.querySelector("#drop-full");
 const windows = [];
 
 function makeWindow(opts) {
-  const { title = "", content = null } = opts;
+  const { title = "", width = 0, height = 0, content = null } = opts;
   const el = htmlToElement(winTemplate.replace("{title}", title));
   const taskbarBtn = htmlToElement(taskbarBtnTemplate);
   const id = windowId++;
 
   let state = {};
-  let prevState = {};
+  let prevStates = [];
   function saveState(newState) {
-    prevState = { ...state };
+    if (newState.status) {
+      const skip = newState.status === "maximized" && state.status === "minimized";
+      if (!skip) {
+        prevStates[newState.status] = { ...state };
+      }
+      
+    }
+
     state = {
       ...state,
-      ...newState
+      ...newState,
+      prevStatus: state.status,
     };
 
     let { w, h, y, x, status } = state;
@@ -122,13 +137,15 @@ function makeWindow(opts) {
     if (status === "minimized") {
       minimizedStyle = {
         opacity: 0,
-        width: taskbarBtn.offsetWidth,
-        height: taskbarBtn.offsetHeight,
+        width: `${taskbarBtn.offsetWidth}px`,
+        height: `${taskbarBtn.offsetHeight}px`,
+        minWidth: 0,
       };
     } else {
       minimizedStyle = {
         opacity: 1
       };
+      delete el.style.minWidth;
     }
 
     Object.assign(el.style, {
@@ -142,8 +159,8 @@ function makeWindow(opts) {
 
   const win = {
     element: el,
-    get prevState() {
-      return prevState;
+    get prevStates() {
+      return prevStates;
     },
     get state() {
       return state;
@@ -178,12 +195,12 @@ function makeWindow(opts) {
     delete windows[id];
   });
 
-  const w = el.offsetWidth;
-  const h = el.offsetHeight;
-  const x = (container.offsetWidth - el.offsetWidth) / 2;
-  const y = (container.offsetHeight - el.offsetHeight) / 2;
+  const w = width || el.offsetWidth;
+  const h = height || el.offsetHeight;
+  const x = (container.offsetWidth - w) / 2;
+  const y = (container.offsetHeight - h) / 2;
 
-  win.saveState({ x, y, w, h, snapTo: "", snapped: false, status: "" });
+  win.saveState({ x, y, w, h, snapTo: "", status: "" });
 
   el.addEventListener("mousedown", function () {
     Object.assign(el.style, { zIndex: zIndex++ });
@@ -223,15 +240,14 @@ function makeWindow(opts) {
       cursorChecker: () => null,
       listeners: {
         move: function dragMoveListener(event) {
-          let { x, y, w, h, snapTo, snapped } = win.state;
+          let { x, y, w, h, snapTo, status } = win.state;
           const padding = 5;
 
-          if (snapped) {
-            w = win.prevState.w;
-            h = win.prevState.h;
+          if (status === "snapped" || status === "maximized") {
+            w = win.prevStates[status].w;
+            h = win.prevStates[status].h;
             x = event.pageX - event.pageX / (win.state.w / w) + x / 2;
             y = event.pageY - event.pageY / (win.state.h / h) + y / 2;
-            snapped = false;
           } else {
             x += event.dx;
             y += event.dy;
@@ -258,7 +274,7 @@ function makeWindow(opts) {
             y = container.offsetHeight - h;
           }
 
-          win.saveState({ x, y, w, h, snapTo, snapped, status: "" });
+          win.saveState({ x, y, w, h, snapTo, status: "" });
         },
         end: function () {
           let { snapTo } = win.state;
@@ -284,13 +300,67 @@ function makeWindow(opts) {
   return win;
 }
 
-for (let i = 0; i < 2; i++) {
-  makeWindow({
-    title: "Hello",
-    content: htmlToElement(`<div><p>Hello</p>
-    <section class="field-row" style="justify-content: flex-end;">
-      <button>OK</button>
-      <button>Cancel</button>
-    </section></div>`)
+function makeDesktopIcon(opts) {
+  const { x, y, title, icon, run } = opts;
+  const el = htmlToElement(desktopIconTemplate.replace("{title}", title).replace("{icon}", icon));
+  iconContainer.appendChild(el);
+
+  const position = { x, y };
+  Object.assign(el.style, {
+    top: `${position.y}px`,
+    left: `${position.x}px`
+  });
+
+  el.addEventListener("dblclick", () => run());
+
+  interact(el).draggable({
+    cursorChecker: () => null,
+    listeners: {
+      move: function(event) {
+        position.x += event.dx;
+        position.y += event.dy;
+        Object.assign(el.style, {
+          top: `${position.y}px`,
+          left: `${position.x}px`
+        });
+      }
+    }
   });
 }
+
+let n = 0;
+makeDesktopIcon({
+  x: 40,
+  y: 40, 
+  title: "Magic Sauce",
+  icon: "https://snippets.cdn.mozilla.net/media/icons/cf90f4af-9ce9-4614-9473-d97260615c7b.png",
+  run: () => {
+    if (n++%2 === 0) {
+      makeWindow({
+        width: 600,
+        height: 400,
+        title: "Magic Paint " + new Date().getTime(),
+        content: htmlToElement(`<div style="display: flex; flex-direction: column;">
+        <iframe src="https://paint.js.org/" style="width: 100%; height: 100%">
+        </div>`)
+      });
+      return;
+    }
+
+    makeWindow({
+      width: 160,
+      height: 100,
+      title: "Waste Ur Time",
+      content: htmlToElement(`<div style="display: flex; flex-direction: column;">
+      <div>Attempting to load fucks...</div>
+      <div role="progressbar" class="marquee"></div>
+      </div>`)
+    });
+  }
+});
+
+// /<div><p>Hello</p>
+// <section class="field-row" style="justify-content: flex-end;">
+// <button>OK</button>
+// <button>Cancel</button>
+// </section></div>

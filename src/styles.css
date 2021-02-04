@@ -138,12 +138,36 @@ html {
     transparent;
 }
 
-.dropzone-full {
+.dropzone-full, .icon-container {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+.desktop-icon img {
+  width: 48px;
+  align-self: center;
+}
+
+.desktop-icon {
+  position: absolute;
+  width: 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  touch-action: none;
+  user-select: none;
+}
+.desktop-icon > div {
+  margin-top: 3px;
+  font: 9pt Segoe UI,sans-serif;
+  color: #fff;
+  letter-spacing: 0;
+  line-height: 15px;
+  text-shadow: 1px 1px 0px #000, 0 0 4px #000;
+  text-align: center;
 }
 
 .colored::before,
