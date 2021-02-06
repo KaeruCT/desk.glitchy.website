@@ -12,9 +12,10 @@ import calcImg from "./img/gcalctool.png";
 
 import { makeDesktopIcon, makeWindow, htmlToElement } from "./lib";
 
-function openIframe(title, src, { width = 600, height = 400 } = {}) {
-  return function() {
+function openIframe(title, src, { width = 460, height = 380 } = {}) {
+  return function (opts) {
     makeWindow({
+      icon: opts.icon,
       width,
       height,
       title,
@@ -24,13 +25,13 @@ function openIframe(title, src, { width = 600, height = 400 } = {}) {
         </div>`
       )
     });
-    return;
   }
 }
 
 function editableText(title, text) {
-  return function() {
+  return function () {
     makeWindow({
+      icon: opts.icon,
       width: 600,
       height: 400,
       title,
@@ -38,12 +39,12 @@ function editableText(title, text) {
         `<div style="display: block; font-family: 'Courier New',monospace; font-size: 16px; padding: 4px; background: #fff" contenteditable>${text}</div>`
       )
     });
-    return;
   }
 }
 
-function timeWaster() {
+function timeWaster(opts) {
   makeWindow({
+    icon: opts.icon,
     width: 300,
     height: 160,
     title: "Waste Ur Time",
@@ -77,10 +78,10 @@ const desktopIcons = [
 const inc = 100;
 let initial = 40;
 let x = initial;
-let y = 0;
+let y = -initial;
 
 desktopIcons.forEach((di, i) => {
-  if (i % 5 === 0) {
+  if (i % 3 === 0) {
     x = initial;
     y += inc;
   } else {
@@ -88,7 +89,7 @@ desktopIcons.forEach((di, i) => {
   }
   makeDesktopIcon({
     x,
-    y, 
+    y,
     title: di.title,
     icon: di.icon,
     run: di.run

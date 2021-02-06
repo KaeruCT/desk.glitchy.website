@@ -1,5 +1,5 @@
 import interact from "interactjs";
-
+import defaultIcon from "./img/unknown.png";
 const desktopIconTemplate = `
 <div class="desktop-icon">
     <img src="{icon}" />
@@ -27,6 +27,7 @@ const winTemplate = `
 const taskbarBtnTemplate = `
 <div class="taskbar-btn">
     <div>
+        <img src="{icon}" />
     </div>
 </div>
 `;
@@ -108,7 +109,7 @@ const windows = [];
 export function makeWindow(opts) {
     const { title = "", width = 0, height = 0, content = null } = opts;
     const el = htmlToElement(winTemplate.replace("{title}", title));
-    const taskbarBtn = htmlToElement(taskbarBtnTemplate);
+    const taskbarBtn = htmlToElement(taskbarBtnTemplate.replace("{icon}", opts.icon || defaultIcon));
     const id = windowId++;
 
     let state = {};
@@ -190,6 +191,7 @@ export function makeWindow(opts) {
 
     el.querySelector(".window-body").appendChild(windowContent);
     container.appendChild(el);
+    Object.assign(el.style, { zIndex: zIndex++ });
 
     taskbar.appendChild(taskbarBtn);
     taskbarBtn.addEventListener("click", function () {
@@ -210,8 +212,12 @@ export function makeWindow(opts) {
 
     el.querySelector(".close").addEventListener("click", close);
 
-    const w = width || el.offsetWidth;
-    const h = height || el.offsetHeight;
+    let w = width || el.offsetWidth;
+    let h = height || el.offsetHeight;
+
+    w = Math.min(width, container.offsetWidth - container.offsetWidth * 0.1);
+    h = Math.min(h, container.offsetHeight - container.offsetHeight * 0.1);
+
     const x = (container.offsetWidth - w) / 2;
     const y = (container.offsetHeight - h) / 2;
 
@@ -337,16 +343,11 @@ export function makeWindow(opts) {
 let focusedIcon;
 function focusIcon(el) {
     if (focusedIcon) {
-        Object.assign(focusedIcon.style, {
-            filter: ""
-        });
+        focusedIcon.classList.remove("focus");
     }
     focusedIcon = el;
     if (focusedIcon) {
-        console.log(focusedIcon)
-        Object.assign(focusedIcon.style, {
-            filter: "brightness(80%) saturate(180%)"
-        });
+        focusedIcon.classList.add("focus");
     }
 }
 
@@ -370,7 +371,7 @@ export function makeDesktopIcon(opts) {
     });
 
     el.addEventListener("dblclick", () => {
-        if (run) run();
+        if (run) run(opts);
         focusIcon(undefined);
     });
 

@@ -86,6 +86,8 @@ html {
   border: rgba(255, 255, 255, 0.3) 1px solid;
   height: 100%;
   width: 100%;
+  position: relative;
+  padding: 2px 0;
 }
 .taskbar-btn > div::after {
   background: radial-gradient(circle, #fff 0%, rgba(255, 255, 255, 0.3) 75%, transparent 100%);
@@ -94,11 +96,23 @@ html {
   transition-duration: 0.3s;
   display: block;
   content: "";
-  height: 100%;
-  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 .taskbar-btn:hover > div::after {
+  opacity: 0.5;
+}
+.taskbar-btn:active > div::after {
   opacity: 1;
+}
+.taskbar-btn img {
+  width: auto;
+  height: 100%;
+  margin: 0 auto;
+  display: block;
 }
 
 .dropzone {
@@ -160,6 +174,7 @@ html {
   justify-content: center;
   touch-action: none;
   user-select: none;
+  padding: 4px;
 }
 .desktop-icon > div {
   margin-top: 3px;
@@ -169,6 +184,23 @@ html {
   line-height: 15px;
   text-shadow: 1px 1px 0px #000, 0 0 4px #000;
   text-align: center;
+  z-index: 1;
+}
+.desktop-icon::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: opacity .3s;
+  opacity: 0;
+  background: #ec1db8;
+  border-radius: 6px;
+}
+.focus::after {
+  opacity: 0.3;
 }
 
 .colored::before,

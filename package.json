@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "7.css": "0.3.0",
+    "img": "^3.0.3",
     "interactjs": "1.10.2"
   },
   "devDependencies": {
