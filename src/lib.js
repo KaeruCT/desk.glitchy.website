@@ -1,5 +1,9 @@
 import interact from "interactjs";
 import defaultIcon from "./img/unknown.png";
+import startActive from "./img/startactive.png";
+import startHover from "./img/starthover.png";
+import startRegular from "./img/startregular.png";
+
 const desktopIconTemplate = `
 <div class="desktop-icon">
     <img src="{icon}" />
@@ -56,6 +60,16 @@ function getElementOffset(el) {
     };
 }
 
+let activeWin;
+function setActive(win) {
+    if (activeWin) {
+        activeWin.taskbarBtn.classList.remove("active");
+    }
+    activeWin = win;
+    Object.assign(activeWin.element.style, { zIndex: zIndex++ });
+    activeWin.taskbarBtn.classList.add("active");
+}
+
 function snap(win, snapEl, minimize) {
     if (!minimize) {
         snapEl.style.opacity = 0;
@@ -75,6 +89,7 @@ function snap(win, snapEl, minimize) {
             ...win.prevStates[win.state.status],
             snapTo: "",
         });
+        setActive(win);
     } else {
         let { top: y, left: x } = getElementOffset(snapEl);
         let w = snapEl.offsetWidth;
@@ -168,6 +183,7 @@ export function makeWindow(opts) {
 
     const win = {
         element: el,
+        taskbarBtn,
         get body() {
             return el.querySelector(".window-body");
         },
@@ -191,7 +207,7 @@ export function makeWindow(opts) {
 
     el.querySelector(".window-body").appendChild(windowContent);
     container.appendChild(el);
-    Object.assign(el.style, { zIndex: zIndex++ });
+    setActive(win);
 
     taskbar.appendChild(taskbarBtn);
     taskbarBtn.addEventListener("click", function () {
@@ -233,7 +249,7 @@ export function makeWindow(opts) {
     });
 
     el.addEventListener("mousedown", function () {
-        Object.assign(el.style, { zIndex: zIndex++ });
+        setActive(win);
     });
 
     interact(el)
@@ -397,4 +413,41 @@ export function makeDesktopIcon(opts) {
             }),
         ],
     });
+}
+
+export function makeStartMenu() {
+    const startMenu = document.querySelector("#start-menu");
+    const startBtn = document.querySelector("#start-button");
+
+    startBtn.addEventListener("mouseenter", function () {
+        startBtn.src = startHover;
+    });
+    startBtn.addEventListener("mouseleave", function () {
+        startBtn.src = startRegular;
+    });
+    startBtn.addEventListener("mousedown", function () {
+        startBtn.src = startActive;
+        Object.assign(startMenu.style, {
+            display: startMenu.style.display === "block" ? "none" : "block",
+            zIndex: zIndex++
+        });
+    });
+    startBtn.addEventListener("mouseup", function () {
+        startBtn.src = startHover;
+    });
+    document.addEventListener("mousedown", function (event) {
+        if (!startMenu.contains(event.target) && event.target !== startBtn) {
+            Object.assign(startMenu.style, {
+                display: "none"
+            });
+        }
+    });
+}
+
+export function makeClock() {
+    const clock = document.querySelector("#clock");
+    setInterval(function () {
+        const date = new Date();
+        clock.innerHTML = `<div>${date.toLocaleTimeString()}</div><div>${date.toLocaleDateString()}</div>`;
+    }, 1000);
 }

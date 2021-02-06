@@ -12,7 +12,7 @@ import calcImg from "./img/gcalctool.png";
 import aviImg from "./img/avidemux.png";
 import video from "./vid/video.mp4";
 
-import { makeDesktopIcon, makeWindow, htmlToElement } from "./lib";
+import { makeStartMenu, makeClock, makeDesktopIcon, makeWindow, htmlToElement } from "./lib";
 
 function openIframe(title, src, { width = 460, height = 380 } = {}) {
   return function (opts) {
@@ -81,16 +81,16 @@ function timeWaster(opts) {
 }
 
 const desktopIcons = [
-  { icon: asciiImg, title: "hello.txt", run: editableText("hello.txt", "Welcome! There's no way to save this file if you change it.") },
+  { icon: asciiImg, title: "hello.txt", run: editableText("hello.txt", "Welcome!<br><br>There's no way to save this file if you change it.") },
   { icon: fileManagerImg, title: "File Explorer", run: () => alert("not yet") },
   { icon: ircImg, title: "IRC", run: openIframe("IRC", "https://widget.mibbit.com/?server=irc.rizon.net&channel=%23Rizon") },
   { icon: imImg, title: "Chat", run: openIframe("The Only Limit...", "https://html5zombo.com/") },
   { icon: webImg, title: "Internet", run: openIframe("Interwebs", "https://tri.neocities.org/spacejam.html", { width: 1024, height: 768 }) },
   { icon: clockImg, title: "Time", run: timeWaster },
   { icon: calcImg, title: "Calque", run: openIframe("Calque", "https://calque.io/") },
-  { icon: paintImg, title: "Paint", run: openIframe("Paint", "https://paint.js.org/") },
+  { icon: paintImg, title: "Paint", run: openIframe("Paint", "https://98.js.org/programs/jspaint", { width: 800, height: 600 }) },
   { icon: aviImg, title: "Sexy", run: openVid("Sexy", video) },
-]
+];
 
 const inc = 100;
 let initial = 40;
@@ -112,3 +112,6 @@ desktopIcons.forEach((di, i) => {
     run: di.run
   });
 });
+
+makeStartMenu();
+makeClock();

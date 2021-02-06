@@ -29,6 +29,10 @@ html {
   height: 100%;
 }
 
+.window-body {
+  overflow: auto;
+}
+
 .window-body,
 .window-body > div {
   flex: 1;
@@ -70,6 +74,12 @@ html {
   border-top: #000 1px solid;
   display: flex;
   padding: 0;
+  display: flex;
+}
+.taskbar-btns {
+  height: 100%;
+  flex: 1;
+  display: flex;
   justify-content: flex-start;
 }
 .taskbar-btn {
@@ -78,7 +88,6 @@ html {
   border-radius: 6px;
   border: #000 1px solid;
   margin-right: 4px;
-  background: linear-gradient(150deg, #fff 0%, rgba(255, 255, 255, 0.5) 30%, transparent 100%);
   height: calc(100% + 2px);
 }
 .taskbar-btn > div {
@@ -102,6 +111,9 @@ html {
   right: 0;
   bottom: 0;
 }
+.taskbar-btn.active {
+  background: linear-gradient(150deg, #fff 0%, rgba(255, 255, 255, 0.5) 30%, transparent 100%);
+}
 .taskbar-btn:hover > div::after {
   opacity: 0.5;
 }
@@ -114,11 +126,19 @@ html {
   margin: 0 auto;
   display: block;
 }
-
+.start-button img {
+  width: 85px;
+}
+.clock {
+  color: #fff;
+  padding: 0 5px;
+  text-align: center;
+  user-select: none;
+}
 .dropzone {
   flex: 1;
   height: 100%;
-  transition: opacity 0.3s;
+  transition: opacity 0.1s;
   padding: 10px;
   opacity: 0;
 }
@@ -161,6 +181,25 @@ html {
   bottom: 0;
 }
 
+.start-menu {
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  min-width: 300px;
+}
+.start-menu .title-bar {
+  height: 100%;
+}
+
+.start-menu .window-body {
+  height: 100%;
+  margin: 0;
+  border-radius: 6px;
+}
+
 .desktop-icon img {
   width: 48px;
   align-self: center;
@@ -182,7 +221,7 @@ html {
   color: #fff;
   letter-spacing: 0;
   line-height: 15px;
-  text-shadow: 1px 1px 0px #000, 0 0 4px #000;
+  text-shadow: 1px 1px 0 #000, 1px 1px 2px #000, 0 0 16px #000;
   text-align: center;
   z-index: 1;
 }
