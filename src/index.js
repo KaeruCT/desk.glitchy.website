@@ -9,6 +9,8 @@ import webImg from "./img/web-browser.png";
 import clockImg from "./img/xclock.png";
 import paintImg from "./img/gimp.png";
 import calcImg from "./img/gcalctool.png";
+import aviImg from "./img/avidemux.png";
+import video from "./vid/video.mp4";
 
 import { makeDesktopIcon, makeWindow, htmlToElement } from "./lib";
 
@@ -23,6 +25,20 @@ function openIframe(title, src, { width = 460, height = 380 } = {}) {
         `<div style="display: flex;">
           <iframe src="${src}" style="width: 100%; height: 100%">
         </div>`
+      )
+    });
+  }
+}
+
+function openVid(title, src, { width = 400, height = 300 } = {}) {
+  return function (opts) {
+    makeWindow({
+      icon: opts.icon,
+      width,
+      height,
+      title,
+      content: htmlToElement(
+        `<div style="display: flex; justify-content: center; align-items: center;"><video src="${src}" style="max-width: ${width * 0.85}px; max-height: ${height * 0.85}px" controls autoplay loop></div>`
       )
     });
   }
@@ -73,6 +89,7 @@ const desktopIcons = [
   { icon: clockImg, title: "Time", run: timeWaster },
   { icon: calcImg, title: "Calque", run: openIframe("Calque", "https://calque.io/") },
   { icon: paintImg, title: "Paint", run: openIframe("Paint", "https://paint.js.org/") },
+  { icon: aviImg, title: "Sexy", run: openVid("Sexy", video) },
 ]
 
 const inc = 100;
