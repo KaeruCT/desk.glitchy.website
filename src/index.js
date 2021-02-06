@@ -45,7 +45,7 @@ function openVid(title, src, { width = 400, height = 300 } = {}) {
 }
 
 function editableText(title, text) {
-  return function () {
+  return function (opts) {
     makeWindow({
       icon: opts.icon,
       width: 600,
