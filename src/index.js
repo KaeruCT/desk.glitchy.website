@@ -88,7 +88,7 @@ const desktopIcons = [
   { icon: webImg, title: "Internet", run: openIframe("Interwebs", "https://tri.neocities.org/spacejam.html", { width: 1024, height: 768 }) },
   { icon: clockImg, title: "Time", run: timeWaster },
   { icon: calcImg, title: "Calque", run: openIframe("Calque", "https://calque.io/") },
-  { icon: paintImg, title: "Paint", run: openIframe("Paint", "https://98.js.org/programs/jspaint", { width: 800, height: 600 }) },
+  { icon: paintImg, title: "Paint", run: openIframe("Paint", "https://98.js.org/programs/jspaint/", { width: 800, height: 600 }) },
   { icon: aviImg, title: "Sexy", run: openVid("Sexy", video) },
 ];
 
