@@ -1,46 +1,83 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Try Andy's Desk</title>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+  </head>
 
-<head>
-  <title>???</title>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-</head>
-
-<body>
-  <div class="desktop">
-    <div class="window-container" id="container">
-      <div id="drop-left" class="dropzone">
-        <div></div>
-      </div>
-      <div id="drop-right" class="dropzone">
-        <div></div>
-      </div>
-      <div id="drop-full" class="dropzone dropzone-full">
-        <div></div>
-      </div>
-      <div id="icon-container" class="icon-container"></div>
-      <div class="start-menu" id="start-menu">
-        <div class="window glass colored">
-          <div class="title-bar">
-            <div class="window-body">
-              This Start Menu Has Nothing Going On...
+  <body>
+    <div class="desktop">
+      <div class="window-container" id="container">
+        <div id="drop-left" class="dropzone">
+          <div></div>
+        </div>
+        <div id="drop-right" class="dropzone">
+          <div></div>
+        </div>
+        <div id="drop-full" class="dropzone dropzone-full">
+          <div></div>
+        </div>
+        <div id="icon-container" class="icon-container"></div>
+        <div class="start-menu" id="start-menu">
+          <div class="window glass colored">
+            <div class="title-bar">
+              <div class="window-body custom">
+                <div class="pet">
+                  <img src="src/img/pet.png" />
+                  <div role="tooltip">
+                    <p>
+                      Welcome to Try Andy's Desk, a mish-mash place of
+                      experimentation!
+                    </p>
+                    <p>YOU might also be interested in:</p>
+                  </div>
+                </div>
+                <fieldset>
+                  <legend>glitchy.website</legend>
+                  <p>
+                    Another way of exploring Try Andy's creative endeavors, this
+                    time with a futuristic sci-fi feel.
+                  </p>
+                  <button>
+                    <a href="https://glitchy.website">Check it out</a>
+                  </button>
+                </fieldset>
+                <fieldset>
+                  <legend>Music</legend>
+                  <p>Fun fact: We made the song you can listen to on Winamp.</p>
+                  <p>
+                    If you want to listen more, please check us out on Bandcamp
+                    & Soundcloud:
+                  </p>
+                  <div>
+                    <button>
+                      <a href="https://tryandy.bandcamp.com/">Bandcamp</a>
+                    </button>
+                    <button>
+                      <a href="https://soundcloud.com/try_andy">Soundcloud</a>
+                    </button>
+                  </div>
+                </fieldset>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-    </div>
-    <div class="taskbar-container window glass colored">
-      <div class="title-bar">
-        <div class="start-button"><img id="start-button" src="./src/img/startregular.png" /></div>
-        <div id="taskbar" class="taskbar-btns"></div>
-        <div class="clock" id="clock"></div>
+      <div class="taskbar-container window glass colored">
+        <div class="title-bar">
+          <div class="start-button">
+            <img id="start-button" src="./src/img/startregular.png" />
+          </div>
+          <div id="taskbar" class="taskbar-btns"></div>
+          <div class="clock" id="clock"></div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <script src="src/index.js"></script>
-</body>
-
+    <script src="src/index.js"></script>
+  </body>
 </html>

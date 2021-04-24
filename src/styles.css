@@ -47,7 +47,7 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("https://source.unsplash.com/random/2048x1536?animal,nature")
+  background: url("https://source.unsplash.com/random/2048x1536?city,nature")
     center center;
   display: flex;
   flex-direction: column;
@@ -99,7 +99,12 @@ html {
   padding: 2px 0;
 }
 .taskbar-btn > div::after {
-  background: radial-gradient(circle, #fff 0%, rgba(255, 255, 255, 0.3) 75%, transparent 100%);
+  background: radial-gradient(
+    circle,
+    #fff 0%,
+    rgba(255, 255, 255, 0.3) 75%,
+    transparent 100%
+  );
   opacity: 0;
   transition-property: opacity;
   transition-duration: 0.3s;
@@ -112,7 +117,12 @@ html {
   bottom: 0;
 }
 .taskbar-btn.active {
-  background: linear-gradient(150deg, #fff 0%, rgba(255, 255, 255, 0.5) 30%, transparent 100%);
+  background: linear-gradient(
+    150deg,
+    #fff 0%,
+    rgba(255, 255, 255, 0.5) 30%,
+    transparent 100%
+  );
 }
 .taskbar-btn:hover > div::after {
   opacity: 0.5;
@@ -125,9 +135,11 @@ html {
   height: 100%;
   margin: 0 auto;
   display: block;
+  user-select: none;
 }
 .start-button img {
   width: 85px;
+  user-select: none;
 }
 .clock {
   color: #fff;
@@ -173,7 +185,8 @@ html {
     transparent;
 }
 
-.dropzone-full, .icon-container {
+.dropzone-full,
+.icon-container {
   position: absolute;
   top: 0;
   left: 0;
@@ -217,7 +230,7 @@ html {
 }
 .desktop-icon > div {
   margin-top: 3px;
-  font: 9pt Segoe UI,sans-serif;
+  font: 9pt Segoe UI, sans-serif;
   color: #fff;
   letter-spacing: 0;
   line-height: 15px;
@@ -233,7 +246,7 @@ html {
   bottom: 0;
   left: 0;
   right: 0;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
   opacity: 0;
   background: #ec1db8;
   border-radius: 6px;
@@ -249,4 +262,55 @@ html {
 
 .colored {
   z-index: 1;
+}
+
+#webamp .window::before {
+  content: unset;
+}
+#webamp .title-bar {
+  padding: 0;
+  border-radius: 0;
+  border: 0;
+  box-shadow: 0;
+}
+
+.custom {
+  justify-content: center;
+}
+
+.custom button {
+  padding: 0;
+}
+.custom button a,
+.custom button a:visited,
+.custom button a:active {
+  width: 100%;
+  display: block;
+  text-decoration: none;
+  color: unset;
+  padding: 0 12px;
+}
+
+.window-body pre {
+  border: 0;
+}
+
+.pet {
+  display: block !important;
+  flex: 0 !important;
+}
+
+.pet [role="tooltip"] {
+  display: block;
+  flex: 0;
+  margin-top: 10px;
+  margin-left: 35px;
+  margin-bottom: 10px;
+}
+
+.pet img {
+  width: 75px;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
 }
