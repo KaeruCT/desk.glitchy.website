@@ -59,6 +59,7 @@ function openIframe(title, src, { width = 460, height = 380 } = {}) {
   return function (opts) {
     makeWindow({
       icon: opts.icon,
+      className: "no-padding",
       width,
       height,
       title,
@@ -67,6 +68,78 @@ function openIframe(title, src, { width = 460, height = 380 } = {}) {
           <iframe src="${src}" style="width: 100%; height: 100%">
         </div>`
       ),
+    });
+  };
+}
+
+function openBrowser(title, src, { width = 460, height = 380 } = {}) {
+  return function (opts) {
+    makeWindow({
+      icon: opts.icon,
+      width,
+      height,
+      title,
+      content: () => {
+        const browser = htmlToElement(
+          `<div class="browser">
+            <form class="bar">
+              <button class="back" type="button">◀</button>
+              <button class="next" type="button">▶</button>
+              <input type="text" class="url" />
+              <button class="reload" type="button">↺</button>
+              <button class="home" type="button">☗</button>
+            </form>
+            <div class="iframe-container"></iframe>
+          </div>`
+        );
+        const urlBox = browser.querySelector(".url");
+        const form = browser.querySelector("form");
+        const iframeContainer = browser.querySelector(".iframe-container");
+        urlBox.value = src;
+        setUrl(src);
+
+        const prev = [];
+        const next = [];
+        function setUrl(url) {
+          iframeContainer.innerHTML = `<iframe src="${url}"></iframe>`;
+        }
+
+        browser.querySelector(".back").addEventListener("click", function () {
+          const url = prev.pop();
+          if (!url) return;
+          next.push(url);
+          setUrl(url);
+          urlBox.value = url;
+        });
+        browser.querySelector(".next").addEventListener("click", function () {
+          const url = next.pop();
+          if (!url) return;
+          prev.push(url);
+          setUrl(url);
+          urlBox.value = url;
+        });
+        browser.querySelector(".reload").addEventListener("click", function () {
+          setUrl(urlBox.value);
+        });
+        browser.querySelector(".home").addEventListener("click", function () {
+          prev.push(urlBox.value);
+          urlBox.value = src;
+          setUrl(src);
+          while (next.lenth) next.pop();
+        });
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          if (!urlBox.value) return;
+          if (!urlBox.value.startsWith("http://")) {
+            urlBox.value = "http://" + urlBox.value;
+          }
+          setUrl(urlBox.value);
+          prev.push(urlBox.value);
+          while (next.lenth) next.pop();
+        });
+
+        return browser;
+      },
     });
   };
 }
@@ -99,29 +172,6 @@ function editableText(title, text) {
       ),
     });
   };
-}
-
-function timeWaster(opts) {
-  makeWindow({
-    icon: opts.icon,
-    width: 300,
-    height: 160,
-    title: "Waste Ur Time",
-    content: (win) => {
-      const content = htmlToElement(`
-        <div style="display: flex; flex-direction: column; justify-content: flex-start;">
-          <div style="margin-bottom: 10px;">Attempting to load fucks...</div>
-          <div style="margin-bottom: 10px;" role="progressbar" class="marquee"></div>
-          <div>
-            <button class="close">I Give Up</button>
-          </div>
-        </div>`);
-      content
-        .querySelector(".close")
-        .addEventListener("click", () => win.close());
-      return content;
-    },
-  });
 }
 
 const winampIcon = {
@@ -162,13 +212,24 @@ Music: Try Andy (https://soundcloud.com/try_andy)
   },
   {
     icon: webImg,
-    title: "Internet",
-    run: openIframe("Interwebs", "https://tri.neocities.org/spacejam.html", {
-      width: 1024,
-      height: 768,
+    title: "Internet Explorer",
+    run: openBrowser(
+      "Internet Explorer",
+      "https://web.archive.org/web/20100117211707/http://www.google.com/",
+      {
+        width: 1024,
+        height: 768,
+      }
+    ),
+  },
+  {
+    icon: clockImg,
+    title: "Clock",
+    run: openIframe("Clock", "https://csb-bbeyl.netlify.app/", {
+      width: 500,
+      height: 500,
     }),
   },
-  { icon: clockImg, title: "Time", run: timeWaster },
   {
     icon: calcImg,
     title: "Calque",

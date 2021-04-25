@@ -12,7 +12,7 @@ const desktopIconTemplate = `
 `;
 
 const winTemplate = `
-<div class="window-wrapper">
+<div class="window-wrapper {className}">
     <div class="window colored glass">
         <div class="title-bar dbl-maximize">
             <div class="title-bar-text">{title}</div>
@@ -128,8 +128,13 @@ export function makeWindow(opts) {
     height = 0,
     content = null,
     customEl = null,
+    className = "",
   } = opts;
-  const el = customEl || htmlToElement(winTemplate.replace("{title}", title));
+  const el =
+    customEl ||
+    htmlToElement(
+      winTemplate.replace("{title}", title).replace("{className}", className)
+    );
   const taskbarBtn = htmlToElement(
     taskbarBtnTemplate.replace("{icon}", opts.icon || defaultIcon)
   );
