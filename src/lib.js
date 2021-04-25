@@ -164,12 +164,14 @@ export function makeWindow(opts) {
         height: `${taskbarBtn.offsetHeight}px`,
         minWidth: 0,
         minHeight: 0,
+        ...(customEl && { display: "none" }),
       };
     } else {
       minimizedStyle = {
         opacity: 1,
         minWidth: `${minWidth}px`,
         minHeight: `${minHeight}px`,
+        ...(customEl && { display: "block" }),
       };
     }
 
