@@ -4,6 +4,14 @@ import startActive from "./img/startactive.png";
 import startHover from "./img/starthover.png";
 import startRegular from "./img/startregular.png";
 
+function isTouchDevice() {
+  return (
+    "ontouchstart" in window ||
+    navigator.maxTouchPoints > 0 ||
+    navigator.msMaxTouchPoints > 0
+  );
+}
+
 const desktopIconTemplate = `
 <div class="desktop-icon">
     <img src="{icon}" />
@@ -413,7 +421,9 @@ export function makeDesktopIcon(opts) {
   }
 
   el.addEventListener("dblclick", onClick);
-  el.addEventListener("touch", onClick);
+  if (isTouchDevice()) {
+    el.addEventListener("click", onClick);
+  }
 
   el.addEventListener("mousedown", () => focusIcon(el));
 
