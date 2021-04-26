@@ -9,6 +9,7 @@ import webImg from "./img/web-browser.png";
 import clockImg from "./img/xclock.png";
 import paintImg from "./img/gimp.png";
 import calcImg from "./img/gcalctool.png";
+import pipesImg from "./img/pipes.png";
 import aviImg from "./img/avidemux.png";
 import winampImg from "./img/winamp.png";
 import snakeImg from "./img/snake.png";
@@ -66,7 +67,7 @@ function openIframe(title, src, { width = 460, height = 380 } = {}) {
       title,
       content: htmlToElement(
         `<div style="display: flex;">
-          <iframe src="${src}" style="width: 100%; height: 100%">
+          <iframe allowfullscreen seamless src="${src}" style="width: 100%; height: 100%">
         </div>`
       ),
     });
@@ -191,8 +192,12 @@ Windows 7 style: https://khang-nd.github.io/7.css
 Winamp: https://github.com/captbaritone/webamp
 Paint: https://github.com/1j01/jspaint
 Calque: https://github.com/grimalschi/calque
+3d Pipes: https://github.com/1j01/pipes
+Minesweeper: https://github.com/KaeruCT/minesweeper (forked from https://github.com/ziebelje/minesweeper)
 Wallpaper: https://unsplash.com/
 Music: Try Andy (https://soundcloud.com/try_andy)
+
+Everything brought together by yours truly
 </pre>
       `
     ),
@@ -235,6 +240,14 @@ Music: Try Andy (https://soundcloud.com/try_andy)
     icon: calcImg,
     title: "Calque",
     run: openIframe("Calque", "https://calque.io/"),
+  },
+  {
+    icon: pipesImg,
+    title: "3D Pipes",
+    run: openIframe("3D Pipes", "https://1j01.github.io/pipes/", {
+      width: 800,
+      height: 600,
+    }),
   },
   {
     icon: snakeImg,
