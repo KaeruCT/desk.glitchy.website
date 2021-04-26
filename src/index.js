@@ -12,6 +12,7 @@ import calcImg from "./img/gcalctool.png";
 import aviImg from "./img/avidemux.png";
 import winampImg from "./img/winamp.png";
 import snakeImg from "./img/snake.png";
+import minesweeperImg from "./img/minesweeper.png";
 import musicSnakeImg from "./img/musicSnake.png";
 import video from "./vid/video.mp4";
 
@@ -217,8 +218,8 @@ Music: Try Andy (https://soundcloud.com/try_andy)
       "Internet Explorer",
       "https://web.archive.org/web/20100117211707/http://www.google.com/",
       {
-        width: 1024,
-        height: 768,
+        width: 640,
+        height: 480,
       }
     ),
   },
@@ -248,6 +249,14 @@ Music: Try Andy (https://soundcloud.com/try_andy)
     ),
   },
   {
+    icon: minesweeperImg,
+    title: "Minesweeper",
+    run: openIframe("Minesweeper", "https://glitchy-minesweeper.netlify.app/", {
+      width: 216,
+      height: 392,
+    }),
+  },
+  {
     icon: musicSnakeImg,
     title: "musicSnake",
     run: openIframe("musicSnake", "https://kaeruct.github.io/musicSnake/", {
@@ -258,7 +267,7 @@ Music: Try Andy (https://soundcloud.com/try_andy)
   {
     icon: paintImg,
     title: "Paint",
-    run: openIframe("Paint", "https://98.js.org/programs/jspaint/", {
+    run: openIframe("Paint", "https://jspaint.app", {
       width: 800,
       height: 600,
     }),
