@@ -12,13 +12,13 @@ export function initWallpaper() {
       fr.onload = function () {
         try {
           localStorage.setItem(KEY, fr.result);
+          setWallpaper(fr.result);
         } catch (e) {
           makeDialog(
             "Error!",
             "Sorry, something is wrong with the chosen image.<br><br>" + e
           );
         }
-        setWallpaper(fr.result);
       };
       fr.readAsDataURL(files[0]);
     }
