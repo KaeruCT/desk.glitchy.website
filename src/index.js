@@ -102,7 +102,7 @@ function editableText(title, text) {
       height: 400,
       title,
       content: htmlToElement(
-        `<div style="display: block; font-family: 'Courier New',monospace; font-size: 16px; padding: 4px; background: #fff" contenteditable>${text}</div>`
+        `<div style="display: block; overflow: auto; font-family: 'Courier New',monospace; font-size: 16px; padding: 4px; background: #fff" contenteditable>${text}</div>`
       ),
     });
   };
