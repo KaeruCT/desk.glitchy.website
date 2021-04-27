@@ -3,6 +3,7 @@ import defaultIcon from "./img/unknown.png";
 import startActive from "./img/startactive.png";
 import startHover from "./img/starthover.png";
 import startRegular from "./img/startregular.png";
+import errorImg from "./img/error.png";
 
 function isTouchDevice() {
   return (
@@ -137,6 +138,7 @@ export function makeWindow(opts) {
     content = null,
     customEl = null,
     className = "",
+    unresizable = false,
   } = opts;
   const el =
     customEl ||
@@ -280,9 +282,74 @@ export function makeWindow(opts) {
     setActive(win);
   });
 
-  !customEl &&
-    interact(el)
-      .resizable({
+  if (!customEl) {
+    const interactable = interact(el).draggable({
+      allowFrom: ".title-bar",
+      ignoreFrom: "button",
+      cursorChecker: () => null,
+      listeners: {
+        start: function () {
+          Object.assign(win.body.style, { pointerEvents: "none" });
+        },
+        move: function (event) {
+          let { x, y, w, h, snapTo, status } = win.state;
+          const padding = 5;
+
+          if (status === "snapped" || status === "maximized") {
+            w = win.prevStates[status].w;
+            h = win.prevStates[status].h;
+            x = event.pageX - event.pageX / (win.state.w / w) + x / 2;
+            y = event.pageY - event.pageY / (win.state.h / h) + y / 2;
+          } else {
+            x += event.dx;
+            y += event.dy;
+          }
+          if (event.pageX - padding <= 0) {
+            dropLeft.style.opacity = 1;
+            snapTo = "left";
+          } else if (event.pageX + padding >= container.offsetWidth) {
+            dropRight.style.opacity = 1;
+            snapTo = "right";
+          } else if (event.pageY - padding <= 0) {
+            dropFull.style.opacity = 1;
+            snapTo = "top";
+          } else {
+            if (event.buttons > 0) {
+              snapTo = "";
+            }
+            dropLeft.style.opacity = 0;
+            dropRight.style.opacity = 0;
+            dropFull.style.opacity = 0;
+          }
+
+          if (event.pageY + h >= container.offsetHeight) {
+            y = container.offsetHeight - h;
+          }
+
+          win.saveState({ x, y, w, h, snapTo, status: "" });
+        },
+        end: function () {
+          let { snapTo } = win.state;
+          let snapEl;
+          if (snapTo === "left") {
+            snapEl = dropLeft;
+          }
+          if (snapTo === "right") {
+            snapEl = dropRight;
+          }
+          if (snapTo === "top") {
+            snapEl = dropFull;
+          }
+          if (snapEl) {
+            snap(win, snapEl);
+          }
+          Object.assign(win.body.style, { pointerEvents: "auto" });
+        },
+      },
+    });
+
+    if (!unresizable) {
+      interactable.resizable({
         margin: 7,
         edges: { left: true, right: true, bottom: true, top: true },
         listeners: {
@@ -314,71 +381,9 @@ export function makeWindow(opts) {
           }),
         ],
         inertia: true,
-      })
-      .draggable({
-        allowFrom: ".title-bar",
-        ignoreFrom: "button",
-        cursorChecker: () => null,
-        listeners: {
-          start: function () {
-            Object.assign(win.body.style, { pointerEvents: "none" });
-          },
-          move: function (event) {
-            let { x, y, w, h, snapTo, status } = win.state;
-            const padding = 5;
-
-            if (status === "snapped" || status === "maximized") {
-              w = win.prevStates[status].w;
-              h = win.prevStates[status].h;
-              x = event.pageX - event.pageX / (win.state.w / w) + x / 2;
-              y = event.pageY - event.pageY / (win.state.h / h) + y / 2;
-            } else {
-              x += event.dx;
-              y += event.dy;
-            }
-            if (event.pageX - padding <= 0) {
-              dropLeft.style.opacity = 1;
-              snapTo = "left";
-            } else if (event.pageX + padding >= container.offsetWidth) {
-              dropRight.style.opacity = 1;
-              snapTo = "right";
-            } else if (event.pageY - padding <= 0) {
-              dropFull.style.opacity = 1;
-              snapTo = "top";
-            } else {
-              if (event.buttons > 0) {
-                snapTo = "";
-              }
-              dropLeft.style.opacity = 0;
-              dropRight.style.opacity = 0;
-              dropFull.style.opacity = 0;
-            }
-
-            if (event.pageY + h >= container.offsetHeight) {
-              y = container.offsetHeight - h;
-            }
-
-            win.saveState({ x, y, w, h, snapTo, status: "" });
-          },
-          end: function () {
-            let { snapTo } = win.state;
-            let snapEl;
-            if (snapTo === "left") {
-              snapEl = dropLeft;
-            }
-            if (snapTo === "right") {
-              snapEl = dropRight;
-            }
-            if (snapTo === "top") {
-              snapEl = dropFull;
-            }
-            if (snapEl) {
-              snap(win, snapEl);
-            }
-            Object.assign(win.body.style, { pointerEvents: "auto" });
-          },
-        },
       });
+    }
+  }
 
   windows[windowId] = win;
 
@@ -484,4 +489,28 @@ export function makeClock() {
     const date = new Date();
     clock.innerHTML = `<div>${date.toLocaleTimeString()}</div><div>${date.toLocaleDateString()}</div>`;
   }, 1000);
+}
+
+export function makeDialog(title, message) {
+  makeWindow({
+    icon: errorImg,
+    width: 300,
+    height: 160,
+    unresizable: true,
+    title,
+    content: (win) => {
+      const el = htmlToElement(
+        `<div>
+          <p>${message}</p>
+          <section class="field-row" style="justify-content: flex-end;">
+            <button class="close">OK</button>
+          </section>
+        </div>`
+      );
+      el.querySelector(".close").addEventListener("click", function () {
+        win.close();
+      });
+      return el;
+    },
+  });
 }

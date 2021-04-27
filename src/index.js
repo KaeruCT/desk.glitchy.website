@@ -26,6 +26,7 @@ import {
 } from "./lib";
 import { initWebamp } from "./webamp";
 import { openBrowser } from "./browser";
+import { initWallpaper } from "./wallpaper";
 import niceUrls from "./niceUrls";
 import { randItem } from "./util";
 
@@ -192,7 +193,7 @@ Everything brought together by yours truly
     icon: minesweeperImg,
     title: "Minesweeper",
     run: openIframe("Minesweeper", "https://glitchy-minesweeper.netlify.app/", {
-      width: 216,
+      width: 392,
       height: 392,
     }),
   },
@@ -240,5 +241,6 @@ desktopIcons.forEach((di, i) => {
 
 makeStartMenu();
 makeClock();
+initWallpaper();
 
 winampIcon.run(winampIcon);
