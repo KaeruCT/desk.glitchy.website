@@ -342,8 +342,12 @@ html {
 
 .browser button {
   min-width: 0;
-  font-size: 1.4em;
-  padding-bottom: 3px;
+  padding: 0 5px;
+}
+.browser button svg {
+  width: 20px;
+  height: 20px;
+  fill: #333;
 }
 .browser .iframe-container,
 .browser iframe {

@@ -25,6 +25,9 @@ import {
   htmlToElement,
 } from "./lib";
 import { initWebamp } from "./webamp";
+import { openBrowser } from "./browser";
+import niceUrls from "./niceUrls";
+import { randItem } from "./util";
 
 function openWinamp(title, { width = 0, height = 0 } = {}) {
   let running = false;
@@ -70,78 +73,6 @@ function openIframe(title, src, { width = 460, height = 380 } = {}) {
           <iframe allowfullscreen seamless src="${src}" style="width: 100%; height: 100%">
         </div>`
       ),
-    });
-  };
-}
-
-function openBrowser(title, src, { width = 460, height = 380 } = {}) {
-  return function (opts) {
-    makeWindow({
-      icon: opts.icon,
-      width,
-      height,
-      title,
-      content: () => {
-        const browser = htmlToElement(
-          `<div class="browser">
-            <form class="bar">
-              <button class="back" type="button">◀</button>
-              <button class="next" type="button">▶</button>
-              <input type="text" class="url" />
-              <button class="reload" type="button">↺</button>
-              <button class="home" type="button">☗</button>
-            </form>
-            <div class="iframe-container"></iframe>
-          </div>`
-        );
-        const urlBox = browser.querySelector(".url");
-        const form = browser.querySelector("form");
-        const iframeContainer = browser.querySelector(".iframe-container");
-        urlBox.value = src;
-        setUrl(src);
-
-        const prev = [];
-        const next = [];
-        function setUrl(url) {
-          iframeContainer.innerHTML = `<iframe src="${url}"></iframe>`;
-        }
-
-        browser.querySelector(".back").addEventListener("click", function () {
-          const url = prev.pop();
-          if (!url) return;
-          next.push(url);
-          setUrl(url);
-          urlBox.value = url;
-        });
-        browser.querySelector(".next").addEventListener("click", function () {
-          const url = next.pop();
-          if (!url) return;
-          prev.push(url);
-          setUrl(url);
-          urlBox.value = url;
-        });
-        browser.querySelector(".reload").addEventListener("click", function () {
-          setUrl(urlBox.value);
-        });
-        browser.querySelector(".home").addEventListener("click", function () {
-          prev.push(urlBox.value);
-          urlBox.value = src;
-          setUrl(src);
-          while (next.lenth) next.pop();
-        });
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-          if (!urlBox.value) return;
-          if (!urlBox.value.startsWith("http://")) {
-            urlBox.value = "http://" + urlBox.value;
-          }
-          setUrl(urlBox.value);
-          prev.push(urlBox.value);
-          while (next.lenth) next.pop();
-        });
-
-        return browser;
-      },
     });
   };
 }
@@ -219,14 +150,10 @@ Everything brought together by yours truly
   {
     icon: webImg,
     title: "Internet Explorer",
-    run: openBrowser(
-      "Internet Explorer",
-      "https://web.archive.org/web/20100117211707/http://www.google.com/",
-      {
-        width: 640,
-        height: 480,
-      }
-    ),
+    run: openBrowser("Internet Explorer", () => randItem(niceUrls), {
+      width: 640,
+      height: 480,
+    }),
   },
   {
     icon: clockImg,
