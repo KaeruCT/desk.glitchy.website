@@ -149,6 +149,28 @@ html {
   padding: 0 5px;
   text-align: center;
   user-select: none;
+  position: relative;
+}
+.clock:hover {
+  text-shadow: 0 0 5px #fff;
+}
+.clock:hover::after {
+  opacity: 1;
+}
+.clock::after {
+  border-left: rgba(255, 255, 255, 0.5) 1px solid;
+  filter: blur(5px);
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 0.1s;
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
 }
 .dropzone {
   flex: 1;
@@ -256,7 +278,7 @@ html {
 .start-menu .menu-sidebar .bottom button::after {
   opacity: 0.5;
 }
-.start-menu .menu-sidebar .bottom button:hover {
+.start-menu .menu-sidebar .bottom button:hover{
   opacity: 1;
 }
 .start-menu .menu-sidebar button {
@@ -303,7 +325,7 @@ html {
 .start-menu .menu-sidebar button:focus {
   outline: 0;
 }
-.start-menu .menu-sidebar button:active {
+.start-menu .menu-sidebar button:active, .clock:active {
   background: linear-gradient(
     150deg,
     rgba(255, 255, 255, 0.5) 0%,

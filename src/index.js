@@ -15,6 +15,9 @@ import winampImg from "./img/winamp.png";
 import snakeImg from "./img/snake.png";
 import minesweeperImg from "./img/minesweeper.png";
 import musicSnakeImg from "./img/musicSnake.png";
+import minecraftImg from "./img/minecraft.png";
+import plasmaImg from "./img/plasma.png";
+import skiImg from "./img/skifree.png";
 import video from "./vid/video.mp4";
 
 import {
@@ -206,6 +209,30 @@ Everything brought together by yours truly
       width: 460,
       height: 680,
     }),
+  },
+  {
+    icon: minecraftImg,
+    title: "Minecraft",
+    run: openIframe("Minecraft", "https://classic.minecraft.net", {
+      width: 640,
+      height: 480,
+    }),
+  },
+  {
+    icon: plasmaImg,
+    title: "Plasma Gun",
+    run: openIframe("Plasma Gun", "https://oguzeroglu.github.io/ROYGBIV/demo/plasmaGun/application.html", {
+      width: 640,
+      height: 480,
+    }),
+  },
+  {
+    icon: skiImg,
+    title: "SkiFree",
+    run: openIframe("SkiFree", "https://basicallydan.github.io/skifree.js/", {
+      width: 640,
+      height: 480
+    })
   },
   {
     icon: paintImg,
