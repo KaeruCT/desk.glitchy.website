@@ -6,4 +6,6 @@ export default [
   "https://www.cameronsworld.net/",
   "http://www.geocities.ws/oldternet/files.htm",
   "https://html5zombo.com/",
+  "https://kirbysdreamsite.neocities.org/",
+  "https://clubnintendoarchives.neocities.org/",
 ];

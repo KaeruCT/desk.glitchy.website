@@ -219,16 +219,17 @@ export function makeWindow(opts) {
   let previewIsHidden = true;
   function showPreview() {
     if (previewEl) return;
-    Object.keys(windows).forEach(id => {
+    Object.keys(windows).forEach((id) => {
       if (id !== this.id) {
         windows[id].hidePreview();
       }
     });
 
-    const previewBody = win.element.querySelector(".window-body") // normal window
-      || win.element.querySelector("#main-window") // webamp window
-      || win.element; // fallback
-    
+    const previewBody =
+      win.element.querySelector(".window-body") || // normal window
+      win.element.querySelector("#main-window") || // webamp window
+      win.element; // fallback
+
     if (win.state.status === "minimized") {
       Object.assign(win.element.style, {
         opacity: 1,
@@ -239,7 +240,11 @@ export function makeWindow(opts) {
       });
     }
     previewIsHidden = false;
-    html2canvas(previewBody, { backgroundColor: null, allowTaint: true, logging: false }).then(canvas => {
+    html2canvas(previewBody, {
+      backgroundColor: null,
+      allowTaint: true,
+      logging: false,
+    }).then((canvas) => {
       if (win.element.style.top === "-9999px") {
         Object.assign(win.element.style, {
           top: customEl ? 0 : `${state.y}px`,
@@ -249,7 +254,9 @@ export function makeWindow(opts) {
       if (previewEl) {
         previewEl.parentNode.removeChild(previewEl);
       }
-      previewEl = htmlToElement(`<div class="preview window glass colored"><div class="title-bar"></div></div>`);
+      previewEl = htmlToElement(
+        `<div class="preview window glass colored"><div class="title-bar"></div></div>`
+      );
       previewEl.querySelector(".title-bar").appendChild(canvas);
       taskbarBtn.appendChild(previewEl);
       setTimeout(() => previewEl && previewEl.classList.add("show"), 1);
@@ -496,9 +503,10 @@ export function makeDesktopIcon(opts) {
     focusIcon(undefined);
   }
 
-  el.addEventListener("dblclick", onClick);
   if (isTouchDevice()) {
     el.addEventListener("click", onClick);
+  } else {
+    el.addEventListener("dblclick", onClick);
   }
 
   el.addEventListener("mousedown", () => focusIcon(el));

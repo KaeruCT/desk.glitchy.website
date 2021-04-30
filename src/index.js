@@ -129,8 +129,13 @@ Windows 7 style: https://khang-nd.github.io/7.css
 Winamp: https://github.com/captbaritone/webamp
 Paint: https://github.com/1j01/jspaint
 Calque: https://github.com/grimalschi/calque
-3d Pipes: https://github.com/1j01/pipes
+3D Pipes: https://github.com/1j01/pipes
 Minesweeper: https://github.com/KaeruCT/minesweeper (forked from https://github.com/ziebelje/minesweeper)
+Snake: https://github.com/KaeruCT/svanac
+musicSnake: https://github.com/KaeruCT/musicSnake
+Plasma Gun: One of many excellent demos for https://github.com/oguzeroglu/ROYGBIV
+SkiFree: https://github.com/basicallydan/skifree.js
+Minecraft: https://classic.minecraft.net
 Wallpaper: https://unsplash.com/
 Music: Try Andy (https://soundcloud.com/try_andy)
 
@@ -221,18 +226,22 @@ Everything brought together by yours truly
   {
     icon: plasmaImg,
     title: "Plasma Gun",
-    run: openIframe("Plasma Gun", "https://oguzeroglu.github.io/ROYGBIV/demo/plasmaGun/application.html", {
-      width: 640,
-      height: 480,
-    }),
+    run: openIframe(
+      "Plasma Gun",
+      "https://oguzeroglu.github.io/ROYGBIV/demo/plasmaGun/application.html",
+      {
+        width: 640,
+        height: 480,
+      }
+    ),
   },
   {
     icon: skiImg,
     title: "SkiFree",
     run: openIframe("SkiFree", "https://basicallydan.github.io/skifree.js/", {
       width: 640,
-      height: 480
-    })
+      height: 480,
+    }),
   },
   {
     icon: paintImg,
@@ -277,5 +286,8 @@ winampIcon.run(winampIcon);
 const shutdown = document.querySelector("#shutdown");
 shutdown.addEventListener("click", function () {
   closeStartMenu();
-  makeDialog("Not allowed", "Sorry, you do not have the necessary permissions to shut the system down.");
+  makeDialog(
+    "Not allowed",
+    "Sorry, you do not have the necessary permissions to shut the system down."
+  );
 });
