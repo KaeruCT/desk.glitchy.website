@@ -92,6 +92,7 @@ html {
   border: #000 1px solid;
   margin-right: 4px;
   height: calc(100% + 2px);
+  position: relative;
 }
 .taskbar-btn > div {
   border-radius: 6px;
@@ -139,6 +140,30 @@ html {
   margin: 0 auto;
   display: block;
   user-select: none;
+}
+.taskbar-btn .preview {
+  position: absolute;
+  top: -155px;
+  width: 200px;
+  height: 150px;
+  padding: 0;
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 0.3s;
+}
+.taskbar-btn .preview.show {
+  opacity: 1;
+}
+.taskbar-btn .preview .title-bar {
+  padding: 5px;
+  border-radius: 5px;
+  border: 0;
+}
+.taskbar-btn .preview canvas {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: scale-down;
+  border-radius: 5px;
 }
 .start-button img {
   width: 85px;
