@@ -200,10 +200,11 @@ html {
 .start-menu {
   display: none;
   position: absolute;
-  top: 40px;
   left: 0;
   bottom: 0;
-  width: 50%;
+  width: 480px;
+  max-width: 100vw;
+  min-height: 480px;
   min-width: 300px;
 }
 .start-menu .title-bar {
@@ -214,7 +215,103 @@ html {
   height: 100%;
   margin: 0;
   border-radius: 6px;
+  width: 250px;
+  background: #fff;
 }
+.start-menu .menu-sidebar {
+  width: 180px;
+  max-width: 30vw;
+  padding-left: 5px;
+  display: flex;
+  align-self: stretch;
+  flex-direction: column;
+}
+.start-menu .menu-sidebar .top {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.start-menu .menu-sidebar .bottom {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+.start-menu .menu-sidebar::after {
+  background: rgba(0, 0, 0, 0.4);
+  filter: blur(5px);
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+.start-menu .menu-sidebar .bottom button {
+  border: rgba(255, 255, 255, 0.3) 1px solid;
+}
+.start-menu .menu-sidebar .bottom button::after {
+  opacity: 0.5;
+}
+.start-menu .menu-sidebar .bottom button:hover {
+  opacity: 1;
+}
+.start-menu .menu-sidebar button {
+  cursor: pointer;
+  margin-bottom: 5px;
+  color: #eee;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  position: relative;
+  text-align: left;
+  border: transparent 1px solid;
+  padding: 5px;
+  text-shadow: 1px 1px 0 #000, 1px 1px 2px #000, 0 0 16px #000;
+}
+.start-menu .menu-sidebar button:hover {
+  border: rgba(255, 255, 255, 0.3) 1px solid;
+}
+.start-menu .menu-sidebar button::after {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.5) 51%,
+    transparent 100%
+  );
+  border: rgba(0 ,0, 0, 0.5) 1px solid;
+  border-radius: 3px;
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 0.1s;
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+.start-menu .menu-sidebar button:hover::after {
+  opacity: 1;
+}
+.start-menu .menu-sidebar button:focus {
+  outline: 0;
+}
+.start-menu .menu-sidebar button:active {
+  background: linear-gradient(
+    150deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.1) 30%,
+    transparent 100%
+  );
+}
+
 
 .desktop-icon img {
   width: 48px;

@@ -454,10 +454,15 @@ export function makeDesktopIcon(opts) {
   });
 }
 
-export function makeStartMenu() {
-  const startMenu = document.querySelector("#start-menu");
-  const startBtn = document.querySelector("#start-button");
+const startMenu = document.querySelector("#start-menu");
+const startBtn = document.querySelector("#start-button");
+export function closeStartMenu() {
+  Object.assign(startMenu.style, {
+    display: "none",
+  });
+}
 
+export function makeStartMenu() {
   startBtn.addEventListener("mouseenter", function () {
     startBtn.src = startHover;
   });
@@ -476,9 +481,7 @@ export function makeStartMenu() {
   });
   document.addEventListener("mousedown", function (event) {
     if (!startMenu.contains(event.target) && event.target !== startBtn) {
-      Object.assign(startMenu.style, {
-        display: "none",
-      });
+      closeStartMenu();
     }
   });
 }

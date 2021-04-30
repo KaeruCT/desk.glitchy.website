@@ -23,6 +23,8 @@ import {
   makeDesktopIcon,
   makeWindow,
   htmlToElement,
+  makeDialog,
+  closeStartMenu,
 } from "./lib";
 import { initWebamp } from "./webamp";
 import { openBrowser } from "./browser";
@@ -244,3 +246,9 @@ makeClock();
 initWallpaper();
 
 winampIcon.run(winampIcon);
+
+const shutdown = document.querySelector("#shutdown");
+shutdown.addEventListener("click", function () {
+  closeStartMenu();
+  makeDialog("Not allowed", "Sorry, you do not have the necessary permissions to shut the system down.");
+});
