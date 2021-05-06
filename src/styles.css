@@ -359,10 +359,10 @@ html {
   );
 }
 
-
 .desktop-icon img {
   width: 48px;
   align-self: center;
+  z-index: 1;
 }
 
 .desktop-icon {
@@ -518,4 +518,11 @@ html {
   position: absolute;
   left: -9999px;
   top: -9999px;
+}
+
+#homework-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
 }

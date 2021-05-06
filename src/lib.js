@@ -213,6 +213,9 @@ export function makeWindow(opts) {
     taskbar.removeChild(taskbarBtn);
     windows[id].hidePreview();
     delete windows[id];
+    if (win.onClose) {
+      win.onClose();
+    }
   }
 
   let previewEl;
@@ -293,6 +296,9 @@ export function makeWindow(opts) {
     },
     get state() {
       return state;
+    },
+    get container() {
+      return container;
     },
     saveState,
     toggleMinimize,
@@ -405,6 +411,10 @@ export function makeWindow(opts) {
           }
 
           win.saveState({ x, y, w, h, snapTo, status: "" });
+
+          if (win.onDrag) {
+            win.onDrag();
+          }
         },
         end: function () {
           let { snapTo } = win.state;
@@ -574,7 +584,7 @@ export function makeClock() {
 }
 
 export function makeDialog(title, message) {
-  makeWindow({
+  return makeWindow({
     icon: errorImg,
     width: 300,
     height: 160,

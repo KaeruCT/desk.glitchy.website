@@ -18,6 +18,7 @@ import musicSnakeImg from "./img/musicSnake.png";
 import minecraftImg from "./img/minecraft.png";
 import plasmaImg from "./img/plasma.png";
 import skiImg from "./img/skifree.png";
+import homeworkImg from "./img/homework.png";
 import video from "./vid/video.mp4";
 
 import {
@@ -34,6 +35,7 @@ import { openBrowser } from "./browser";
 import { initWallpaper } from "./wallpaper";
 import niceUrls from "./niceUrls";
 import { randItem } from "./util";
+import { openHomework } from "./homeworkTrap";
 
 function openWinamp(title, { width = 0, height = 0 } = {}) {
   let running = false;
@@ -252,6 +254,7 @@ Everything brought together by yours truly
     }),
   },
   { icon: aviImg, title: "Media Player", run: openVid("DJ Yayo", video) },
+  { icon: homeworkImg, title: "Homework ;)", run: openHomework() },
   winampIcon,
 ];
 
