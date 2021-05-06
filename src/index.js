@@ -138,7 +138,7 @@ musicSnake: https://github.com/KaeruCT/musicSnake
 Plasma Gun: One of many excellent demos for https://github.com/oguzeroglu/ROYGBIV
 SkiFree: https://github.com/basicallydan/skifree.js
 Minecraft: https://classic.minecraft.net
-Wallpaper: https://unsplash.com/
+Default Wallpaper: https://unsplash.com/
 Music: Try Andy (https://soundcloud.com/try_andy)
 
 Everything brought together by yours truly

@@ -495,6 +495,7 @@ iconContainer.addEventListener("mouseup", function (event) {
   }
 });
 
+let iconZIndex = 0;
 export function makeDesktopIcon(opts) {
   const { x, y, title, icon, run } = opts;
   const el = htmlToElement(
@@ -530,6 +531,7 @@ export function makeDesktopIcon(opts) {
         Object.assign(el.style, {
           top: `${position.y}px`,
           left: `${position.x}px`,
+          zIndex: iconZIndex++
         });
 
         focusIcon(el);

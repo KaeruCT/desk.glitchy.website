@@ -244,6 +244,10 @@ html {
   bottom: 0;
 }
 
+.icon-container {
+  z-index: 1;
+}
+
 .start-menu {
   display: none;
   position: absolute;
