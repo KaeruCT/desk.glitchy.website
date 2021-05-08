@@ -1,3 +1,5 @@
+Credits
+
 Windows 7 style: https://khang-nd.github.io/7.css
 Winamp: https://github.com/captbaritone/webamp
 Paint: https://github.com/1j01/jspaint

@@ -1,0 +1,28 @@
+.terminal-container,
+.terminal-input,
+.terminal-output {
+  font-family: "Courier New", Courier, monospace !important;
+  font-size: 13px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #111 !important;
+  color: #ccc !important;
+  white-space: break-spaces !important;
+}
+
+.terminal-input,
+.terminal-output {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.terminal-container {
+  display: block !important;
+  padding: 4px !important;
+}
+
+.terminal-input {
+  line-height: 1em !important;
+  height: unset !important;
+  width: 100%;
+}

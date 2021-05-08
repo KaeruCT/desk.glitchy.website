@@ -18,6 +18,7 @@ import musicSnakeImg from "./img/musicSnake.png";
 import minecraftImg from "./img/minecraft.png";
 import plasmaImg from "./img/plasma.png";
 import skiImg from "./img/skifree.png";
+import puttyImg from "./img/putty.png";
 import homeworkImg from "./img/homework.png";
 import video from "./vid/video.mp4";
 
@@ -39,6 +40,7 @@ import { initWallpaper } from "./wallpaper";
 import niceUrls from "./niceUrls";
 import { randItem } from "./util";
 import { openHomework } from "./homeworkTrap";
+import { openTerminal } from "./terminal";
 
 function openWinamp(title, { width = 0, height = 0 } = {}) {
   let running = false;
@@ -237,7 +239,8 @@ const desktopIcons = [
     }),
   },
   { icon: aviImg, title: "Media Player", run: openVid("DJ Yayo", video) },
-  { icon: homeworkImg, title: "Homework ;)", run: openHomework() },
+  { icon: homeworkImg, title: "Homework", run: openHomework() },
+  { icon: puttyImg, title: "PuTTY", run: openTerminal() },
   winampIcon,
 ];
 
@@ -267,7 +270,7 @@ makeStartMenu();
 makeClock();
 initWallpaper();
 
-winampIcon.run(winampIcon);
+//winampIcon.run(winampIcon);
 
 const shutdown = document.querySelector("#shutdown");
 shutdown.addEventListener("click", function () {
