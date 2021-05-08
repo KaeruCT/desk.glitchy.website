@@ -4,7 +4,11 @@ import { makeDialog } from "./lib";
 let homeWorkCanvas;
 let homeWorkCanvasCtx;
 export function openHomework() {
+  let running = false;
+
   return function () {
+    if (running) return;
+    running = true;
     const win = makeDialog(
       "Gesture Protected",
       "Move me in the correct way and I might show you the secret folder!"
@@ -15,7 +19,7 @@ export function openHomework() {
       backgroundColor: null,
       allowTaint: true,
       logging: false,
-      scale: 1
+      scale: 1,
     }).then((canvas) => {
       winImg = canvas;
 
@@ -33,18 +37,20 @@ export function openHomework() {
 
         win.container.appendChild(homeWorkCanvas);
         homeWorkCanvas.style.zIndex = win.element.style.zIndex;
-        win.onClose = function () {
-          if (homeWorkCanvasCtx) {
-            homeWorkCanvasCtx.clearRect(
-              0,
-              0,
-              homeWorkCanvas.width,
-              homeWorkCanvas.height
-            );
-          }
-        };
       }
     });
+
+    win.onClose = function () {
+      running = false;
+      if (homeWorkCanvasCtx) {
+        homeWorkCanvasCtx.clearRect(
+          0,
+          0,
+          homeWorkCanvas.width,
+          homeWorkCanvas.height
+        );
+      }
+    };
 
     win.onDrag = function () {
       if (winImg && homeWorkCanvas) {
