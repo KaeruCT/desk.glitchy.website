@@ -307,7 +307,7 @@ html {
 .start-menu .menu-sidebar .bottom button::after {
   opacity: 0.5;
 }
-.start-menu .menu-sidebar .bottom button:hover{
+.start-menu .menu-sidebar .bottom button:hover {
   opacity: 1;
 }
 .start-menu .menu-sidebar button {
@@ -334,7 +334,7 @@ html {
     rgba(0, 0, 0, 0.5) 51%,
     transparent 100%
   );
-  border: rgba(0 ,0, 0, 0.5) 1px solid;
+  border: rgba(0, 0, 0, 0.5) 1px solid;
   border-radius: 3px;
   opacity: 0;
   transition-property: opacity;
@@ -354,7 +354,8 @@ html {
 .start-menu .menu-sidebar button:focus {
   outline: 0;
 }
-.start-menu .menu-sidebar button:active, .clock:active {
+.start-menu .menu-sidebar button:active,
+.clock:active {
   background: linear-gradient(
     150deg,
     rgba(255, 255, 255, 0.5) 0%,
@@ -514,6 +515,7 @@ html {
   text-shadow: 1px 1px 0 #000, 1px 1px 2px #000, 0 0 16px #000;
   background: rgba(0, 0, 0, 0.5);
   color: #fac;
+  z-index: 10;
 }
 #change-wallpaper:hover {
   text-shadow: 1px 1px 0 #000, 1px 1px 5px #000, 0 0 26px #000;

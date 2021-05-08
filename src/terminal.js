@@ -1,42 +1,10 @@
 import TermlyPrompt from "termly.js/bin/classes/Prompt";
 import { htmlToElement, makeWindow } from "./lib";
-import { readFileSync } from "fs";
-const creditsText = readFileSync(__dirname + "/CREDITS.txt", "utf-8");
+import { filesystem } from "./filesystem";
 
 import "./terminal.css";
 
 let terminals = 0;
-
-const filesystem = {
-  home: {
-    nia: {
-      Desktop: {},
-    },
-    van: {
-      Desktop: {},
-    },
-    try_andy: {
-      Desktop: {
-        "CREDITS.txt": creditsText,
-        Homework: {
-          "surprise.txt": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        },
-      },
-      Music: {
-        "you're nine times closer": {
-          "TRACKLIST.txt":
-            "https://tryandy.bandcamp.com/album/youre-nine-times-closer",
-        },
-        npi: {
-          "TRACKLIST.txt": "https://tryandy.bandcamp.com/album/npi",
-        },
-        Dicha: {
-          "TRACKLIST.txt": "https://tryandy.bandcamp.com/album/dicha",
-        },
-      },
-    },
-  },
-};
 const commands = {};
 
 export function openTerminal() {
@@ -49,7 +17,7 @@ export function openTerminal() {
       className: "no-padding",
       width: 640,
       height: 480,
-      title: "PuTTy",
+      title: opts.title,
       content: htmlToElement(
         `<div class="terminal-container" id="${terminalId}"></div>`
       ),

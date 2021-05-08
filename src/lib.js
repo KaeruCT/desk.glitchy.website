@@ -211,16 +211,18 @@ export function makeWindow(opts) {
     interact(el).unset();
     el.parentNode.removeChild(el);
     taskbar.removeChild(taskbarBtn);
-    windows[id].hidePreview();
-    delete windows[id];
+    win.hidePreview();
     if (win.onClose) {
       win.onClose();
     }
+    delete windows[id];
   }
 
   let previewEl;
   let previewIsHidden = true;
   function showPreview() {
+    // preview is too slow and buggy, let's not do it for now
+    return;
     if (previewEl) return;
     Object.keys(windows).forEach((id) => {
       if (id !== this.id) {
@@ -250,7 +252,7 @@ export function makeWindow(opts) {
     }).then((canvas) => {
       if (win.element.style.top === "-9999px") {
         Object.assign(win.element.style, {
-          top: customEl ? 0 : `${state.y}px`,
+          top: customEl ? 0 : `${win.state.y}px`,
         });
       }
       if (previewIsHidden) return;
@@ -270,7 +272,7 @@ export function makeWindow(opts) {
           height: `${taskbarBtn.offsetHeight}px`,
           minWidth: 0,
           minHeight: 0,
-          top: customEl ? 0 : `${state.y}px`,
+          top: customEl ? 0 : `${win.state.y}px`,
           ...(customEl && { display: "none" }),
         });
       }
@@ -283,6 +285,13 @@ export function makeWindow(opts) {
       previewEl = null;
     }
     previewIsHidden = true;
+  }
+
+  function setTitle(newTitle) {
+    const titleEl = win.element.querySelector(".title-bar-text");
+    if (titleEl) {
+      titleEl.innerText = newTitle;
+    }
   }
 
   const win = {
@@ -300,11 +309,13 @@ export function makeWindow(opts) {
     get container() {
       return container;
     },
+    setTitle,
     saveState,
     toggleMinimize,
     showPreview,
     hidePreview,
     close,
+    hasCustomEl: !!customEl,
   };
 
   let windowContent;
@@ -362,7 +373,14 @@ export function makeWindow(opts) {
     status: "",
   });
 
-  el.addEventListener("mousedown", function () {
+  const titleBar = el.querySelector(".title-bar");
+  if (titleBar) {
+    titleBar.addEventListener("mousedown", function () {
+      setActive(win);
+    });
+  }
+
+  el.addEventListener("click", function () {
     setActive(win);
   });
 
@@ -531,7 +549,7 @@ export function makeDesktopIcon(opts) {
         Object.assign(el.style, {
           top: `${position.y}px`,
           left: `${position.x}px`,
-          zIndex: iconZIndex++
+          zIndex: iconZIndex++,
         });
 
         focusIcon(el);

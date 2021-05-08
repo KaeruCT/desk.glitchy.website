@@ -2,7 +2,7 @@ import "7.css/dist/7.css";
 import "./styles.css";
 
 import asciiImg from "./img/ascii.png";
-//import fileManagerImg from "./img/file-manager.png";
+import fileManagerImg from "./img/file-manager.png";
 import ircImg from "./img/im-irc.png";
 import imImg from "./img/im-message-new.png";
 import webImg from "./img/web-browser.png";
@@ -18,7 +18,7 @@ import musicSnakeImg from "./img/musicSnake.png";
 import minecraftImg from "./img/minecraft.png";
 import plasmaImg from "./img/plasma.png";
 import skiImg from "./img/skifree.png";
-import puttyImg from "./img/putty.png";
+import terminalImg from "./img/terminal.png";
 import homeworkImg from "./img/homework.png";
 import video from "./vid/video.mp4";
 
@@ -35,12 +35,14 @@ import {
   closeStartMenu,
 } from "./lib";
 import { initWebamp } from "./webamp";
-import { openBrowser } from "./browser";
+import { openBrowser, openIframe } from "./browser";
 import { initWallpaper } from "./wallpaper";
 import niceUrls from "./niceUrls";
 import { randItem } from "./util";
 import { openHomework } from "./homeworkTrap";
 import { openTerminal } from "./terminal";
+import { openExplorer } from "./explorer";
+import { openNotepad } from "./editor";
 
 function openWinamp(title, { width = 0, height = 0 } = {}) {
   let running = false;
@@ -73,23 +75,6 @@ function openWinamp(title, { width = 0, height = 0 } = {}) {
   };
 }
 
-function openIframe(title, src, { width = 460, height = 380 } = {}) {
-  return function (opts) {
-    makeWindow({
-      icon: opts.icon,
-      className: "no-padding",
-      width,
-      height,
-      title,
-      content: htmlToElement(
-        `<div style="display: flex;">
-          <iframe allowfullscreen seamless src="${src}" style="width: 100%; height: 100%">
-        </div>`
-      ),
-    });
-  };
-}
-
 function openVid(title, src, { width = 400, height = 300 } = {}) {
   return function (opts) {
     makeWindow({
@@ -106,20 +91,6 @@ function openVid(title, src, { width = 400, height = 300 } = {}) {
   };
 }
 
-function editableText(title, text) {
-  return function (opts) {
-    makeWindow({
-      icon: opts.icon,
-      width: 600,
-      height: 400,
-      title,
-      content: htmlToElement(
-        `<div style="display: block; overflow: auto; font-family: 'Courier New',monospace; font-size: 16px; padding: 4px; background: #fff" contenteditable>${text}</div>`
-      ),
-    });
-  };
-}
-
 const winampIcon = {
   icon: winampImg,
   title: "Winamp",
@@ -129,9 +100,13 @@ const desktopIcons = [
   {
     icon: asciiImg,
     title: "CREDITS.txt",
-    run: editableText("CREDITS.txt", `<pre>${creditsText}</pre>`),
+    run: openNotepad("CREDITS.txt", `${creditsText}`),
   },
-  //, title: "File Explorer", run: () => alert("not yet") },
+  {
+    icon: fileManagerImg,
+    title: "Explorer",
+    run: openExplorer(),
+  },
   {
     icon: ircImg,
     title: "IRC",
@@ -240,7 +215,7 @@ const desktopIcons = [
   },
   { icon: aviImg, title: "Media Player", run: openVid("DJ Yayo", video) },
   { icon: homeworkImg, title: "Homework", run: openHomework() },
-  { icon: puttyImg, title: "PuTTY", run: openTerminal() },
+  { icon: terminalImg, title: "Terminal", run: openTerminal() },
   winampIcon,
 ];
 

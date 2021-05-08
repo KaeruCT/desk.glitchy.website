@@ -1,0 +1,42 @@
+.explorer-container button,
+.explorer-container button:hover,
+.explorer-container button:active {
+  min-width: 0;
+  min-height: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+}
+
+.fe_fileexplorer_folder_tools_scroll_wrap {
+  display: none;
+}
+.fe_fileexplorer_wrap .fe_fileexplorer_inner_wrap {
+  position: absolute;
+  width: 100%;
+}
+
+.explorer-container {
+  font-size: 16px;
+}
+
+.fe_fileexplorer_item_icon_folder,
+.fe_fileexplorer_item_icon_ext_u,
+.fe_fileexplorer_item_icon_ext_t {
+  background-position: center !important;
+  background-size: contain;
+}
+
+.fe_fileexplorer_item_icon_folder {
+  background-image: url(./img/homework.png) !important;
+}
+
+.fe_fileexplorer_item_icon_ext_t {
+  background-image: url(./img/ascii.png) !important;
+}
+.fe_fileexplorer_item_icon_ext_u {
+  background-image: url(./img/web-browser.png) !important;
+}
+.fe_fileexplorer_item_icon_ext_t::after {
+  display: none !important;
+}

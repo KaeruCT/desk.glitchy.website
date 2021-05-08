@@ -12,6 +12,7 @@ Plasma Gun: One of many excellent demos for https://github.com/oguzeroglu/ROYGBI
 SkiFree: https://github.com/basicallydan/skifree.js
 Minecraft: https://classic.minecraft.net
 Terminal: https://github.com/simonecorsi/termly.js
+File Explorer: https://github.com/cubiclesoft/js-fileexplorer
 Default Wallpaper: https://unsplash.com/
 Music: Try Andy (https://soundcloud.com/try_andy)
 
