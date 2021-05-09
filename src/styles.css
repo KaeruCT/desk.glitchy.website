@@ -59,7 +59,7 @@ html {
 .window-container {
   display: flex;
   flex: 1;
-  /* position: relative; */
+  position: relative;
 }
 .taskbar-container {
   height: 45px;
@@ -283,13 +283,15 @@ html {
   vertical-align: top;
   margin-right: 5px;
 }
-#share-link {
+#share-link,
+#change-wallpaper,
+#shutdown {
   padding-left: 16px;
 }
 .start-menu .menu-sidebar .top {
   flex: 1;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   flex-direction: column;
 }
 .start-menu .menu-sidebar .bottom {
@@ -297,6 +299,11 @@ html {
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
+}
+.start-menu .menu-sidebar .sep {
+  border-top: rgba(255, 255, 255, 0.3) 1px solid;
+  padding-top: 10px;
+  margin-top: 10px;
 }
 .start-menu .menu-sidebar::after {
   background: rgba(0, 0, 0, 0.4);
@@ -319,7 +326,8 @@ html {
 .start-menu .menu-sidebar .bottom button:hover {
   opacity: 1;
 }
-.start-menu .menu-sidebar button {
+.start-menu .menu-sidebar button,
+.start-menu .menu-sidebar .button {
   cursor: pointer;
   margin-bottom: 5px;
   color: #eee;
@@ -332,10 +340,12 @@ html {
   padding: 5px;
   text-shadow: 1px 1px 0 #000, 1px 1px 2px #000, 0 0 16px #000;
 }
-.start-menu .menu-sidebar button:hover {
+.start-menu .menu-sidebar button:hover,
+.start-menu .menu-sidebar .button:hover {
   border: rgba(255, 255, 255, 0.3) 1px solid;
 }
-.start-menu .menu-sidebar button::after {
+.start-menu .menu-sidebar button::after,
+.start-menu .menu-sidebar .button::after {
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.9) 0%,
@@ -357,14 +367,16 @@ html {
   bottom: 0;
   z-index: -1;
 }
-.start-menu .menu-sidebar button:hover::after {
+.start-menu .menu-sidebar button:hover::after,
+.start-menu .menu-sidebar .button:hover::after {
   opacity: 1;
 }
-.start-menu .menu-sidebar button:focus {
+.start-menu .menu-sidebar button:focus,
+.start-menu .menu-sidebar .button:focus {
   outline: 0;
 }
 .start-menu .menu-sidebar button:active,
-.clock:active {
+.start-menu .menu-sidebar .button:active .clock:active {
   background: linear-gradient(
     150deg,
     rgba(255, 255, 255, 0.5) 0%,
@@ -526,22 +538,6 @@ html {
   height: 100%;
 }
 
-#change-wallpaper {
-  user-select: none;
-  cursor: pointer;
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 10px;
-  font-weight: bold;
-  text-shadow: 1px 1px 0 #000, 1px 1px 2px #000, 0 0 16px #000;
-  background: rgba(0, 0, 0, 0.5);
-  color: #fac;
-  z-index: 10;
-}
-#change-wallpaper:hover {
-  text-shadow: 1px 1px 0 #000, 1px 1px 5px #000, 0 0 26px #000;
-}
 #wallpaper-upload {
   position: absolute;
   left: -9999px;
