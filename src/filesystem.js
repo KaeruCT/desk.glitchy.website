@@ -52,7 +52,7 @@ export const filesystem = {
         "DOOM.jpg": doom,
         "aug29.jpg": buddha,
       },
-      "Homework (Real)": {
+      Homework_Real: {
         "hot_redhead_solo.mp4": "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
       Music: {
