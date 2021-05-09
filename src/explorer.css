@@ -37,6 +37,7 @@
 .fe_fileexplorer_item_icon_ext_u {
   background-image: url(./img/web-browser.png) !important;
 }
-.fe_fileexplorer_item_icon_ext_t::after {
+.fe_fileexplorer_item_icon_ext_t::after,
+.fe_fileexplorer_item_icon_ext_u::after {
   display: none !important;
 }

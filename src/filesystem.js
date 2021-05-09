@@ -52,7 +52,7 @@ export const filesystem = {
         },
       },
       Music: {
-        "you're nine times closer": {
+        ur9tc: {
           "TRACKLIST.url":
             "https://tryandy.bandcamp.com/album/youre-nine-times-closer",
         },

@@ -208,6 +208,9 @@ export function makeWindow(opts) {
   }
 
   function close() {
+    if (updatePreviewInterval) {
+      clearInterval(updatePreviewInterval);
+    }
     interact(el).unset();
     el.parentNode.removeChild(el);
     taskbar.removeChild(taskbarBtn);
@@ -219,72 +222,58 @@ export function makeWindow(opts) {
   }
 
   let previewEl;
-  let previewIsHidden = true;
+  let previewCanvas;
+  let previewScheduled;
+
+  function initPreview() {
+    if (win.state.status === "minimized") return;
+    const previewBody =
+      win.element.querySelector(".window-body") || // normal window
+      win.element.querySelector("#main-window") || // webamp window
+      win.element; // fallback
+
+    html2canvas(previewBody, {
+      backgroundColor: null,
+      allowTaint: true,
+      logging: false,
+    }).then((canvas) => {
+      if (win.state.status === "minimized") return;
+      previewCanvas = canvas;
+      if (previewScheduled) {
+        win.showPreview();
+      }
+    });
+  }
+
   function showPreview() {
-    // preview is too slow and buggy, let's not do it for now
-    return;
-    if (previewEl) return;
+    if (!previewCanvas) {
+      previewScheduled = true;
+      return;
+    }
+    previewScheduled = false;
     Object.keys(windows).forEach((id) => {
       if (id !== this.id) {
         windows[id].hidePreview();
       }
     });
 
-    const previewBody =
-      win.element.querySelector(".window-body") || // normal window
-      win.element.querySelector("#main-window") || // webamp window
-      win.element; // fallback
-
-    if (win.state.status === "minimized") {
-      Object.assign(win.element.style, {
-        opacity: 1,
-        minWidth: `${win.state.minWidth}px`,
-        minHeight: `${win.state.minHeight}px`,
-        top: "-9999px",
-        ...(customEl && { display: "block" }),
-      });
+    if (previewEl) {
+      previewEl.parentNode.removeChild(previewEl);
     }
-    previewIsHidden = false;
-    html2canvas(previewBody, {
-      backgroundColor: null,
-      allowTaint: true,
-      logging: false,
-    }).then((canvas) => {
-      if (win.element.style.top === "-9999px") {
-        Object.assign(win.element.style, {
-          top: customEl ? 0 : `${win.state.y}px`,
-        });
-      }
-      if (previewIsHidden) return;
-      if (previewEl) {
-        previewEl.parentNode.removeChild(previewEl);
-      }
-      previewEl = htmlToElement(
-        `<div class="preview window glass colored"><div class="title-bar"></div></div>`
-      );
-      previewEl.querySelector(".title-bar").appendChild(canvas);
-      taskbarBtn.appendChild(previewEl);
-      setTimeout(() => previewEl && previewEl.classList.add("show"), 1);
-      if (win.state.status === "minimized") {
-        Object.assign(win.element.style, {
-          opacity: 0,
-          width: `${taskbarBtn.offsetWidth}px`,
-          height: `${taskbarBtn.offsetHeight}px`,
-          minWidth: 0,
-          minHeight: 0,
-          top: customEl ? 0 : `${win.state.y}px`,
-          ...(customEl && { display: "none" }),
-        });
-      }
-    });
+    previewEl = htmlToElement(
+      `<div class="preview window glass colored"><div class="title-bar"></div></div>`
+    );
+    previewEl.querySelector(".title-bar").appendChild(previewCanvas);
+    taskbarBtn.appendChild(previewEl);
+    setTimeout(() => previewEl && previewEl.classList.add("show"), 1);
   }
 
   function hidePreview() {
+    previewScheduled = false;
     if (previewEl) {
       previewEl.parentNode.removeChild(previewEl);
       previewEl = null;
     }
-    previewIsHidden = true;
   }
 
   function setTitle(newTitle) {
@@ -354,6 +343,9 @@ export function makeWindow(opts) {
 
     el.querySelector(".close").addEventListener("click", close);
   }
+
+  setTimeout(initPreview, 500);
+  const updatePreviewInterval = setInterval(initPreview, 5 * 1000);
   setActive(win);
 
   let w = width || el.offsetWidth;
