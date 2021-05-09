@@ -372,7 +372,7 @@ html {
 
 .desktop-icon {
   position: absolute;
-  width: 48px;
+  width: 75px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -386,6 +386,10 @@ html {
   }
   .desktop-icon {
     width: 96px;
+  }
+  .browser button svg {
+    width: 20px !important;
+    height: 20px !important;
   }
 }
 
@@ -503,8 +507,8 @@ html {
   padding: 0 5px;
 }
 .browser button svg {
-  width: 20px;
-  height: 20px;
+  width: 12px;
+  height: 12px;
   fill: #333;
 }
 .browser .iframe-container,
