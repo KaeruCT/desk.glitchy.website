@@ -277,10 +277,14 @@ html {
   align-self: stretch;
   flex-direction: column;
 }
-.start-menu .menu-sidebar img {
+.start-menu .menu-sidebar img,
+.start-menu .menu-sidebar svg {
   width: 18px;
   vertical-align: top;
   margin-right: 5px;
+}
+#share-link {
+  padding-left: 16px;
 }
 .start-menu .menu-sidebar .top {
   flex: 1;

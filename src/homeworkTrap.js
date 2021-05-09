@@ -11,7 +11,7 @@ export function openHomework() {
     running = true;
     const win = makeDialog(
       "Gesture Protected",
-      "Move me in the correct way and I might show you the secret folder!"
+      "<p>Move me in the correct way and I might show you the secret folder!</p>"
     );
     let winImg;
 

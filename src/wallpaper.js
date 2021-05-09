@@ -16,7 +16,9 @@ export function initWallpaper() {
         } catch (e) {
           makeDialog(
             "Error!",
-            "Sorry, something is wrong with the chosen image.<br><br>" + e
+            "<p>Sorry, something is wrong with the chosen image.<br><br>" +
+              e +
+              "</p>"
           );
         }
       };

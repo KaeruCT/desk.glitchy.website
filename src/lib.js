@@ -612,9 +612,9 @@ export function makeClock() {
   }, 1000);
 }
 
-export function makeDialog(title, message) {
+export function makeDialog(title, message, icon = undefined) {
   return makeWindow({
-    icon: errorImg,
+    icon: icon || errorImg,
     width: 300,
     height: 160,
     unresizable: true,
@@ -622,7 +622,7 @@ export function makeDialog(title, message) {
     content: (win) => {
       const el = htmlToElement(
         `<div>
-          <p>${message}</p>
+          ${message}
           <section class="field-row" style="justify-content: flex-end;">
             <button class="close">OK</button>
           </section>

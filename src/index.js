@@ -20,6 +20,7 @@ import plasmaImg from "./img/plasma.png";
 import skiImg from "./img/skifree.png";
 import terminalImg from "./img/terminal.png";
 import homeworkImg from "./img/homework.png";
+import petImg from "./img/pet.png";
 import video from "./vid/video.mp4";
 
 import { readFileSync } from "fs";
@@ -252,6 +253,16 @@ shutdown.addEventListener("click", function () {
   closeStartMenu();
   makeDialog(
     "Not allowed",
-    "Sorry, you do not have the necessary permissions to shut the system down."
+    "<p>Sorry, you do not have the necessary permissions to shut the system down.</p>"
+  );
+});
+
+const shareLink = document.querySelector("#share-link");
+shareLink.addEventListener("click", function () {
+  closeStartMenu();
+  makeDialog(
+    "Share Link",
+    "Copy and paste this link to share with your pals!<br><input onClick='this.setSelectionRange(0, this.value.length)' value='https://desk.glitchy.website/' />",
+    petImg
   );
 });
