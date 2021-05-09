@@ -61,11 +61,24 @@ function initExplorer(win, element) {
       if (ext === "txt") {
         openNotepad(entry.name, entry.attrs.content)();
       }
-      if (ext === "jpg") {
-        openIframe(entry.name, entry.attrs.content)();
-      }
-      if (ext === "url") {
-        openIframe(entry.name, entry.attrs.content)();
+
+      const iframeExts = [
+        "jpg",
+        "jpeg",
+        "png",
+        "url",
+        "webm",
+        "wma",
+        "wmv",
+        "mkv",
+        "avi",
+        "mp4",
+        "m3u8",
+      ];
+      if (iframeExts.includes(ext)) {
+        setTimeout(function () {
+          openIframe(entry.name, entry.attrs.content)();
+        }, 150);
       }
     },
 

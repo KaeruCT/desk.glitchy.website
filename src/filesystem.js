@@ -37,30 +37,43 @@ for (let i = 1; i <= 28; i++) {
 
 export const filesystem = {
   home: {
-    nia: {
-      Desktop: {},
-      Images: niaImg,
+    try_panpan: {
+      Desktop: {
+        Images: niaImg,
+      },
     },
-    van: {
+    try_wolk: {
       Desktop: {},
     },
     try_andy: {
       Desktop: {
         "CREDITS.txt": creditsText,
         Homework: {
-          "SURPRISE.url": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          "SURPRISE.mp4": "https://www.youtube.com/embed/dQw4w9WgXcQ",
         },
-      },
-      Music: {
-        ur9tc: {
-          "TRACKLIST.url":
-            "https://tryandy.bandcamp.com/album/youre-nine-times-closer",
+        Music: {
+          ur9tc: {
+            "playlist.m3u8":
+              "https://bandcamp.com/EmbeddedPlayer/album=1635113546/size=large/bgcol=ffffff/linkcol=f171a2/artwork=small/transparent=true",
+          },
+          npi: {
+            "playlist.m3u8":
+              "https://bandcamp.com/EmbeddedPlayer/album=2480641060/size=large/bgcol=ffffff/linkcol=f171a2/artwork=small/transparent=true",
+          },
+          Dicha: {
+            "playlist.m3u8":
+              "https://bandcamp.com/EmbeddedPlayer/album=2262989140/size=large/bgcol=ffffff/linkcol=f171a2/artwork=small/transparent=true",
+          },
         },
-        npi: {
-          "TRACKLIST.url": "https://tryandy.bandcamp.com/album/npi",
-        },
-        Dicha: {
-          "TRACKLIST.url": "https://tryandy.bandcamp.com/album/dicha",
+        Videos: {
+          "the_need_for_escapism.mkv":
+            "https://www.youtube.com/embed/Hp-KX4HcaXo",
+          "two_months.mp4": "https://www.youtube.com/embed/9T_m6Zq3ZKQ",
+          "new_freedom.avi": "https://www.youtube.com/embed/xh8lQU1jSO4",
+          "milk_hun.mp4": "https://www.youtube.com/embed/-NHFNjCe0Eo",
+          "cyan_dot_music.mp4": "https://www.youtube.com/embed/3k_7KhEwJ_0",
+          "cold_blow.avi": "https://www.youtube.com/embed/qQPKlf5NRkc",
+          "rh_bb.wmv": "https://www.youtube.com/embed/hvf_LemcrcE",
         },
       },
     },
