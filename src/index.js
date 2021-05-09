@@ -219,12 +219,12 @@ const desktopIcons = [
   winampIcon,
 ];
 
-const inc = 100;
 let initial = 40;
 let x = initial;
 let y = -initial;
 
 const rowCnt = window.innerWidth <= 375 ? 3 : 5;
+const inc = window.innerWidth <= 375 ? 90 : 100;
 desktopIcons.forEach((di, i) => {
   if (i % rowCnt === 0) {
     x = initial;
