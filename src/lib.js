@@ -309,6 +309,9 @@ export function makeWindow(opts) {
     get container() {
       return container;
     },
+    setActive: function _setActive() {
+      setActive(win);
+    },
     setTitle,
     saveState,
     toggleMinimize,
@@ -533,7 +536,15 @@ export function makeDesktopIcon(opts) {
   }
 
   if (isTouchDevice()) {
-    el.addEventListener("click", onClick);
+    el.addEventListener("click", function () {
+      if (
+        el.lastDragTime === 0 ||
+        el.lastDragTime + 150 > new Date().getTime()
+      ) {
+        return;
+      }
+      onClick();
+    });
   } else {
     el.addEventListener("dblclick", onClick);
   }
@@ -553,6 +564,9 @@ export function makeDesktopIcon(opts) {
         });
 
         focusIcon(el);
+      },
+      end: function () {
+        el.lastDragTime = new Date().getTime();
       },
     },
     modifiers: [

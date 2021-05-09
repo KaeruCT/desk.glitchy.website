@@ -37,6 +37,7 @@ export function openHomework() {
 
         win.container.appendChild(homeWorkCanvas);
         homeWorkCanvas.style.zIndex = win.element.style.zIndex;
+        win.setActive();
       }
     });
 
