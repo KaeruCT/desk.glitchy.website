@@ -1,4 +1,6 @@
 import { readFileSync } from "fs";
+import doom from "./img/doom.jpg";
+import buddha from "./img/buddha.jpg";
 const creditsText = readFileSync(__dirname + "/CREDITS.txt", "utf-8");
 
 var niceImgs = [
@@ -46,35 +48,39 @@ export const filesystem = {
       Desktop: {},
     },
     try_andy: {
+      Images: {
+        "DOOM.jpg": doom,
+        "aug29.jpg": buddha,
+      },
+      "Homework (Real)": {
+        "hot_redhead_solo.mp4": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      },
+      Music: {
+        ur9tc: {
+          "playlist.m3u8":
+            "https://bandcamp.com/EmbeddedPlayer/album=1635113546/size=large/bgcol=ffffff/linkcol=f171a2/artwork=small/transparent=true",
+        },
+        npi: {
+          "playlist.m3u8":
+            "https://bandcamp.com/EmbeddedPlayer/album=2480641060/size=large/bgcol=ffffff/linkcol=f171a2/artwork=small/transparent=true",
+        },
+        Dicha: {
+          "playlist.m3u8":
+            "https://bandcamp.com/EmbeddedPlayer/album=2262989140/size=large/bgcol=ffffff/linkcol=f171a2/artwork=small/transparent=true",
+        },
+      },
+      Videos: {
+        "the_need_for_escapism.mkv":
+          "https://www.youtube.com/embed/Hp-KX4HcaXo",
+        "two_months.mp4": "https://www.youtube.com/embed/9T_m6Zq3ZKQ",
+        "new_freedom.avi": "https://www.youtube.com/embed/xh8lQU1jSO4",
+        "milk_hun.mp4": "https://www.youtube.com/embed/-NHFNjCe0Eo",
+        "cyan_dot_music.mp4": "https://www.youtube.com/embed/3k_7KhEwJ_0",
+        "cold_blow.avi": "https://www.youtube.com/embed/qQPKlf5NRkc",
+        "rh_bb.wmv": "https://www.youtube.com/embed/hvf_LemcrcE",
+      },
       Desktop: {
         "CREDITS.txt": creditsText,
-        Homework: {
-          "SURPRISE.mp4": "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        },
-        Music: {
-          ur9tc: {
-            "playlist.m3u8":
-              "https://bandcamp.com/EmbeddedPlayer/album=1635113546/size=large/bgcol=ffffff/linkcol=f171a2/artwork=small/transparent=true",
-          },
-          npi: {
-            "playlist.m3u8":
-              "https://bandcamp.com/EmbeddedPlayer/album=2480641060/size=large/bgcol=ffffff/linkcol=f171a2/artwork=small/transparent=true",
-          },
-          Dicha: {
-            "playlist.m3u8":
-              "https://bandcamp.com/EmbeddedPlayer/album=2262989140/size=large/bgcol=ffffff/linkcol=f171a2/artwork=small/transparent=true",
-          },
-        },
-        Videos: {
-          "the_need_for_escapism.mkv":
-            "https://www.youtube.com/embed/Hp-KX4HcaXo",
-          "two_months.mp4": "https://www.youtube.com/embed/9T_m6Zq3ZKQ",
-          "new_freedom.avi": "https://www.youtube.com/embed/xh8lQU1jSO4",
-          "milk_hun.mp4": "https://www.youtube.com/embed/-NHFNjCe0Eo",
-          "cyan_dot_music.mp4": "https://www.youtube.com/embed/3k_7KhEwJ_0",
-          "cold_blow.avi": "https://www.youtube.com/embed/qQPKlf5NRkc",
-          "rh_bb.wmv": "https://www.youtube.com/embed/hvf_LemcrcE",
-        },
       },
     },
   },

@@ -32,7 +32,6 @@ function initExplorer(win, element) {
     initpath: [
       ["0", "home", { canmodify: false }],
       ["1", "try_andy", { canmodify: false }],
-      ["2", "Desktop"],
     ],
 
     // See main documentation for the complete list of keys.
