@@ -365,14 +365,14 @@ html {
 }
 
 .desktop-icon img {
-  width: 48px;
+  width: 24px;
   align-self: center;
   z-index: 1;
 }
 
 .desktop-icon {
   position: absolute;
-  width: 96px;
+  width: 48px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -380,6 +380,15 @@ html {
   user-select: none;
   padding: 4px;
 }
+@media screen and (min-width: 374px) {
+  .desktop-icon img {
+    width: 48px;
+  }
+  .desktop-icon {
+    width: 96px;
+  }
+}
+
 .desktop-icon > div {
   margin-top: 3px;
   font: 9pt Segoe UI, sans-serif;

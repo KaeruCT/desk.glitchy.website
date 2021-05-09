@@ -224,7 +224,7 @@ let initial = 40;
 let x = initial;
 let y = -initial;
 
-const rowCnt = window.innerWidth > 420 ? 5 : 3;
+const rowCnt = window.innerWidth <= 375 ? 3 : 5;
 desktopIcons.forEach((di, i) => {
   if (i % rowCnt === 0) {
     x = initial;
