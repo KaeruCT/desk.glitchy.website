@@ -59,12 +59,12 @@ html {
 .window-container {
   display: flex;
   flex: 1;
-  position: relative;
+  /* position: relative; */
 }
 .taskbar-container {
   height: 45px;
   border-radius: 0;
-  z-index: 999 !important;
+  z-index: 9999 !important;
 }
 .taskbar-container::before {
   border-radius: 0;

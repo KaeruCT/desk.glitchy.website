@@ -164,7 +164,8 @@ const MOODS = [
   "MF DOOM forever",
   "mmm... food",
   "meet me at the gate",
-  "who uses Discord anymore?",
+  "who even uses Discord anymore?",
+  "YOU THOUGHT YOU WERE PRAYING TO THE RESURRECTOR",
   "Check out my tumblr!",
   "DOGE crash!!!",
   "Please help me I am trying to buy Bitcoin",
@@ -332,14 +333,15 @@ export function openMessenger() {
     const advertisement = win.body.querySelector(".advertisement");
 
     function addMessage(from, content) {
+      const isYou = from === "You say";
       conversation.appendChild(
         htmlToElement(`<div>
-              <p>${escapeHTML(from)}:</p>
+              <p class="from${isYou ? "-2" : ""}">${escapeHTML(from)}:</p>
               <p class="message">${escapeHTML(content)}</p>
             </div>`)
       );
       conversation.scrollTop = conversation.scrollHeight;
-      if (from !== "You") {
+      if (!isYou) {
         messageInfos.innerText =
           "Last message received at " + new Date().toLocaleString();
       }

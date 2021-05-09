@@ -74,12 +74,12 @@
   margin: 1px;
 }
 .messenger-container .img__img {
-  height: 96px;
-  width: 96px;
+  height: 48px;
+  width: 48px;
 }
 .messenger-container .img__img img {
   border: 3px double #e4ebe3;
-  width: 96px;
+  width: 48px;
 }
 
 /* Conversation area */
@@ -90,10 +90,18 @@
   flex: 1;
 }
 .messenger-container p {
-  margin: 7px;
+  margin: 3px;
+}
+.messenger-container .from {
+  font-weight: bold;
+  color: #509fc6;
+}
+.messenger-container .from-2 {
+  font-weight: bold;
+  color: #295d77;
 }
 .messenger-container .message {
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 /* Send message area */
@@ -116,6 +124,8 @@
   background: transparent;
   border: 0;
   font-size: 1.3rem;
+  min-width: unset !important;
+  padding: 0 8px !important;
 }
 .messenger-container .send-message__button:active {
   background: #e9f3f6;
@@ -149,13 +159,13 @@
   border-top: 1px solid #d2dde0;
   color: #8d8e88;
   display: flex;
-  font-size: 0.85em;
+  font-size: 0.75em;
   padding-left: 5px;
 }
 
 /* Bottom */
 .messenger-container .footer {
-  font-size: 0.9rem;
+  font-size: 0.6rem;
   font-weight: bold;
   letter-spacing: 0.8px;
 }
@@ -185,6 +195,30 @@
   flex: 1;
   display: flex;
   overflow: hidden;
+}
+
+@media screen and (min-width: 374px) {
+  .messenger-container .img__img {
+    height: 96px;
+    width: 96px;
+  }
+  .messenger-container .img__img img {
+    width: 96px;
+  }
+  .messenger-container .footer {
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+  }
+  .messenger-container .message {
+    margin-left: 20px;
+  }
+  .messenger-container p {
+    margin: 3px;
+  }
+  .messenger-container .send-message__infos {
+    font-size: 0.85em;
+  }
 }
 
 /* Inspired by https://github.com/elrumordelaluz/csshake */

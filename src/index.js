@@ -226,13 +226,14 @@ let x = initial;
 let y = -initial;
 
 const rowCnt = window.innerWidth <= 375 ? 3 : 5;
-const inc = window.innerWidth <= 375 ? 90 : 100;
+const xinc = window.innerWidth <= 375 ? 90 : 100;
+const yinc = window.innerWidth <= 375 ? 80 : 100;
 desktopIcons.forEach((di, i) => {
   if (i % rowCnt === 0) {
     x = initial;
-    y += inc;
+    y += yinc;
   } else {
-    x += inc;
+    x += xinc;
   }
   makeDesktopIcon({
     x,
