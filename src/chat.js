@@ -55,7 +55,7 @@ And not Queen like Queen killer, rhapsody bohemian Queen
 But Queen like white glove wave hand
 And not wave hand like it's a heat wave
 So you make a fan by waving your hand
-I'm talking wave like you saying "hey"
+I'm talking wave like you saying hey
 Man, and not hay for horses and hoarse like you almost voiceless
 You gotta treat your vocal chords like it's a fortress
 And treat every single one of your words like reinforcements
@@ -381,7 +381,7 @@ Yeah, my man, mothafucka!
 Hey, baby, you forgot your Ray Bans
 And my sheets still orange from your spray-tan
 It was more than soft porn for the K-Man
-She remember my Sprinter, said "I was in the grape van"
+She remember my Sprinter, said I was in the grape van
 Uhm—well, cutie, I like your bougie booty
 Come, Erykah Badu-me—well, let's make a movie
 Hell, you know my repertoire is like a wrestler
@@ -404,7 +404,7 @@ I said baby, Spin that 'round and say the alphabet backwards
 You're dealing with malpractice, don't kill a good guy's confidence
 Just 'cause he a nerd and you don't know what a condom is
 The head still good, though; the head still good, though
-Make me say "Nam Myoho Renge Kyo"
+Make me say Nam Myoho Renge Kyo
 Make a guy say big words and act lyrical
 Make me get spiritual, make me believe in miracles
 Buddhist monks and Cap'n Crunch cereal
@@ -532,7 +532,7 @@ If I ever wasn't the greatest, guy, I must have missed it
 I need more drinks and less lights
 And that American Apparel girl in just tights
 She told the director she tryna get in a school
-He said, "Take them glasses off and get in the pool"
+He said, Take them glasses off and get in the pool
 It's been a while since I watched the tube
 'Cause like a Crip set, I got way too many blues for any more bad news
 I was looking at my resume, feeling real fresh today
@@ -569,11 +569,64 @@ If you can't live, you dying, you give or buy in
 Keep it real or keep it moving, keep grinding
 Keep shining, to every young man, this is a plan
 Learn from others like your brothers Rae and Kanye
+I have had a number of job interviews recently that went poorly and did not result in securing employment.
+I started to think I needed to do something during an interview to really stand out, be impressive, unique, and highly memorable. I thought it could be risky, but might work out.
+I came up with the following idea: After concluding the interview, after the hand shakes, etc, when leaving the room stop, turn around, and say There's one more thing you need to know about me.
+Then pull out a bottle of hot sauce, down the entire bottle, slam it onto the ground and say I can handle the heat. Nod confidently, leave the room.
+I imagined that they would be really impressed and wowed by such a performance.
+Well it didn't pan out like I thought it would. It was only a small bottle of hot sauce, I figured it would be no big deal to actually do. I should have tested at home first, but I didn't.
+I was nervous as a bitch-ass during the interview, but I was determined to follow through with the plan.
+So I started exactly as described above. I was leaving, I turned around, maybe not with as much swagger as I'd imagined in my head, and I declared There's one more thing you need to know about me.
+I pulled out the hot sauce bottle, almost dropped it, and started to open the bottle. In my head it was all one quick confident motion, like an electric Indiana Jones, but instead I fumbled around and had a tough time getting it open. It felt like a nightmarish eternity but was probably only about 20 seconds. Enough time for one of the interviewers to ask me what I was doing.
+I didn't answer directly. Instead, after I got the bottle open, I repeated There's one more thing you need to know about me. (But stuttering.)
+Then I guzzled down the entire bottle of hot sauce. I instantly regretted it. My mouth and throat felt like lava was swirling around inside me. I immediately started to gag and loudly cough, I was crying involuntarily. Tears hardcore streaming down my face. I was sweating like a terrible fool.
+I desperately tried to scream I can handle the heat but just kept coughing before I could get anything out.
+The interviewers were all standing up looking at me in horror and confusion.
+A few seconds before I threw up all over the floor I knew it would happen, but I tried to hold it back. I couldn't.
+I threw up all over the floor. It hurt as much on the way out as it did on the way in, if not more so. The vomit felt like flaming barbed wire shredding its way through my neck.
+I should mention a disturbing amount of fiery mucus was also leaking out of my nose uncontrollably.
+After I finished throwing up I could not bear to look at the interviewers. I hoarsely mumbled an apology and started to stumble as quickly as possible out the door.
+I have never been more shamed in my life.
+I didn't get the job.
+I have one moment that stands out above all the rest. I was waiting for someone to ask me this question. It's the reason I left a good job as a VIP Tourguide and moved to the Character Department.
+I was working City Hall one day when two guests came in with two little girls. One was in a wheel chair and the other one looked like she had just seen death. Both were cut and bruised and the one in the wheelchair had her arm in a cast. The two women were actually nurses from a hospital and were asking for a refund on the girl's tickets, something we avoided doing at all costs. When I asked why they told me the story. The two girls were with their mom and dad at Epcot and on the way home they got into a horrible car accident. The mother was beheaded right in front of them. The father eventually died too but the two girls didn't know that yet. They were from overseas and had no money and no contact information for anyone they knew. They were bringing the tickets back to get the girls some much needed money to help get them back home. My heart absolutely sunk. If you had seen these girls you'd know why. They were truly traumatized. I refunded their tickets and got permission to be their private tour guide for the rest of the day (which they were not expecting). I walked them to the VIP viewing area for the parade which was as far as I could walk them in the costume we used to wear at City Hall. I had to leave them there while I put on my VIP costume. On the way down I pulled out every kid joke I could think of. I was a REALLY good tour guide (I helped write part of it) and I knew how to make kids smile. Nothing worked. These girls were too far gone for that. I left them at the bridge to go change, walked backstage and bawled my eyes out. I just had never seen something so horrible. I was truly affected and it was a terrible feeling of powerlessness not being able to fix the situation. When I came back I brought them to get ice-cream, take them on rides and stuff but they never smiled, not once. The nurses were loving it and were trying to get them into it but it just wasn't working. We went back to the bridge to watch the parade. It was there that I honestly saw true magic. Real magic, not bullshit. I had called the parade department to let them know what was going on and set up a private meet and greet after the parade. As the parade was coming around Liberty Square I told the girls that I had called Mickey and told him all about them. I told them that Mickey asked to meet them after the parade.
+The little girl in the wheelchair smiled.
+Really? she asked. My heart skipped. Yes, really! He told me to tell you to look out for him in the parade and to follow the float back to City Hall.
+The other girl smiled.
+You mean right now? she asked.
+It had worked. They were talking. Not laughing, but talking. It was the first time I had heard them speak. Every single parade performer came up to them on the bridge and told them to look out for Mickey. Every one of them told them that. When Mickey's float came up Mickey (who was attached to a pole at the top of the float) managed to turn her body sideways, look down at the girls and point towards Main Street. That was all it took. The girls were excited now. They had forgotten about death. They were lost in a magical world and I couldn't believe I was watching it unfold in front of my eyes. We followed that float all the way back to City Hall, singing Mickey Mania the whole way. Back then, City Hall used to have a VIP lounge behind the desk that was for privacy during difficult situations or to host celebrities. I took them in and showed them the book where all of the autographs were. They were eating it up.
+The girl who was Mickey that day got down off her float and without even taking her head off walked up to me backstage and said Let's go. I walked in with Mickey behind me so I got to see the exact moment the girls met their new friend. They got shy but Mickey was in control now. Those girls met the REAL Mickey Mouse that day. Every single parade character stayed dressed to meet those girls. One by one they'd come in and play a bit then leave. We were in that lounge for over an hour. Mickey stayed in costume the entire time (which is hard to do after a parade). When Mickey finally said goodbye I had two excited girls on my hands that couldn't stop smiling. They talked and talked and talked. We had a wonderful day after that but what I remember most is when we walked by the rose garden, the older one said Oh, my mommy loves roses! I mean... and she stopped. I held out my hand and walked her to the gate, picked her up and put her on the other side and said Pick one! She looked happy as she picked out her favorite rose. She didn't say anything more and she didn't need to. I said goodbye to the wonderful nurses and the wonderful girls then walked backstage behind the train station. This time I didn't cry. It felt so good to be a part of that. I realized that as much as I liked helping guests at City Hall, the true magic of Disney was in the character department. I auditioned, transferred and never looked back. Thanks for letting me relive this. It was a special day for me.
+As a man that has reached the ripe old age of 48 I can promise you I have seen some shit go down. This one totally takes the cake for me though.
+I was waiting out front of a truck stop back in the mid 80's. Sitting on a park bench with a guy that had a big Rottweiler kinda dog on a leash with him. I tried to make small talk but he was quite a sourpuss. So we sat in silence for a few minutes until the most unexpected thing I have ever seen, happened right before my very eyes.
+While we were sitting there a big 18 wheeler pulls in without a trailer (bobtail) so he parks right up front like a normal car would. Inside the cab of the truck with the driver is a little monkey. The dance for the organ grinder kind. I think they are called Rhesus monkeys perhaps. Well the dog spots this lil monkey and proceeds to go apeshit over it. Lunging at the end of his leash and barking at the top of his lungs. Generally making a real spectacle of himself to say the least.
+The driver is obviously upset, but not nearly as much as the monkey is. Actually upset may be the wrong adjective to use for the monkey though. In retrospect I think eagerly aggressive may be a more appropriate description for his disposition. He was pacing the dashboard back and forth. Never taking his eyes off of this very aggravating dog.
+The driver opens his little triangle window that they don't make on cars anymore. The ones made for smokers back in the day. He yells out to this douche bag to call his dog off because it is upsetting his monkey. The guy laughs and says no way (I told you he was a jerk didn't I?). Says that his dog ain't bothering nobody. The dog hasn't shut up since he laid eyes on the monkey. I promise you he is bothering everybody for several blocks around.
+Now here's where things start to get interesting. The driver says that if he doesn't call his dog off he's gonna let his monkey loose on that dog. Douche bag laughs and says that his dog would eat that monkey alive. Upon hearing this the driver leans over and reaches into his glove box I guess. Pulls out one of those tiny baseball bats like you used to get at Astroworld or carnivals, and places it in the monkeys hand. The monkey obviously knows what's about to go down because he is now trying to squeeze out of that little triangular window I mentioned earlier. This monkey has murder in his eyes if I have ever seen it. Driver hollers Last chance to save your dog's ass man. In response douche bag lets his dog off of the leash. Now we have a situation that has escalated to the point where we have a dog jumping up at the window and a monkey screaming profanities right back at him. Well, the driver finally rolls down the regular window and out leaps all kinds of miniature primate hell. The dog never knew what hit him. Quick as a flash this monkey is riding on the back of this dog's neck. His two back feet all wrapped up in his neck fur with one hand hanging onto an ear. The other hand as you may have guessed by now is steadily and mercilessly raining down blows about this dog's head and face. I mean hard blows. You can hear them whap whap whap.
+Well it only took a moment for the dog to realize he was in way over his head. He bolts yelping bloody murder as he runs away at full speed. I mean this dog is running so fuckin hard he's throwing up tufts of grass and dirt as soon as he leaves pavement. The monkey still riding him and beating on him the whole time. Douche bag acts like he wants to fight now but several people including myself stepped in to stop that nonsense. In a couple of minutes or so the little monkey comes loping back with his little bat still in hand, and leaps up into the still open window of the truck to await his master who has gone on into the store.
+That wanker ran off to try to go find his dog, but I don't know if he ever did. My ride showed up and I had to go. Never again in this lifetime will I see something so totally crazy and unexpected like that. I am both fortunate and humble to have been so privileged to be present for such an event.
+So Reddit, please do tell. What's your craziest thing you have ever seen in public?
+Let me tell you that I have made a bad mistake this evening.
+My girlfriend (who let me tell you is only my 2nd girlfriend of all time) said I am invited to dinner with her and her parents. I was very aghast, nervous, and bashful to be invited to such a situation. But I knew it must be done.
+I met them nicely, I should tell you, and it started off in a good way. The idea slapped my mind that I should do a comic bit, to make a good impression and become known to them as a person who is amusing.
+When I saw that baked potatoes were served I got the idea that it would be very good if I pretended I did not know what potatoes was. That would be funny.
+Well let me tell you: backfired on my face. I'll tell you how.
+So first when the potato became on my plate, I acted very interesting. I showed an expression on my face so as to seem that I was confused, astounded but in a restrained way, curious, and interested. They did notice, and seemed confused, but did not remark. So I asked This looks very interesting. What is this?
+They stared at me and the mother said It's a baked potato. And I was saying Oh, interesting, a baked....what is it again?
+And she was like A potato.
+And I was like A 'potato', oh interesting. Never heard of a potato, looks pretty good.
+And then they didn't see I was clowning, but thought I really did not know what is a potato. So I knew I would be very shamed, humiliated, depressed, and disgusted if I admitted to making a bad joke, so what I did was to act as if it was not a joke but I committed to the act of pretending I didn't know what a potato is.
+They asked me, VERY incredulous, did I really not know what a potato is? That I never heard of a potato. I went with it and told them, yes, I did not ever even hear of a potato. Not only had I never eaten a potato I had never heard the word potato.
+This went on for a bit and my girlfriend was acting very confused and embarrassed by my fucked up antics, and then the more insistent I was about not knowing what a potato is was when them parents starting thinking I DID know what a potato was.
+Well let me tell you I had to commit 100% at this point. When I would not admit to knowing what a potato was, the father especially began to get annoyed. At one point he said something like Enough is enough. You're fucking with us. Admit it. And I said Sir, before today I never heard of a potato. I still don't know what a potato is, other than some kind of food. I don't know what to tell you.
+Well let me tell you he got very annoyed. I decided to take a bite of the potato, and when I did I made a high pitched noise and said Taste's very strange!
+That is when the father started yelling at me, and the mother kept saying What are you doing? and my girlfriend went to some other room.
+Finally the father said I should Get the fuck out of his house and I said it was irrational to treat me like this just because I never heard of a potato before. Well let me tell you he didn't take that kindly.
+Now in text messages I have been telling my girlfriend I really don't know what a potato is. The only way I can ever get out of this is for them to buy that I don't know what a potato is.
+I wish I never started it but I can't go back. I think she will break up with me anyway.
 `.replace(/\n/g, ". ");
 
 const m = markov(1);
 let ready = false;
-
 export function initChatbot(cb) {
   if (ready) {
     cb();
@@ -584,7 +637,6 @@ export function initChatbot(cb) {
     cb();
   });
 }
-
 export function getResponse(line, length) {
   return m.respond(line, length).join(" ");
 }

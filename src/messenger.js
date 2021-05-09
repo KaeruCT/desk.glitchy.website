@@ -10,14 +10,54 @@ import musicImg from "./img/msnmusic.png";
 import av1 from "./img/msnavatar1.png";
 import av2 from "./img/msnavatar2.png";
 import av3 from "./img/msnavatar3.png";
+import av4 from "./img/msnavatar4.png";
+import av5 from "./img/msnavatar5.png";
+import av6 from "./img/msnavatar6.png";
+import av7 from "./img/msnavatar7.png";
+import av8 from "./img/msnavatar8.png";
+import av9 from "./img/msnavatar9.png";
 import { randItem } from "./util";
 import { initChatbot, getResponse } from "./chat";
 import { openBrowser } from "./browser";
 import niceUrls from "./niceUrls";
 
 function randAvatar() {
-  return randItem([av1, av2, av3]);
+  return randItem([
+    av1,
+    av2,
+    av3,
+    av4,
+    av5,
+    av6,
+    av7,
+    av8,
+    av9,
+    "https://placekeanu.com/96/96",
+    "https://www.placecage.com/96/96",
+  ]);
 }
+
+const GREETINGS = [
+  "hello",
+  "Hi",
+  "... hi",
+  "Hi!",
+  "Hello there",
+  "Hi?",
+  "hey",
+  "hey...",
+  "Hey!",
+  "sup",
+  "What's up?",
+  "wassuuppp",
+  "you good",
+  "How you doing?",
+  "Que pasa?",
+  "Hej",
+  "Hallo",
+  "oi",
+  "Oi!",
+];
 
 const USER_NAMES = [
   "arko",
@@ -107,12 +147,17 @@ const DOMAINS = [
   "glitchy.website",
   "msn.com",
   "gmail.com",
+  "outlook.com",
   "hotmail.com",
+  "gmx.com",
+  "apple.com",
+  "aol.com",
   "yahoo.com",
   "localhost.local",
 ];
 
 const MOODS = [
+  "a tree does not believe itself to be a tree. it expresses treeness",
   "go peep my latest gallery",
   "I LOVE BTS",
   "i stan lana forever",
@@ -153,6 +198,24 @@ const MOODS = [
   "suspect n*** don't come outside",
   "lemme show you my bionicles",
   "looking for the one....",
+  "what time is it?",
+  "hat's a real nice pair of underwear I see you've splurged on.",
+  "swamp ass gang represent",
+  "do NOT trust bill gates and AstraZeneca",
+  "pizza pizza PIZZA",
+  "hey bro do you listen to tool?",
+  "All Rito girls idolize those things!",
+  "why is HTML so hard? bbcode is much better",
+  "Giving HTML classes, if you're interested hmu",
+  "I can help you pimp your myspace page! Just ASK!!",
+  "too cool for school",
+  "We Will Always Love You",
+  "anyone in the mood to have some fun ;)",
+  "just kidding. haha, unless??",
+  "dreams REALLY come true!!!",
+  "je t'aime mon amour",
+  "PUT DISPENSER HERE",
+  "MEDIC!!!!",
 ];
 
 function getUser() {
@@ -242,17 +305,19 @@ export function openMessenger() {
   return function (opts) {
     const otherUser = getUser();
     const avatar = randAvatar();
+    const a = Math.round(94 + Math.random() * 20);
+    const avatarMe = `https://www.placecage.com/${a}/${a}?c=${new Date().getTime()}`;
 
     const win = makeWindow({
       icon: opts.icon,
       className: "no-padding",
-      width: 640,
-      height: 480,
+      width: 500,
+      height: 500,
       title: opts.title,
       content: htmlToElement(
         messengerTemplate
           .replace("{avatar}", avatar)
-          .replace("{avatarMe}", av3)
+          .replace("{avatarMe}", avatarMe)
           .replace("{avatarSmall}", avatar)
           .replace("{username}", escapeHTML(otherUser.name))
           .replace("{mood}", escapeHTML(otherUser.mood))
@@ -283,7 +348,7 @@ export function openMessenger() {
     function triggerAnswer() {
       setTimeout(function () {
         addMessage(
-          otherUser.name,
+          otherUser.name + " says",
           getResponse("wake up!", getResponseLength())
         );
       }, getResponseDelay());
@@ -294,6 +359,7 @@ export function openMessenger() {
       conversation.appendChild(
         htmlToElement(`<p class="nudge">You have just sent a nudge.</p>`)
       );
+      conversation.scrollTop = conversation.scrollHeight;
       setTimeout(() => win.element.classList.remove("is-nudged"), 400);
       triggerAnswer();
     });
@@ -310,14 +376,10 @@ export function openMessenger() {
       }, 150);
     });
 
-    addMessage(otherUser.name, "Hello?");
-    addMessage(otherUser.name, "Are you there?");
+    win.setTitle("Messenger - " + otherUser.name);
 
     initChatbot(function () {
-      addMessage(
-        otherUser.name + "says",
-        getResponse("almost there", getResponseLength())
-      );
+      addMessage(otherUser.name + " says", randItem(GREETINGS));
 
       const buttonSend = win.body.querySelector(
         ".send-message__textfield [type=submit]"
@@ -337,6 +399,7 @@ export function openMessenger() {
       buttonSend.addEventListener("click", sendMessage);
       textarea.addEventListener("keypress", function (e) {
         if (e.which == 13 || e.keyCode == 13) {
+          e.preventDefault();
           sendMessage();
         }
       });

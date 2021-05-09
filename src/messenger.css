@@ -79,6 +79,7 @@
 }
 .messenger-container .img__img img {
   border: 3px double #e4ebe3;
+  width: 96px;
 }
 
 /* Conversation area */
