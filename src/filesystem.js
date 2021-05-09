@@ -1,6 +1,7 @@
 import { readFileSync } from "fs";
 import doom from "./img/doom.jpg";
 import buddha from "./img/buddha.jpg";
+import { randItem } from "./util";
 const creditsText = readFileSync(__dirname + "/CREDITS.txt", "utf-8");
 
 var niceImgs = [
@@ -21,7 +22,7 @@ function formatStr(format) {
 }
 
 function getRandomImageUrl() {
-  var url = niceImgs[Math.floor(Math.random() * niceImgs.length)];
+  var url = randItem(niceImgs);
 
   url = formatStr(
     url,

@@ -1,0 +1,348 @@
+.messenger-container {
+  background-color: #e9f3f6;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+}
+
+.messenger-container .container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.messenger-container .item {
+  border: 2px solid #d2dde0;
+  border-radius: 2px;
+  margin: 1px;
+}
+
+/* Top bar */
+.messenger-container .bar {
+  border: 0;
+}
+.messenger-container .bar__top {
+  display: flex;
+  padding: 10px;
+  background-image: url(./img/msnheader.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.messenger-container .username {
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+.messenger-container .logo {
+  height: 100%;
+  margin-right: 5px;
+  width: 30px;
+}
+.messenger-container .mood {
+  color: #6c7070;
+  letter-spacing: 0.5px;
+}
+.messenger-container .bar__bottom {
+  background: rgb(247, 253, 255);
+  background: linear-gradient(
+    180deg,
+    rgba(247, 253, 255, 1) 0%,
+    rgba(214, 227, 234, 1) 50%,
+    rgba(238, 249, 250, 1) 100%
+  );
+  border-bottom: 1px solid #d2dde0;
+  border-top: 1px solid #d2dde0;
+  display: flex;
+  height: 50px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 5px;
+}
+.action__button {
+  background: transparent;
+  border: 0;
+  font-size: 1.5rem;
+}
+.action__button:active {
+  background: #e9f3f6;
+  outline: 1px solid #d2dde0;
+}
+
+/* Profile pictures */
+.messenger-container .img {
+  background-color: #fafbfd;
+  padding: 10px;
+  margin: 1px;
+}
+.messenger-container .img__img {
+  height: 96px;
+  width: 96px;
+}
+.messenger-container .img__img img {
+  border: 3px double #e4ebe3;
+}
+
+/* Conversation area */
+.messenger-container .conversation {
+  background-color: #fafbfd;
+  overflow-y: auto;
+  padding: 5px;
+  flex: 1;
+}
+.messenger-container p {
+  margin: 7px;
+}
+.messenger-container .message {
+  margin-left: 20px;
+}
+
+/* Send message area */
+.messenger-container .send-message {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.messenger-container .send-message__buttons {
+  background: rgb(247, 253, 255);
+  background: linear-gradient(
+    180deg,
+    rgba(247, 253, 255, 1) 0%,
+    rgba(214, 227, 234, 1) 50%,
+    rgba(238, 249, 250, 1) 100%
+  );
+  border-bottom: 1px solid #d2dde0;
+}
+.messenger-container .send-message__button {
+  background: transparent;
+  border: 0;
+  font-size: 1.3rem;
+}
+.messenger-container .send-message__button:active {
+  background: #e9f3f6;
+  outline: 1px solid #d2dde0;
+}
+.messenger-container .buttons {
+  display: flex;
+  flex-direction: column;
+}
+.messenger-container .buttons button {
+  margin: 5px;
+  padding: 8px;
+}
+.messenger-container textarea {
+  background-color: #fafbfd;
+  border: 0;
+  padding-left: 8px;
+  padding-top: 8px;
+  resize: none;
+  width: 100%;
+}
+.messenger-container .send-message__textfield {
+  background-color: #fafbfd;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+}
+.messenger-container .send-message__infos {
+  align-items: center;
+  background-color: #fbfbff;
+  border-top: 1px solid #d2dde0;
+  color: #8d8e88;
+  display: flex;
+  font-size: 0.85em;
+  padding-left: 5px;
+}
+
+/* Bottom */
+.messenger-container .footer {
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 0.8px;
+}
+.messenger-container .footer a {
+  color: #30343a;
+  text-decoration: none;
+}
+
+.messenger-container .nudge {
+  margin: 10px 0 20px 5px;
+  position: relative;
+}
+.messenger-container .nudge:after {
+  border-top: 1px solid black;
+  content: "";
+  left: 0;
+  position: absolute;
+  top: 25px;
+  width: 60px;
+}
+.messenger-container .chat,
+.messenger-container .send {
+  display: flex;
+  justify-content: space-between;
+}
+.messenger-container .chat {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Inspired by https://github.com/elrumordelaluz/csshake */
+.is-nudged {
+  animation-name: nudge;
+  animation-duration: 100ms;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+@keyframes nudge {
+  2% {
+    transform: translate(-0.5px, -1.5px) rotate(-0.5deg);
+  }
+  4% {
+    transform: translate(2.5px, 2.5px) rotate(0.5deg);
+  }
+  6% {
+    transform: translate(-1.5px, 1.5px) rotate(1deg);
+  }
+  8% {
+    transform: translate(0.5px, -0.5px) rotate(1deg);
+  }
+  10% {
+    transform: translate(2.5px, -0.5px) rotate(1deg);
+  }
+  12% {
+    transform: translate(1.5px, -0.5px) rotate(1deg);
+  }
+  14% {
+    transform: translate(-0.5px, 2.5px) rotate(1deg);
+  }
+  16% {
+    transform: translate(-1.5px, 0.5px) rotate(1deg);
+  }
+  18% {
+    transform: translate(1.5px, 2.5px) rotate(-0.5deg);
+  }
+  20% {
+    transform: translate(2.5px, 0.5px) rotate(0.5deg);
+  }
+  22% {
+    transform: translate(-1.5px, -0.5px) rotate(1deg);
+  }
+  24% {
+    transform: translate(-0.5px, 2.5px) rotate(-0.5deg);
+  }
+  26% {
+    transform: translate(1.5px, 0.5px) rotate(1deg);
+  }
+  28% {
+    transform: translate(-0.5px, 1.5px) rotate(0.5deg);
+  }
+  30% {
+    transform: translate(1.5px, -1.5px) rotate(0.5deg);
+  }
+  32% {
+    transform: translate(1.5px, 2.5px) rotate(-0.5deg);
+  }
+  34% {
+    transform: translate(0.5px, 0.5px) rotate(0.5deg);
+  }
+  36% {
+    transform: translate(-1.5px, 2.5px) rotate(0.5deg);
+  }
+  38% {
+    transform: translate(-0.5px, 0.5px) rotate(1deg);
+  }
+  40% {
+    transform: translate(0.5px, -0.5px) rotate(1deg);
+  }
+  42% {
+    transform: translate(0.5px, -1.5px) rotate(-0.5deg);
+  }
+  44% {
+    transform: translate(0.5px, -0.5px) rotate(-0.5deg);
+  }
+  46% {
+    transform: translate(2.5px, 0.5px) rotate(1deg);
+  }
+  48% {
+    transform: translate(1.5px, -1.5px) rotate(0.5deg);
+  }
+  50% {
+    transform: translate(1.5px, 0.5px) rotate(1deg);
+  }
+  52% {
+    transform: translate(-1.5px, -1.5px) rotate(-0.5deg);
+  }
+  54% {
+    transform: translate(-0.5px, -0.5px) rotate(0.5deg);
+  }
+  56% {
+    transform: translate(2.5px, 1.5px) rotate(-0.5deg);
+  }
+  58% {
+    transform: translate(-1.5px, -1.5px) rotate(1deg);
+  }
+  60% {
+    transform: translate(-0.5px, -1.5px) rotate(-0.5deg);
+  }
+  62% {
+    transform: translate(2.5px, 2.5px) rotate(1deg);
+  }
+  64% {
+    transform: translate(-0.5px, 2.5px) rotate(-0.5deg);
+  }
+  66% {
+    transform: translate(2.5px, -0.5px) rotate(1deg);
+  }
+  68% {
+    transform: translate(-1.5px, -1.5px) rotate(1deg);
+  }
+  70% {
+    transform: translate(1.5px, -0.5px) rotate(-0.5deg);
+  }
+  72% {
+    transform: translate(2.5px, 2.5px) rotate(-0.5deg);
+  }
+  74% {
+    transform: translate(0.5px, 0.5px) rotate(-0.5deg);
+  }
+  76% {
+    transform: translate(0.5px, -0.5px) rotate(-0.5deg);
+  }
+  78% {
+    transform: translate(-1.5px, -0.5px) rotate(0.5deg);
+  }
+  80% {
+    transform: translate(0.5px, 0.5px) rotate(0.5deg);
+  }
+  82% {
+    transform: translate(-1.5px, 2.5px) rotate(-0.5deg);
+  }
+  84% {
+    transform: translate(-1.5px, 2.5px) rotate(0.5deg);
+  }
+  86% {
+    transform: translate(2.5px, 2.5px) rotate(0.5deg);
+  }
+  88% {
+    transform: translate(-0.5px, 2.5px) rotate(0.5deg);
+  }
+  90% {
+    transform: translate(-1.5px, 2.5px) rotate(1deg);
+  }
+  92% {
+    transform: translate(-1.5px, -1.5px) rotate(1deg);
+  }
+  94% {
+    transform: translate(0.5px, 2.5px) rotate(1deg);
+  }
+  96% {
+    transform: translate(-1.5px, -0.5px) rotate(1deg);
+  }
+  98% {
+    transform: translate(-1.5px, 2.5px) rotate(1deg);
+  }
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0);
+  }
+}

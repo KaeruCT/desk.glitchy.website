@@ -18,9 +18,9 @@ const home = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="
 </svg>`;
 
 export function openBrowser(title, getSrc, { width = 460, height = 380 } = {}) {
-  return function (opts) {
+  return function (opts = {}) {
     makeWindow({
-      icon: opts.icon,
+      icon: opts.icon || webImg,
       width,
       height,
       title,

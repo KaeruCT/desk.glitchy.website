@@ -13,6 +13,7 @@ SkiFree: https://github.com/basicallydan/skifree.js
 Minecraft: https://classic.minecraft.net
 Terminal: https://github.com/simonecorsi/termly.js
 File Explorer: https://github.com/cubiclesoft/js-fileexplorer
+MSN Messenger: Heavily modified / inspired from: https://codepen.io/plizet (https://codepen.io/plizet/pen/pozdoQM)
 Default Wallpaper: https://unsplash.com/
 Music: Try Andy (https://soundcloud.com/try_andy)
 

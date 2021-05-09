@@ -44,6 +44,7 @@ import { openHomework } from "./homeworkTrap";
 import { openTerminal } from "./terminal";
 import { openExplorer } from "./explorer";
 import { openNotepad } from "./editor";
+import { openMessenger } from "./messenger";
 
 function openWinamp(title, { width = 0, height = 0 } = {}) {
   let running = false;
@@ -118,8 +119,8 @@ const desktopIcons = [
   },
   {
     icon: imImg,
-    title: "Chat",
-    run: openIframe("The Only Limit...", "https://html5zombo.com/"),
+    title: "Messenger",
+    run: openMessenger(),
   },
   {
     icon: webImg,
