@@ -42,6 +42,7 @@ function initExplorer(win, element) {
     },
 
     onrefresh: function (folder, required) {
+      if (!required) return;
       const pathParts = folder.GetPath();
       const parts = pathParts.map((p) => p[1]);
       const entries = getExplorerFolderEntries(parts);

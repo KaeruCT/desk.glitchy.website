@@ -208,9 +208,10 @@ export function makeWindow(opts) {
   }
 
   function close() {
-    if (updatePreviewInterval) {
-      clearInterval(updatePreviewInterval);
-    }
+    // TODO: uncomment if we have the preview update again
+    // if (updatePreviewInterval) {
+    //   clearInterval(updatePreviewInterval);
+    // }
     interact(el).unset();
     el.parentNode.removeChild(el);
     taskbar.removeChild(taskbarBtn);
@@ -345,7 +346,9 @@ export function makeWindow(opts) {
   }
 
   setTimeout(initPreview, 500);
-  const updatePreviewInterval = setInterval(initPreview, 5 * 1000);
+  // TODO: figure out when to update the previews, it's very resource heavy
+  // for external images
+  //const updatePreviewInterval = setInterval(initPreview, 5 * 1000);
   setActive(win);
 
   let w = width || el.offsetWidth;

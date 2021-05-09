@@ -277,6 +277,11 @@ html {
   align-self: stretch;
   flex-direction: column;
 }
+.start-menu .menu-sidebar img {
+  width: 18px;
+  vertical-align: top;
+  margin-right: 5px;
+}
 .start-menu .menu-sidebar .top {
   flex: 1;
   display: flex;

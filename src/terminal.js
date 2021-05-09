@@ -74,7 +74,7 @@ export function openTerminal() {
           }
 
           if (newFile) {
-            currentParts.pop();
+            if (currentParts.length > 1) currentParts.pop();
             input.value = currentParts.join(" ") + " " + newFile;
           }
         } catch (e) {
