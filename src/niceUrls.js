@@ -8,4 +8,5 @@ export default [
   "https://html5zombo.com/",
   "https://kirbysdreamsite.neocities.org/",
   "https://clubnintendoarchives.neocities.org/",
+  "https://tixy.land/",
 ];

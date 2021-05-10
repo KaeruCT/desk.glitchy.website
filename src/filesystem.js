@@ -4,6 +4,9 @@ import buddha from "./img/buddha.jpg";
 import { randItem } from "./util";
 const creditsText = readFileSync(__dirname + "/CREDITS.txt", "utf-8");
 
+const trollText =
+  "IF YOU'RE READING THIS, YOU'VE BEEN IN A COMA FOR ALMOST 20 YEARS NOW. WE'RE TRYING A NEW TECHNIQUE.\nWE DON'T KNOW WHERE THIS MESSAGE WILL END UP IN YOUR DREAM, BUT WE HOPE WE'RE GETTING THROUGH.";
+
 var niceImgs = [
   "https://picsum.photos/{0}/{1}",
   "https://source.unsplash.com/{0}x{1}",
@@ -79,6 +82,9 @@ export const filesystem = {
         "cyan_dot_music.mp4": "https://www.youtube.com/embed/3k_7KhEwJ_0",
         "cold_blow.avi": "https://www.youtube.com/embed/qQPKlf5NRkc",
         "rh_bb.wmv": "https://www.youtube.com/embed/hvf_LemcrcE",
+      },
+      Documents: {
+        "ImportantAnnouncement.txt": trollText,
       },
       Desktop: {
         "CREDITS.txt": creditsText,

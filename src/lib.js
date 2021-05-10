@@ -287,7 +287,6 @@ export function makeWindow(opts) {
   }
 
   function hidePreview() {
-    return;
     previewScheduled = false;
     if (previewEl) {
       previewEl.parentNode.removeChild(previewEl);
