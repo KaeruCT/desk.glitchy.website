@@ -657,6 +657,15 @@ export function initChatbot(cb) {
     cb();
   });
 }
-export function getResponse(line, length) {
-  return m.respond(line, length).join(" ");
+export function getResponse(line, length, formal) {
+  let response = m.respond(line, length).join(" ").toLowerCase();
+  response = response.replace(/\bi\b/g, "I");
+  if (formal) {
+    response = response[0].toUpperCase() + response.slice(1);
+    const last = response[response.length - 1];
+    if (!["?", "!", "."].includes(last)) {
+      response += Math.random() > 0.3 ? "." : Math.random() > 0.5 ? "!" : "?";
+    }
+  }
+  return response;
 }

@@ -294,6 +294,12 @@ const MOODS = [
   "too cool for school",
   "We Will Always Love You",
   "anyone in the mood to have some fun ;)",
+  "FUCK elon musk",
+  "fuck the police coming straight from the underground",
+  "fuck everyone",
+  "ACAB",
+  "mlp is the best!",
+  "i have the best waifu and noone can change my mind",
   "just kidding. haha, unless??",
   "dreams REALLY come true!!!",
   "je t'aime mon amour",
@@ -401,6 +407,9 @@ export function openMessenger() {
     const a = Math.round(94 + Math.random() * 20);
     const avatarMe = `https://www.placecage.com/${a}/${a}?c=${new Date().getTime()}`;
 
+    const greeting = randItem(GREETINGS);
+    const isFormal = greeting[0].toUpperCase() === greeting[0];
+
     const win = makeWindow({
       icon: opts.icon,
       className: "no-padding",
@@ -445,7 +454,7 @@ export function openMessenger() {
       setTimeout(function () {
         addMessage(
           otherUser.name + " says",
-          getResponse(msg, getResponseLength())
+          getResponse(msg, getResponseLength(), isFormal)
         );
       }, getResponseDelay());
     }
@@ -491,7 +500,7 @@ export function openMessenger() {
     win.setTitle("Messenger - " + otherUser.name);
 
     initChatbot(function () {
-      addMessage(otherUser.name + " says", randItem(GREETINGS));
+      addMessage(otherUser.name + " says", greeting);
 
       const buttonSend = win.body.querySelector(
         ".send-message__textfield [type=submit]"
