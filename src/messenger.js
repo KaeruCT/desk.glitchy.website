@@ -21,6 +21,7 @@ import { randItem } from "./util";
 import { initChatbot, getResponse } from "./chat";
 import { openBrowser } from "./browser";
 import niceUrls from "./niceUrls";
+import { randomEmoji } from "./emoji";
 
 function randAvatar() {
   return randItem([
@@ -384,12 +385,14 @@ function escapeHTML(unsafeText) {
 }
 
 function getResponseLength() {
-  return 2 + Math.round(Math.random() * 10);
+  return 3 + Math.round(Math.random() * 14);
 }
 
 function getResponseDelay() {
-  return 500 + Math.random() * 10 * 500;
+  return 200 + Math.random() * 10 * 300;
 }
+
+const YOU_SAY = "You say";
 
 export function openMessenger() {
   return function (opts) {
@@ -417,13 +420,14 @@ export function openMessenger() {
 
     const messageInfos = win.body.querySelector(".send-message__infos");
     const nudgeButton = win.body.querySelector(".nudge-button");
+    const emoticonButton = win.body.querySelector(".emoticon-button");
     const winkButton = win.body.querySelector(".wink-button");
     const blockButton = win.body.querySelector(".block");
     const conversation = win.body.querySelector(".conversation");
     const advertisement = win.body.querySelector(".advertisement");
 
     function addMessage(from, content) {
-      const isYou = from === "You say";
+      const isYou = from === YOU_SAY;
       conversation.appendChild(
         htmlToElement(`<div>
               <p class="from${isYou ? "-2" : ""}">${escapeHTML(from)}:</p>
@@ -437,11 +441,11 @@ export function openMessenger() {
       }
     }
 
-    function triggerAnswer() {
+    function triggerAnswer(msg) {
       setTimeout(function () {
         addMessage(
           otherUser.name + " says",
-          getResponse("wake up!", getResponseLength())
+          getResponse(msg, getResponseLength())
         );
       }, getResponseDelay());
     }
@@ -453,7 +457,7 @@ export function openMessenger() {
       );
       conversation.scrollTop = conversation.scrollHeight;
       setTimeout(() => win.element.classList.remove("is-nudged"), 400);
-      triggerAnswer();
+      triggerAnswer("Answer now");
     });
 
     winkButton.addEventListener("click", function () {
@@ -464,7 +468,12 @@ export function openMessenger() {
       wink.querySelector("img").onload = function () {
         conversation.scrollTop = conversation.scrollHeight;
       };
-      triggerAnswer();
+      triggerAnswer("Kill you");
+    });
+
+    emoticonButton.addEventListener("click", function () {
+      addMessage(YOU_SAY, randomEmoji());
+      triggerAnswer("I love you");
     });
 
     blockButton.addEventListener("click", function () {
@@ -494,9 +503,9 @@ export function openMessenger() {
       function sendMessage() {
         const msg = textarea.value.trim();
         if (!msg) return;
-        addMessage("You say", msg);
+        addMessage(YOU_SAY, msg);
         textarea.value = "";
-        triggerAnswer();
+        triggerAnswer(msg);
       }
 
       buttonSend.addEventListener("click", sendMessage);
