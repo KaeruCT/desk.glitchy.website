@@ -379,6 +379,7 @@ export function makeWindow(opts) {
 
   w = Math.min(width, container.offsetWidth - container.offsetWidth * 0.1);
   h = Math.min(h, container.offsetHeight - container.offsetHeight * 0.1);
+  const minWidth = Math.max(w / 2, 360);
 
   const x = (container.offsetWidth - w) / 2;
   const y = (container.offsetHeight - h) / 2;
@@ -388,7 +389,7 @@ export function makeWindow(opts) {
     y,
     w,
     h,
-    minWidth: w,
+    minWidth,
     minHeight: h,
     snapTo: "",
     status: "",
