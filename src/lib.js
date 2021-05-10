@@ -134,7 +134,6 @@ const windows = [];
 
 export function makeWindow(opts) {
   const {
-    title = "",
     width = 0,
     height = 0,
     content = null,
@@ -142,6 +141,7 @@ export function makeWindow(opts) {
     className = "",
     unresizable = false,
   } = opts;
+  let title = opts.title || "";
   const el =
     customEl ||
     htmlToElement(
@@ -247,6 +247,7 @@ export function makeWindow(opts) {
   }
 
   function showPreview() {
+    if (previewEl && previewEl.classList.contains("show")) return;
     if (!previewCanvas) {
       previewScheduled = true;
       return;
@@ -264,12 +265,29 @@ export function makeWindow(opts) {
     previewEl = htmlToElement(
       `<div class="preview window glass colored"><div class="title-bar"></div></div>`
     );
-    previewEl.querySelector(".title-bar").appendChild(previewCanvas);
+    const title = htmlToElement(
+      `<div class="preview-title">
+        <div class="title-bar-text">${win.title}</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close" class="close"></button>
+        </div>
+      </div>`
+    );
+    const content = previewEl.querySelector(".title-bar");
+    content.appendChild(title);
+    content.appendChild(previewCanvas);
     taskbarBtn.appendChild(previewEl);
+
+    previewEl.querySelector(".close").addEventListener("click", function (e) {
+      e.stopPropagation();
+      win.close();
+    });
+
     setTimeout(() => previewEl && previewEl.classList.add("show"), 1);
   }
 
   function hidePreview() {
+    return;
     previewScheduled = false;
     if (previewEl) {
       previewEl.parentNode.removeChild(previewEl);
@@ -278,6 +296,7 @@ export function makeWindow(opts) {
   }
 
   function setTitle(newTitle) {
+    title = newTitle;
     const titleEl = win.element.querySelector(".title-bar-text");
     if (titleEl) {
       titleEl.innerText = newTitle;
@@ -289,6 +308,9 @@ export function makeWindow(opts) {
     taskbarBtn,
     get body() {
       return customEl || el.querySelector(".window-body");
+    },
+    get title() {
+      return title;
     },
     get prevStates() {
       return prevStates;
@@ -319,13 +341,15 @@ export function makeWindow(opts) {
     windowContent = content; // asume DOM element already
   }
 
+  let hideTimeout;
   taskbar.appendChild(taskbarBtn);
   taskbarBtn.addEventListener("click", toggleMinimize);
   taskbarBtn.addEventListener("mouseenter", function () {
+    if (hideTimeout) clearTimeout(hideTimeout);
     win.showPreview();
   });
   taskbarBtn.addEventListener("mouseleave", function () {
-    win.hidePreview();
+    hideTimeout = setTimeout(() => win.hidePreview(), 250);
   });
 
   if (!customEl) {

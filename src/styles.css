@@ -148,9 +148,9 @@ html {
 }
 .taskbar-btn .preview {
   position: absolute;
-  top: -155px;
+  top: -125px;
   width: 200px;
-  height: 150px;
+  height: 120px;
   padding: 0;
   opacity: 0;
   transition-property: opacity;
@@ -163,11 +163,33 @@ html {
   padding: 5px;
   border-radius: 5px;
   border: 0;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8em;
+}
+.taskbar-btn .preview .title-bar-text {
+  align-self: start;
+  margin-top: -4px;
+}
+.preview-title {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.preview-title .title-bar-controls .close {
+  min-width: 0;
+  width: 18px;
+  min-height: 14px;
+  z-index: 10;
+}
+.preview-title .title-bar-controls {
+  margin-top: -5px;
+  margin-bottom: 2px;
 }
 .taskbar-btn .preview canvas {
-  max-height: 100%;
+  max-height: 88%;
   max-width: 100%;
-  object-fit: scale-down;
+  object-fit: cover;
   border-radius: 5px;
 }
 .start-button img {
