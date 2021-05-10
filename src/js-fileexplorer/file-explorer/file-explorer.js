@@ -5,6 +5,14 @@
 	// Prevent multiple instances.
 	if (window.hasOwnProperty('FileExplorer'))  return;
 
+	function isTouchDevice() {
+		return (
+			"ontouchstart" in window ||
+			navigator.maxTouchPoints > 0 ||
+			navigator.msMaxTouchPoints > 0
+		);
+	}
+
 	var EscapeHTML = function(text) {
 		var map = {
 			'&': '&amp;',
@@ -5445,7 +5453,7 @@ console.log('MoveCopyEndHandler');
 						elems.itemsclipboardoverlaypastewrap.classList.add('fe_fileexplorer_items_clipboard_contextmenu');
 					}
 
-					if (orignumselected && e.detail > 1)
+					if ((orignumselected && e.detail > 1) || isTouchDevice())
 					{
 						// Open selected items on double-click.
 						$this.OpenSelectedItems();
