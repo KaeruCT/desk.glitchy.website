@@ -3,10 +3,8 @@ html {
   font-family: sans-serif;
   padding: 0;
   margin: 0;
-  overflow: hidden;
   background: #000;
 }
-
 * {
   box-sizing: border-box;
 }
@@ -45,7 +43,7 @@ html {
 }
 
 .desktop {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -60,6 +58,13 @@ html {
   display: flex;
   flex: 1;
   position: relative;
+  overflow-y: auto; /* at least dont hide stuff on mobile */
+  overflow-x: hidden;
+}
+.window-container::-webkit-scrollbar-track:vertical {
+  /* fix weird scrollbar bug on mobile chrome, maybe only on my phone :shrug: */
+  margin-top: -17px;
+  margin-bottom: -17px;
 }
 .taskbar-container {
   height: 45px;
@@ -411,6 +416,13 @@ html {
   .browser button svg {
     width: 20px !important;
     height: 20px !important;
+  }
+  .window-container {
+    overflow-y: hidden;
+  }
+  .window-container::-webkit-scrollbar-track:vertical {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 }
 
