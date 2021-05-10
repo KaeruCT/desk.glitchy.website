@@ -16,6 +16,7 @@ import av6 from "./img/msnavatar6.png";
 import av7 from "./img/msnavatar7.png";
 import av8 from "./img/msnavatar8.png";
 import av9 from "./img/msnavatar9.png";
+import winkGuitar from "./img/msnguitar.gif";
 import { randItem } from "./util";
 import { initChatbot, getResponse } from "./chat";
 import { openBrowser } from "./browser";
@@ -293,10 +294,10 @@ const messengerTemplate = `
     <div class="send">
         <div class="item send-message">
             <div class="send-message__buttons">
-                <button class="send-message__button" title="Send an emoticon"><img src="${emoticonImg}" /></button>
-                <button class="send-message__button" title="Send a wink"><img src="${winkImg}" /></button>
+                <button class="send-message__button emoticon-button" title="Send an emoticon"><img src="${emoticonImg}" /></button>
+                <button class="send-message__button wink-button" title="Send a wink"><img src="${winkImg}" /></button>
                 <button class="send-message__button nudge-button" title="Send a nudge"><img src="${tiltImg}" /></button>
-                <button class="send-message__button" title="Send a voice message"><img src="${voiceImg}" /></button>
+                <button class="send-message__button voice-button" title="Send a voice message"><img src="${voiceImg}" /></button>
                 </div>
                 <div class="send-message__textfield">
                 <textarea></textarea>
@@ -358,6 +359,7 @@ export function openMessenger() {
 
     const messageInfos = win.body.querySelector(".send-message__infos");
     const nudgeButton = win.body.querySelector(".nudge-button");
+    const winkButton = win.body.querySelector(".wink-button");
     const blockButton = win.body.querySelector(".block");
     const conversation = win.body.querySelector(".conversation");
     const advertisement = win.body.querySelector(".advertisement");
@@ -393,6 +395,17 @@ export function openMessenger() {
       );
       conversation.scrollTop = conversation.scrollHeight;
       setTimeout(() => win.element.classList.remove("is-nudged"), 400);
+      triggerAnswer();
+    });
+
+    winkButton.addEventListener("click", function () {
+      const wink = htmlToElement(
+        `<p><img src="${winkGuitar}" width="160px" /></p>`
+      );
+      conversation.appendChild(wink);
+      wink.querySelector("img").onload = function () {
+        conversation.scrollTop = conversation.scrollHeight;
+      };
       triggerAnswer();
     });
 
