@@ -9,4 +9,5 @@ export default [
   "https://kirbysdreamsite.neocities.org/",
   "https://clubnintendoarchives.neocities.org/",
   "https://tixy.land/",
+  "https://href.cool/",
 ];

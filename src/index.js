@@ -39,7 +39,7 @@ import { initWebamp } from "./webamp";
 import { openBrowser, openIframe } from "./browser";
 import { initWallpaper } from "./wallpaper";
 import niceUrls from "./niceUrls";
-import { randItem } from "./util";
+import { randItem, shuffle } from "./util";
 import { openHomework } from "./homeworkTrap";
 import { openTerminal } from "./terminal";
 import { openExplorer } from "./explorer";
@@ -220,6 +220,7 @@ const desktopIcons = [
   { icon: terminalImg, title: "Terminal", run: openTerminal() },
   winampIcon,
 ];
+shuffle(desktopIcons);
 
 let initial = 40;
 let x = initial;
