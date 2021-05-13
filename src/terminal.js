@@ -1,4 +1,4 @@
-import TermlyPrompt from "termly.js/bin/classes/Prompt";
+import Shell from "termly.js";
 import { programs } from "./programs";
 import { htmlToElement, makeWindow } from "./lib";
 import { filesystem } from "./filesystem";
@@ -9,14 +9,123 @@ import "./terminal.css";
 let terminals = 0;
 const KEY = "terminalHistory";
 
-// override this method to prevent swallowing the click events
-TermlyPrompt.prototype.init = function () {
-  this.generateRow();
-  this.container.addEventListener("click", (e) => {
+class Prompt extends Shell {
+  constructor(selector = undefined, options = {}) {
+    super(options); // must pass option here
+
+    if (!selector) throw new Error("No wrapper element selector provided");
+    try {
+      this.container = document.querySelector(selector);
+      if (!this.container)
+        throw new Error("new Terminal(): DOM element not found");
+    } catch (e) {
+      throw new Error("new Terminal(): Not valid DOM selector.");
+    }
+
+    return this.init();
+  }
+
+  init() {
+    this.generateRow();
+    this.container.addEventListener("click", () => {
+      let input = this.container.querySelector(".current .terminal-input");
+      if (input) input.focus();
+    });
+  }
+
+  generateRow() {
+    var that = this;
+
+    // Remove previous current active row
+    let current = this.container.querySelector(".current.terminal-row");
+    if (current) {
+      current.classList.remove("current");
+      current.querySelector("input").disabled = true;
+    }
+
+    let prevInput = this.container.querySelector(".terminal-input");
+    if (prevInput) {
+      prevInput.removeEventListener("input", this.resizeHandler);
+      prevInput.blur();
+    }
+
+    const div = document.createElement("div");
+    div.classList.add("current", "terminal-row");
+    div.innerHTML = "";
+    div.innerHTML += `<span class="terminal-info">${this.env.USER}@${
+      this.env.HOSTNAME
+    } - ${this.fs.getCurrentDirectory()} ➜ </span>`;
+    div.innerHTML += `<input type="text" class="terminal-input" size="2" style="cursor:none;">`;
+
+    // add new row and focus it
+    this.container.appendChild(div);
     let input = this.container.querySelector(".current .terminal-input");
-    if (input) input.focus();
-  });
-};
+    let currentRow = this.container.querySelector(".current.terminal-row");
+    let currentPrompt = currentRow.querySelector(".terminal-info");
+    let inputWidth = currentRow.offsetWidth - currentPrompt.offsetWidth - 20;
+    input.style.width = inputWidth + "px";
+    input.addEventListener("keyup", (e) => this.submitHandler(e));
+    input.select();
+    this.container.scrollTop = this.container.scrollHeight + 1;
+
+    return input;
+  }
+
+  generateOutput(out = "", newLine = true) {
+    if (Array.isArray(out)) {
+      out = out.join("\n");
+    }
+    const pre = document.createElement("pre");
+    pre.textContent = out;
+    pre.className = "terminal-output";
+    this.container.appendChild(pre);
+    if (newLine) {
+      return this.generateRow();
+    }
+  }
+
+  clear() {
+    this.container.innerHTML = "";
+    return this.generateRow();
+  }
+
+  submitHandler(e) {
+    if (e.which == 13 || e.keyCode == 13) {
+      e.preventDefault();
+      const command = e.target.value.trim();
+
+      if (command === "clear") return this.clear();
+
+      // EXEC
+      let output = this.run(command);
+
+      // if is a {Promise} resolve it ad parse as json response
+      if (output["then"]) {
+        this.generateOutput("Pending request...", false);
+        return output
+          .then((res) => {
+            if (typeof res === "object") {
+              try {
+                res = JSON.stringify(res, null, 2);
+              } catch (e) {
+                return this.generateOutput(
+                  "-fatal http: Response received but had a problem parsing it."
+                );
+              }
+            }
+            return this.generateOutput(res);
+          })
+          .catch((err) => this.generateOutput(err.message));
+      }
+
+      if (typeof output === "object" || Array.isArray(output)) {
+        output = JSON.stringify(output, null, 2);
+      }
+
+      return this.generateOutput(output);
+    }
+  }
+}
 
 export function openTerminal() {
   return function (opts) {
@@ -84,7 +193,7 @@ export function openTerminal() {
         `<div class="terminal-container" id="${terminalId}"></div>`
       ),
     });
-    const shell = new TermlyPrompt(`#${terminalId}`, {
+    const shell = new Prompt(`#${terminalId}`, {
       filesystem,
       commands,
       env: {

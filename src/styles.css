@@ -89,6 +89,7 @@ html {
   flex: 1;
   display: flex;
   justify-content: flex-start;
+  overflow: auto;
 }
 .taskbar-btn {
   width: 60px;
