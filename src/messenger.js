@@ -194,6 +194,18 @@ const USER_NAMES = [
   "Michael",
 ];
 
+const PREFIXES = [
+  "",
+  "",
+  "TheReal",
+  "real_",
+  "the.only.",
+  "official",
+  "Official",
+  "the_",
+  "one_",
+];
+
 const SUFFIXES = [
   "",
   "89",
@@ -313,14 +325,16 @@ const MOODS = [
   "At work lol!",
   "At school, don't send me weird shit",
   "checkmessenger.com doesn't work! it's a scam!!",
+  "i am a god hurry up with my damn croissant",
 ];
 
 function getUser() {
+  const prefix = Math.random() > 0.6 ? randItem(PREFIXES) : "";
   const name = randItem(USER_NAMES);
   const emailStart = name.replace(/\\_/g, ".").toLowerCase();
   const mood = randItem(MOODS);
   return {
-    name: name + randItem(SUFFIXES),
+    name: prefix + name + randItem(SUFFIXES),
     email: emailStart + randItem(SUFFIXES) + "@" + randItem(DOMAINS),
     mood,
   };

@@ -95,14 +95,21 @@ export function openTerminal() {
     shell.run("cd /home/try_andy");
     shell.clear();
 
+    function getTermInput() {
+      return terminal.querySelector(".current .terminal-input");
+    }
+
     // scroll to bottom when user presses any key
     const terminal = document.querySelector(`#${terminalId}`);
+    getTermInput().style.cursor = "";
+
     terminal.addEventListener("keypress", function (e) {
       win.body.scrollTop = win.body.scrollHeight;
       if (e.which == 13 || e.keyCode == 13) {
         // hack: scroll to the bottom when outputting
         setTimeout(function () {
           win.body.scrollTop = win.body.scrollHeight;
+          getTermInput().style.cursor = "";
         }, 200);
 
         const cmd = getTermInput().value;
@@ -117,9 +124,6 @@ export function openTerminal() {
         histIndex = -1; // reset history index
       }
     });
-    function getTermInput() {
-      return terminal.querySelector(".current .terminal-input");
-    }
     terminal.addEventListener("keydown", function (e) {
       const text = getTermInput().value;
 
@@ -158,15 +162,17 @@ export function openTerminal() {
           if (currentParts.length <= 1) {
             // autocomplete program names
             const programs = Object.keys(shell.ShellCommands);
-            const results = programs.filter((p) => p.startsWith(input));
+            const search = input.toLowerCase();
+            const results = programs.filter((p) => p.startsWith(search));
 
             if (results.length > 1) {
               shell.generateOutput(results.join(" "));
               getTermInput().value = input;
             }
             if (results.length === 1) {
-              getTermInput().value = results[0];
+              getTermInput().value = results[0] + " ";
             }
+            return;
           }
 
           // else, autocomplete file names
@@ -207,9 +213,10 @@ function dirname(path) {
 function autocomplete(input, candidates) {
   let result = "";
   if (input) {
-    const i = candidates.indexOf(input);
+    input = input.toLowerCase();
+    const i = candidates.map((f) => f.toLowerCase()).indexOf(input);
     if (i === -1) {
-      result = candidates.find((f) => f.startsWith(input));
+      result = candidates.find((f) => f.toLowerCase().startsWith(input));
     } else {
       result = candidates[(i + 1) % candidates.length];
     }
