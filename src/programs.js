@@ -178,3 +178,13 @@ export const programs = [
     run: openNotepad(),
   },
 ];
+
+export function findPrograms(search) {
+  const sorted = programs.sort((a, b) => a.title.localeCompare(b.title));
+  search = search.trim().toLowerCase();
+  if (!search) return sorted;
+  return sorted.filter(function (p) {
+    const searchValues = [p.title, p.cmd].map((s) => s.toLowerCase());
+    return searchValues.some((s) => s.includes(search));
+  });
+}

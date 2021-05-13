@@ -14,6 +14,7 @@ import {
   makeDesktopIcon,
   makeDialog,
   closeStartMenu,
+  makeSpotlight,
 } from "./lib";
 
 import { initWallpaper } from "./wallpaper";
@@ -60,6 +61,7 @@ function initDesktop() {
   });
 
   makeStartMenu();
+  makeSpotlight();
   makeClock();
   initWallpaper();
 

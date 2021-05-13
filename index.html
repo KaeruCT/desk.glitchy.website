@@ -43,6 +43,20 @@
           <div></div>
         </div>
         <div id="icon-container" class="icon-container"></div>
+        <div class="start-menu" id="spotlight-menu">
+          <div class="window glass colored">
+            <div class="title-bar">
+              <div class="window-body custom spotlight-container">
+                <div id="spotlight-results"></div>
+                <input
+                  type="text"
+                  id="spotlight-input"
+                  placeholder="Type here to search..."
+                />
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="start-menu" id="start-menu">
           <div class="window glass colored">
             <div class="title-bar">
@@ -161,6 +175,21 @@
         <div class="title-bar">
           <div class="start-button">
             <img id="start-button" src="./src/img/startregular.png" />
+          </div>
+          <div id="spotlight-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
           </div>
           <div id="taskbar" class="taskbar-btns"></div>
           <div class="clock" id="clock"></div>

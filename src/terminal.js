@@ -137,6 +137,17 @@ export function openTerminal() {
     const commands = {};
     let histIndex = -1;
 
+    const win = makeWindow({
+      icon: opts.icon,
+      className: "no-padding",
+      width: 640,
+      height: 480,
+      title: opts.title,
+      content: htmlToElement(
+        `<div class="terminal-container" id="${terminalId}"></div>`
+      ),
+    });
+
     programs.forEach((p) => {
       commands[p.cmd] = {
         name: p.cmd,
@@ -182,17 +193,13 @@ export function openTerminal() {
         return "";
       },
     };
+    commands.exit = {
+      name: "exit",
+      fn: function () {
+        win.close();
+      },
+    };
 
-    const win = makeWindow({
-      icon: opts.icon,
-      className: "no-padding",
-      width: 640,
-      height: 480,
-      title: opts.title,
-      content: htmlToElement(
-        `<div class="terminal-container" id="${terminalId}"></div>`
-      ),
-    });
     const shell = new Prompt(`#${terminalId}`, {
       filesystem,
       commands,

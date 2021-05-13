@@ -89,7 +89,7 @@ html {
   flex: 1;
   display: flex;
   justify-content: flex-start;
-  overflow: auto;
+  overflow: hidden;
 }
 .taskbar-btn {
   width: 60px;
@@ -198,6 +198,23 @@ html {
   width: 85px;
   user-select: none;
 }
+#spotlight-button {
+  color: #fff;
+  opacity: 0.8;
+  padding-top: 4px;
+  position: relative;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 5px;
+}
+#spotlight-button:hover {
+  opacity: 1;
+}
+#spotlight-button svg {
+  width: 20px;
+  transform: scale(-1, 1);
+  transform-origin: center;
+}
 .clock {
   color: #fff;
   padding: 0 5px;
@@ -208,12 +225,15 @@ html {
 .clock:hover {
   text-shadow: 0 0 5px #fff;
 }
-.clock:hover::after {
-  opacity: 1;
+.clock:hover::after,
+#spotlight-button:hover::after {
+  opacity: 0.7;
 }
-.clock::after {
+.clock::after,
+#spotlight-button::after {
   border-left: rgba(255, 255, 255, 0.5) 1px solid;
   filter: blur(5px);
+  background: rgba(255, 255, 255, 0.4);
   opacity: 0;
   transition-property: opacity;
   transition-duration: 0.1s;
@@ -286,6 +306,15 @@ html {
   max-width: 100vw;
   min-height: 480px;
   min-width: 300px;
+}
+#spotlight-menu {
+  min-height: 0;
+  min-width: 0;
+  width: 300px;
+}
+#spotlight-menu .window-body {
+  min-width: 0;
+  width: 100px;
 }
 .start-menu .title-bar {
   height: 100%;
@@ -405,7 +434,7 @@ html {
   outline: 0;
 }
 .start-menu .menu-sidebar button:active,
-.start-menu .menu-sidebar .button:active .clock:active {
+.start-menu .menu-sidebar .button:active {
   background: linear-gradient(
     150deg,
     rgba(255, 255, 255, 0.5) 0%,
@@ -538,4 +567,43 @@ html {
   top: 0;
   left: 0;
   pointer-events: none;
+}
+
+#spotlight-input {
+  font-size: 16px;
+  height: 30px;
+}
+
+#spotlight-results {
+  overflow: auto;
+  max-height: 50vh;
+}
+
+#spotlight-results .result {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 2px;
+  border: transparent 1px solid;
+  margin-bottom: 5px;
+}
+
+#spotlight-results .result.active,
+#spotlight-results .result:hover {
+  background-color: #fce5ff;
+  border: 1px solid #e97fce;
+}
+
+#spotlight-results .result img {
+  width: 32px;
+  align-self: center;
+}
+
+#spotlight-results .result div {
+  flex: 1;
+  padding-left: 10px;
+}
+
+.spotlight-container {
+  display: flex;
 }

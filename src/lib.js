@@ -5,6 +5,8 @@ import startActive from "./img/startactive.png";
 import startHover from "./img/starthover.png";
 import startRegular from "./img/startregular.png";
 import errorImg from "./img/error.png";
+import { findPrograms } from "./programs";
+import { debounce } from "./util";
 
 function isTouchDevice() {
   return (
@@ -657,6 +659,99 @@ export function makeStartMenu() {
   document.addEventListener("mousedown", function (event) {
     if (!startMenu.contains(event.target) && event.target !== startBtn) {
       closeStartMenu();
+    }
+  });
+}
+
+const spotlightBtn = document.querySelector("#spotlight-button");
+const spotlightMenu = document.querySelector("#spotlight-menu");
+const spotlightInput = document.querySelector("#spotlight-input");
+const spotlightResults = document.querySelector("#spotlight-results");
+export function closeSpotlightMenu() {
+  Object.assign(spotlightMenu.style, {
+    display: "none",
+  });
+}
+
+export function makeSpotlight() {
+  let lastResults;
+  let focused = 0;
+  function setFocus(i) {
+    const results = spotlightResults.querySelectorAll(".result");
+    if (!results.length) return;
+
+    if (results[focused]) {
+      results[focused].classList.remove("active");
+    }
+    if (i > results.length - 1) i = 0;
+    if (i < 0) i = results.length - 1;
+
+    results[i].classList.add("active");
+    results[i].scrollIntoView && results[i].scrollIntoView();
+    focused = i;
+  }
+
+  function updateResults() {
+    lastResults = findPrograms(spotlightInput.value);
+    spotlightResults.innerHTML = "";
+    lastResults.forEach((r) => {
+      const el = htmlToElement(
+        `<div class="result"><img src="${r.icon}" /><div>${r.title}</div></div>`
+      );
+
+      el.addEventListener("click", function () {
+        setTimeout(() => r.run(r), 150);
+        closeSpotlightMenu();
+      });
+
+      spotlightResults.appendChild(el);
+    });
+    setFocus(0);
+  }
+
+  spotlightBtn.addEventListener("click", function () {
+    Object.assign(spotlightMenu.style, {
+      display: spotlightMenu.style.display === "block" ? "none" : "block",
+      zIndex: zIndex++,
+    });
+
+    spotlightResults.innerHTML = "";
+    spotlightInput.value = "";
+    spotlightInput.focus();
+    updateResults();
+  });
+  document.addEventListener("mousedown", function (event) {
+    if (
+      !spotlightMenu.contains(event.target) &&
+      !spotlightBtn.contains(event.target)
+    ) {
+      closeSpotlightMenu();
+    }
+  });
+  spotlightInput.addEventListener("input", debounce(updateResults, 250));
+  spotlightInput.addEventListener("keydown", function (e) {
+    if (e.which == 38 || e.keyCode == 38) {
+      setFocus(focused - 1);
+      e.preventDefault();
+    }
+
+    if (e.which == 40 || e.keyCode == 40) {
+      setFocus(focused + 1);
+      e.preventDefault();
+    }
+
+    if (e.which == 13 || e.keyCode == 13) {
+      if (lastResults) {
+        const program = lastResults[focused];
+        setTimeout(() => program.run(program), 150);
+        closeSpotlightMenu();
+        e.preventDefault();
+      }
+    }
+
+    if (e.which == 27 || e.keyCode == 27) {
+      closeSpotlightMenu();
+      e.preventDefault();
     }
   });
 }
