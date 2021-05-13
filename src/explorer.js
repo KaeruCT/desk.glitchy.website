@@ -1,18 +1,19 @@
 import { htmlToElement, makeWindow } from "./lib";
 import { getExplorerFolderEntries } from "./filesystem";
+import fileManagerImg from "./img/file-manager.png";
 import "./js-fileexplorer/file-explorer/file-explorer.js";
 import "./js-fileexplorer/file-explorer/file-explorer.css";
 import "./explorer.css";
 import { openNotepad } from "./notepad";
 import { openIframe } from "./browser";
 
-export function openFile(name, content) {
-  const nameParts = name.split(".");
+export function openFile(filename, content) {
+  const nameParts = filename.split(".");
   const ext = nameParts[1] && nameParts[1].toLowerCase();
   if (ext === "txt") {
-    openNotepad("")({
-      args: { filename: name, content: attrs.content },
-    });
+    setTimeout(function () {
+      openNotepad()({ filename, content });
+    }, 150);
   }
 
   const iframeExts = [
@@ -30,7 +31,7 @@ export function openFile(name, content) {
   ];
   if (iframeExts.includes(ext)) {
     setTimeout(function () {
-      openIframe(name, content)();
+      openIframe(filename, content)();
     }, 150);
   }
 }
@@ -45,7 +46,7 @@ export function openExplorer() {
     }
 
     const win = makeWindow({
-      icon: opts.icon,
+      icon: opts.icon || fileManagerImg,
       className: "no-padding",
       width: 640,
       height: 480,
@@ -66,6 +67,7 @@ function initExplorer(win, element, startPath) {
   if (startPath) {
     initpath = startPath
       .split("/")
+      .filter((s) => s !== "")
       .map((p, i) => [String(i), p, { canmodify: false }]);
   }
 

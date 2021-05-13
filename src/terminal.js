@@ -2,7 +2,7 @@ import TermlyPrompt from "termly.js/bin/classes/Prompt";
 import { programs } from "./programs";
 import { htmlToElement, makeWindow } from "./lib";
 import { filesystem } from "./filesystem";
-import { openFile } from "./explorer";
+import { openExplorer, openFile } from "./explorer";
 
 import "./terminal.css";
 
@@ -51,15 +51,25 @@ export function openTerminal() {
     });
     commands.open = {
       name: "open",
-      man: "Opens a file with the appropriate program",
+      man: "Opens a file or directory with the appropriate program",
       fn: function (argv) {
         const fs = this.shell.fs;
         const fileArg = argv._[0];
+        if (!fileArg) throw Error("No file specified");
         const filename = fileArg
           ? fs.pathArrayToString(fs.cwd) + "/" + fileArg
           : "";
-        const file = filename ? fs.readFile(filename) : "";
-        openFile(filename, file ? file.content : "");
+        const res = fs.getNode(filename);
+        if (!res) {
+          throw Error("Could not open " + filename);
+        }
+        console.log(res.node);
+        if (!res.node.type) {
+          // this is a directory
+          openExplorer()({ filename: res.node.path });
+          return "";
+        }
+        openFile(res.node.name, res.node.content);
         return "";
       },
     };
