@@ -6,6 +6,35 @@ import "./explorer.css";
 import { openNotepad } from "./notepad";
 import { openIframe } from "./browser";
 
+export function openFile(name, content) {
+  const nameParts = name.split(".");
+  const ext = nameParts[1] && nameParts[1].toLowerCase();
+  if (ext === "txt") {
+    openNotepad("")({
+      args: { filename: name, content: attrs.content },
+    });
+  }
+
+  const iframeExts = [
+    "jpg",
+    "jpeg",
+    "png",
+    "url",
+    "webm",
+    "wma",
+    "wmv",
+    "mkv",
+    "avi",
+    "mp4",
+    "m3u8",
+  ];
+  if (iframeExts.includes(ext)) {
+    setTimeout(function () {
+      openIframe(name, content)();
+    }, 150);
+  }
+}
+
 export function openExplorer() {
   return function (opts = {}) {
     let startPath = "";
@@ -70,32 +99,7 @@ function initExplorer(win, element, startPath) {
     },
 
     onopenfile: function (folder, entry) {
-      const nameParts = entry.name.split(".");
-      const ext = nameParts[1] && nameParts[1].toLowerCase();
-      if (ext === "txt") {
-        openNotepad("")({
-          args: { filename: entry.name, content: entry.attrs.content },
-        });
-      }
-
-      const iframeExts = [
-        "jpg",
-        "jpeg",
-        "png",
-        "url",
-        "webm",
-        "wma",
-        "wmv",
-        "mkv",
-        "avi",
-        "mp4",
-        "m3u8",
-      ];
-      if (iframeExts.includes(ext)) {
-        setTimeout(function () {
-          openIframe(entry.name, entry.attrs.content)();
-        }, 150);
-      }
+      openFile(entry.name, entry.attrs.content);
     },
 
     onnewfolder: function (created, folder) {

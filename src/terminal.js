@@ -2,10 +2,12 @@ import TermlyPrompt from "termly.js/bin/classes/Prompt";
 import { programs } from "./programs";
 import { htmlToElement, makeWindow } from "./lib";
 import { filesystem } from "./filesystem";
+import { openFile } from "./explorer";
 
 import "./terminal.css";
 
 let terminals = 0;
+const KEY = "terminalHistory";
 
 // override this method to prevent swallowing the click events
 TermlyPrompt.prototype.init = function () {
@@ -21,7 +23,8 @@ export function openTerminal() {
     terminals++;
     const terminalId = `terminal-${terminals}`;
 
-    const history = [];
+    const storedHistory = JSON.parse(localStorage.getItem(KEY) || "[]");
+    const history = storedHistory.length > 0 ? storedHistory : [];
     const commands = {};
     let histIndex = -1;
 
@@ -41,12 +44,25 @@ export function openTerminal() {
             filename,
             content: file ? file.content : "",
           };
-          console.log("t", opts);
           p.run(opts);
           return "";
         },
       };
     });
+    commands.open = {
+      name: "open",
+      man: "Opens a file with the appropriate program",
+      fn: function (argv) {
+        const fs = this.shell.fs;
+        const fileArg = argv._[0];
+        const filename = fileArg
+          ? fs.pathArrayToString(fs.cwd) + "/" + fileArg
+          : "";
+        const file = filename ? fs.readFile(filename) : "";
+        openFile(filename, file ? file.content : "");
+        return "";
+      },
+    };
 
     const win = makeWindow({
       icon: opts.icon,
@@ -86,6 +102,7 @@ export function openTerminal() {
         } else {
           // otherwise push to history
           history.unshift(cmd);
+          localStorage.setItem(KEY, JSON.stringify(history));
         }
         histIndex = -1; // reset history index
       }
