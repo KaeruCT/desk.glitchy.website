@@ -12,6 +12,7 @@ import { openLetterShooter } from "./lettershooter";
 import niceUrls from "./niceUrls";
 
 import fileManagerImg from "./img/file-manager.png";
+import vsCodeImg from "./img/vscode.png";
 import vmImg from "./img/vm.png";
 import ircImg from "./img/im-irc.png";
 import imImg from "./img/im-message-new.png";
@@ -194,6 +195,19 @@ export const programs = [
     icon: notepadImg,
     title: "Notepad",
     run: openNotepad(),
+  },
+  {
+    cmd: "code.exe",
+    icon: vsCodeImg,
+    title: "Visual Studio Code",
+    run: openIframe(
+      "Visual Studio Code",
+      "https://github1s.com/KaeruCT/desk.glitchy.website",
+      {
+        width: 800,
+        height: 600,
+      }
+    ),
   },
 ];
 
