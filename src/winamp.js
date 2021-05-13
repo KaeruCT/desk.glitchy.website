@@ -1,5 +1,6 @@
 import { makeWindow } from "./lib";
 import { initWebamp } from "./webamp";
+import "./winamp.css";
 
 export function openWinamp(title, { width = 0, height = 0 } = {}) {
   let running = false;

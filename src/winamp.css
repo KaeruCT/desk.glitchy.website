@@ -1,0 +1,9 @@
+#webamp .window::before {
+  content: unset;
+}
+#webamp .title-bar {
+  padding: 0;
+  border-radius: 0;
+  border: 0;
+  box-shadow: 0;
+}

@@ -1,0 +1,36 @@
+.browser {
+  display: flex;
+}
+
+.browser .url {
+  flex: 1;
+}
+
+.browser .bar {
+  display: flex;
+  flex-direction: row;
+  height: 26px;
+  padding-bottom: 8px;
+}
+
+.browser .bar * {
+  margin-right: 8px;
+}
+.browser .bar *:last-child {
+  margin-right: 0;
+}
+
+.browser button {
+  min-width: 0;
+  padding: 0 5px;
+}
+.browser button svg {
+  width: 12px;
+  height: 12px;
+  fill: #333;
+}
+.browser .iframe-container,
+.browser iframe {
+  width: 100%;
+  height: 100%;
+}

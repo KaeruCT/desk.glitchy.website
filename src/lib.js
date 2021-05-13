@@ -429,14 +429,16 @@ export function makeWindow(opts) {
     });
   }
 
-  el.addEventListener("click", function () {
+  function delayedActivate() {
     setTimeout(() => {
       if (windows[win.id]) {
         // check if the window still exists before focusing because of a click
         setActive(win);
       }
     }, 10);
-  });
+  }
+
+  el.addEventListener("click", delayedActivate);
 
   if (!customEl) {
     const interactable = interact(el).draggable({
