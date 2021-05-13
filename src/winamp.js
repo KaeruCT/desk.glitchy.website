@@ -11,8 +11,10 @@ export function openWinamp(title, { width = 0, height = 0 } = {}) {
     const webamp = initWebamp();
 
     webamp.renderWhenReady(document.querySelector("#drop-full")).then(() => {
+      const customEl = document.querySelector("#webamp");
+      document.querySelector("#container").appendChild(customEl); // so it respects zindex of other windows
       makeWindow({
-        customEl: document.querySelector("#webamp"),
+        customEl,
         icon: opts.icon,
         width,
         height,
