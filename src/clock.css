@@ -1,0 +1,67 @@
+.clock-container {
+  font-family: sans-serif;
+  background-color: #111;
+  position: relative;
+}
+
+.clock-container .app {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.clock-container .clock {
+  position: relative;
+  border: #444 2px solid;
+  border-radius: 50%;
+  height: 0;
+  width: 70%;
+  padding-bottom: 70%;
+}
+
+.clock-container .hand-0 {
+  background-color: #ddd;
+  width: 3px;
+  height: 30%;
+}
+
+.clock-container .hand-1 {
+  background-color: #aaa;
+  width: 1px;
+  height: 40%;
+}
+
+.clock-container .hand-2 {
+  background-color: #d88;
+  width: 1px;
+  height: 50%;
+}
+
+.clock-container .hand {
+  transform-origin: 0 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.clock-container .notch {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: 0 0;
+  height: 50%;
+  width: 1px;
+  border-bottom: #666 10px solid;
+}
+
+.clock-container .notch-strong {
+  height: 50%;
+  width: 2px;
+  border-bottom: #aaa 15px solid;
+}

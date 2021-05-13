@@ -4,6 +4,9 @@ import { openTerminal } from "./terminal";
 import { openExplorer } from "./explorer";
 import { openBrowser, openIframe } from "./browser";
 import { openMessenger } from "./messenger";
+import { openVid } from "./videoplayer";
+import { openWinamp } from "./winamp";
+import { openClock } from "./clock";
 
 import niceUrls from "./niceUrls";
 
@@ -26,8 +29,6 @@ import skiImg from "./img/skifree.png";
 import terminalImg from "./img/terminal.png";
 import homeworkImg from "./img/homework.png";
 import video from "./vid/video.mp4";
-import { openVid } from "./videoplayer";
-import { openWinamp } from "./winamp";
 
 export const programs = [
   {
@@ -59,10 +60,7 @@ export const programs = [
   {
     icon: clockImg,
     title: "Clock",
-    run: openIframe("Clock", "https://csb-bbeyl.netlify.app/", {
-      width: 500,
-      height: 500,
-    }),
+    run: openClock(),
   },
   {
     icon: calcImg,
@@ -141,7 +139,7 @@ export const programs = [
       height: 600,
     }),
   },
-  { icon: aviImg, title: "Media Player", run: openVid("DJ Yayo", video) },
+  { icon: aviImg, title: "Media Player", run: openVid("Media Player", video) },
   { icon: homeworkImg, title: "Homework", run: openHomework() },
   { icon: terminalImg, title: "Terminal", run: openTerminal() },
   {
