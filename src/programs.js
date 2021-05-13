@@ -7,6 +7,7 @@ import { openVid } from "./videoplayer";
 import { openWinamp } from "./winamp";
 import { openClock } from "./clock";
 import { openNotepad } from "./notepad";
+import { openLetterShooter } from "./lettershooter";
 
 import niceUrls from "./niceUrls";
 
@@ -23,6 +24,7 @@ import aviImg from "./img/avidemux.png";
 import winampImg from "./img/winamp.png";
 import snakeImg from "./img/snake.png";
 import minesweeperImg from "./img/minesweeper.png";
+import letterShooterImg from "./img/lettershooter.png";
 import musicSnakeImg from "./img/musicSnake.png";
 import minecraftImg from "./img/minecraft.png";
 import plasmaImg from "./img/plasma.png";
@@ -113,6 +115,12 @@ export const programs = [
       width: 392,
       height: 392,
     }),
+  },
+  {
+    cmd: "lettershooter.exe",
+    icon: letterShooterImg,
+    title: "Letter Shooter",
+    run: openLetterShooter(),
   },
   {
     cmd: "musicsnake.exe",

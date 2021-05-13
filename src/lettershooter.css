@@ -1,0 +1,35 @@
+.lettershooter {
+  font-size: 15px;
+  font-family: "Courier New", Courier, monospace;
+  color: #dadada;
+  background: #000;
+  height: 100%;
+  text-align: center;
+  min-width: 290px;
+  position: relative;
+}
+.lettershooter .ins {
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  font-size: 0.8em;
+  text-align: left;
+}
+.lettershooter .sh {
+  color: #33f;
+}
+.lettershooter .bg {
+  color: #0f0f0f;
+}
+.lettershooter .s {
+  color: #ff6;
+}
+.lettershooter .g {
+  color: #f66;
+}
+.lettershooter .v {
+  color: #3f3;
+}
+.lettershooter div {
+  text-align: center;
+}
