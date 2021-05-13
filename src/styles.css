@@ -89,7 +89,7 @@ html {
   flex: 1;
   display: flex;
   justify-content: flex-start;
-  overflow: hidden;
+  /* overflow-x: hidden; */
 }
 .taskbar-btn {
   width: 60px;

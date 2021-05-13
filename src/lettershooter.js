@@ -55,12 +55,18 @@ export function openLetterShooter() {
 
     function mapPrint() {
       var txt = "";
-      //outs[2] = '<span class="v">'+evils[Math.floor(evils.length*Math.random())]+'</span>';
+      outs[2] =
+        '<span class="v">' +
+        evils[Math.floor(evils.length * Math.random())] +
+        "</span>";
       for (let i = 0; i < map.length; i++) {
         txt = txt + "|";
         var brd = "";
         for (let e = 0; e < map[i].length; e++) {
-          //outs[0] = '<span class="bg">'+spaces[Math.floor(spaces.length*Math.random())]+'</span>';
+          outs[0] =
+            '<span class="bg">' +
+            spaces[Math.floor(spaces.length * Math.random())] +
+            "</span>";
           txt = txt + outs[map[i][e]] + outs[0];
           brd = brd + "--";
         }
