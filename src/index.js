@@ -2,6 +2,7 @@ import "7.css/dist/7.css";
 import "./styles.css";
 
 import asciiImg from "./img/ascii.png";
+import homeworkImg from "./img/homework.png";
 import petImg from "./img/pet.png";
 
 import { readFileSync } from "fs";
@@ -17,8 +18,9 @@ import {
 
 import { initWallpaper } from "./wallpaper";
 import { shuffle } from "./util";
-import { openNotepad } from "./editor";
+import { openNotepad } from "./notepad";
 import { programs } from "./programs";
+import { openHomework } from "./homeworkTrap";
 
 function initDesktop() {
   const desktopIcons = [...programs];
@@ -26,7 +28,12 @@ function initDesktop() {
   desktopIcons.unshift({
     icon: asciiImg,
     title: "CREDITS.txt",
-    run: openNotepad("CREDITS.txt", `${creditsText}`),
+    run: openNotepad("CREDITS.txt", creditsText),
+  });
+  desktopIcons.unshift({
+    icon: homeworkImg,
+    title: "Homework",
+    run: openHomework(),
   });
 
   let initial = 40;

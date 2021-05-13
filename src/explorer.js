@@ -3,36 +3,51 @@ import { getExplorerFolderEntries } from "./filesystem";
 import "./js-fileexplorer/file-explorer/file-explorer.js";
 import "./js-fileexplorer/file-explorer/file-explorer.css";
 import "./explorer.css";
-import { openNotepad } from "./editor";
+import { openNotepad } from "./notepad";
 import { openIframe } from "./browser";
 
 export function openExplorer() {
-  return function (opts) {
+  return function (opts = {}) {
+    let startPath = "";
+    let title = "Explorer";
+    if (opts) {
+      title = opts.filename;
+      startPath = opts.filename;
+    }
+
     const win = makeWindow({
       icon: opts.icon,
       className: "no-padding",
       width: 640,
       height: 480,
-      title: opts.title,
+      title: title,
       content: htmlToElement(`<div class="explorer-container"></div>`),
     });
 
-    initExplorer(win, win.body.querySelector(".explorer-container"));
+    initExplorer(win, win.body.querySelector(".explorer-container"), startPath);
   };
 }
 
-function initExplorer(win, element) {
-  var options = {
+function initExplorer(win, element, startPath) {
+  let initpath = [
+    ["0", "home", { canmodify: false }],
+    ["1", "try_andy", { canmodify: false }],
+  ];
+
+  if (startPath) {
+    initpath = startPath
+      .split("/")
+      .map((p, i) => [String(i), p, { canmodify: false }]);
+  }
+
+  const options = {
     // This allows drag-and-drop and cut/copy/paste to work between windows of the live demo.
     // Your application should either define the group uniquely for your application or not at all.
     group: "desk.glitchy.website",
 
     capturebrowser: true,
 
-    initpath: [
-      ["0", "home", { canmodify: false }],
-      ["1", "try_andy", { canmodify: false }],
-    ],
+    initpath,
 
     // See main documentation for the complete list of keys.
     // The only tool that won't show as a result of a handler being defined is 'item_checkboxes'.
@@ -58,7 +73,9 @@ function initExplorer(win, element) {
       const nameParts = entry.name.split(".");
       const ext = nameParts[1] && nameParts[1].toLowerCase();
       if (ext === "txt") {
-        openNotepad(entry.name, entry.attrs.content)();
+        openNotepad("")({
+          args: { filename: entry.name, content: entry.attrs.content },
+        });
       }
 
       const iframeExts = [

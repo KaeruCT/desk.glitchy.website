@@ -1,3 +1,4 @@
+import { makeWindow } from "./lib";
 import { initWebamp } from "./webamp";
 
 export function openWinamp(title, { width = 0, height = 0 } = {}) {

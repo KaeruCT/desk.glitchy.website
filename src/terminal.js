@@ -1,16 +1,52 @@
 import TermlyPrompt from "termly.js/bin/classes/Prompt";
+import { programs } from "./programs";
 import { htmlToElement, makeWindow } from "./lib";
 import { filesystem } from "./filesystem";
 
 import "./terminal.css";
 
 let terminals = 0;
-const commands = {};
+
+// override this method to prevent swallowing the click events
+TermlyPrompt.prototype.init = function () {
+  this.generateRow();
+  this.container.addEventListener("click", (e) => {
+    let input = this.container.querySelector(".current .terminal-input");
+    if (input) input.focus();
+  });
+};
 
 export function openTerminal() {
   return function (opts) {
     terminals++;
     const terminalId = `terminal-${terminals}`;
+
+    const history = [];
+    const commands = {};
+    let histIndex = -1;
+
+    programs.forEach((p) => {
+      commands[p.cmd] = {
+        name: p.cmd,
+        fn: function (argv) {
+          const fs = this.shell.fs;
+          const fileArg = argv._[0];
+          const filename = fileArg
+            ? fs.pathArrayToString(fs.cwd) + "/" + fileArg
+            : "";
+          const file = filename ? fs.readFile(filename) : "";
+
+          const opts = {
+            icon: p.icon,
+            filename,
+            content: file ? file.content : "",
+          };
+          console.log("t", opts);
+          p.run(opts);
+          return "";
+        },
+      };
+    });
 
     const win = makeWindow({
       icon: opts.icon,
@@ -31,6 +67,7 @@ export function openTerminal() {
       },
     });
     shell.run("cd /home/try_andy");
+    shell.clear();
 
     // scroll to bottom when user presses any key
     const terminal = document.querySelector(`#${terminalId}`);
@@ -41,14 +78,46 @@ export function openTerminal() {
         setTimeout(function () {
           win.body.scrollTop = win.body.scrollHeight;
         }, 200);
+
+        const cmd = getTermInput().value;
+        if (cmd.startsWith("#")) {
+          // ignore comment commands
+          getTermInput().value = "";
+        } else {
+          // otherwise push to history
+          history.unshift(cmd);
+        }
+        histIndex = -1; // reset history index
       }
     });
+    function getTermInput() {
+      return terminal.querySelector(".current .terminal-input");
+    }
     terminal.addEventListener("keydown", function (e) {
-      const input = terminal.querySelector(".current .terminal-input");
-      const text = input.value;
+      const text = getTermInput().value;
 
       if (e.ctrlKey && (e.which == 67 || e.keyCode == 67)) {
         shell.generateOutput("^C");
+      }
+
+      if (e.which == 38 || e.keyCode == 38) {
+        histIndex++;
+        if (histIndex > history.length) histIndex = history.length - 1;
+        const entry = history[histIndex];
+        if (entry) {
+          getTermInput().value = entry;
+          setTimeout(() => moveCursorToEnd(getTermInput()), 1);
+        }
+      }
+
+      if (e.which == 40 || e.keyCode == 40) {
+        histIndex--;
+        if (histIndex < 0) histIndex = 0;
+        const entry = history[histIndex];
+        if (entry) {
+          getTermInput().value = entry;
+          setTimeout(() => moveCursorToEnd(getTermInput()), 1);
+        }
       }
 
       // autocomplete
@@ -56,26 +125,43 @@ export function openTerminal() {
         e.preventDefault();
         try {
           if (!text.length) return;
-          const files = Object.keys(shell.fs.listDir("."));
           const currentParts = text.split(/\s+/);
-          const currentFile =
-            currentParts.length > 1 && currentParts[currentParts.length - 1];
-          let newFile;
+          let input = currentParts[currentParts.length - 1];
 
-          if (currentFile) {
-            const i = files.indexOf(currentFile);
-            if (i === -1) {
-              newFile = files.find((f) => f.startsWith(currentFile));
-            } else {
-              newFile = files[(i + 1) % files.length];
+          if (currentParts.length <= 1) {
+            // autocomplete program names
+            const programs = Object.keys(shell.ShellCommands);
+            const results = programs.filter((p) => p.startsWith(input));
+
+            if (results.length > 1) {
+              shell.generateOutput(results.join(" "));
+              getTermInput().value = input;
             }
-          } else {
-            newFile = files[0];
+            if (results.length === 1) {
+              getTermInput().value = results[0];
+            }
           }
+
+          // else, autocomplete file names
+          let files = [];
+          let pathPrefix = "";
+          if (input.includes("/")) {
+            const isDir = input.endsWith("/");
+            const inputDir = isDir ? input : dirname(input);
+            files = Object.keys(shell.fs.listDir(inputDir));
+            const inputParts = input.split("/");
+            input = inputParts.pop();
+
+            pathPrefix = inputParts.join("/") + "/";
+          } else {
+            files = Object.keys(shell.fs.listDir("."));
+          }
+          const newFile = autocomplete(input, files);
 
           if (newFile) {
             if (currentParts.length > 1) currentParts.pop();
-            input.value = currentParts.join(" ") + " " + newFile;
+            getTermInput().value =
+              currentParts.join(" ") + " " + pathPrefix + newFile;
           }
         } catch (e) {
           console.log(e);
@@ -83,4 +169,36 @@ export function openTerminal() {
       }
     });
   };
+}
+
+function dirname(path) {
+  const inputParts = path.split("/");
+  path = inputParts.pop();
+  return inputParts.join("/") + "/";
+}
+
+function autocomplete(input, candidates) {
+  let result = "";
+  if (input) {
+    const i = candidates.indexOf(input);
+    if (i === -1) {
+      result = candidates.find((f) => f.startsWith(input));
+    } else {
+      result = candidates[(i + 1) % candidates.length];
+    }
+  } else {
+    result = candidates[0];
+  }
+  return result;
+}
+
+function moveCursorToEnd(el) {
+  if (typeof el.selectionStart == "number") {
+    el.selectionStart = el.selectionEnd = el.value.length;
+  } else if (typeof el.createTextRange != "undefined") {
+    el.focus();
+    var range = el.createTextRange();
+    range.collapse(false);
+    range.select();
+  }
 }

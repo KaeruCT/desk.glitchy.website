@@ -76,8 +76,21 @@ function setActive(win) {
     activeWin.taskbarBtn.classList.remove("active");
   }
   activeWin = win;
+  if (!activeWin) {
+    return;
+  }
   Object.assign(activeWin.element.style, { zIndex: zIndex++ });
   activeWin.taskbarBtn.classList.add("active");
+}
+
+function inferActive() {
+  let nonMinimized = 0;
+  Object.keys(windows).forEach((id) => {
+    if (windows[id].state.status !== "minimized") {
+      nonMinimized = id;
+    }
+  });
+  setActive(windows[nonMinimized]);
 }
 
 function snap(win, snapEl, minimize) {
@@ -123,14 +136,14 @@ function snap(win, snapEl, minimize) {
 }
 
 let zIndex = 1;
-let windowId;
+let windowId = 1;
 const container = document.querySelector("#container");
 const iconContainer = document.querySelector("#icon-container");
 const taskbar = document.querySelector("#taskbar");
 const dropLeft = document.querySelector("#drop-left");
 const dropRight = document.querySelector("#drop-right");
 const dropFull = document.querySelector("#drop-full");
-const windows = [];
+const windows = {};
 
 export function makeWindow(opts) {
   const {
@@ -183,6 +196,7 @@ export function makeWindow(opts) {
         minHeight: 0,
         ...(customEl && { display: "none" }),
       };
+      inferActive();
     } else {
       minimizedStyle = {
         opacity: 1,
@@ -220,6 +234,7 @@ export function makeWindow(opts) {
       win.onClose();
     }
     delete windows[id];
+    inferActive();
   }
 
   let previewEl;
@@ -305,6 +320,9 @@ export function makeWindow(opts) {
   const win = {
     element: el,
     taskbarBtn,
+    get id() {
+      return id;
+    },
     get body() {
       return customEl || el.querySelector(".window-body");
     },
@@ -322,6 +340,9 @@ export function makeWindow(opts) {
     },
     setActive: function _setActive() {
       setActive(win);
+    },
+    get isActive() {
+      return activeWin === win;
     },
     setTitle,
     saveState,
@@ -342,7 +363,13 @@ export function makeWindow(opts) {
 
   let hideTimeout;
   taskbar.appendChild(taskbarBtn);
-  taskbarBtn.addEventListener("click", toggleMinimize);
+  taskbarBtn.addEventListener("click", function () {
+    if (win.state.status === "minimized" || win.isActive) {
+      win.toggleMinimize();
+    } else {
+      win.setActive();
+    }
+  });
   taskbarBtn.addEventListener("mouseenter", function () {
     if (hideTimeout) clearTimeout(hideTimeout);
     win.showPreview();
@@ -403,7 +430,12 @@ export function makeWindow(opts) {
   }
 
   el.addEventListener("click", function () {
-    setActive(win);
+    setTimeout(() => {
+      if (windows[win.id]) {
+        // check if the window still exists before focusing because of a click
+        setActive(win);
+      }
+    }, 10);
   });
 
   if (!customEl) {
@@ -513,8 +545,7 @@ export function makeWindow(opts) {
     }
   }
 
-  windows[windowId] = win;
-
+  windows[id] = win;
   return win;
 }
 

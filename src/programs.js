@@ -1,5 +1,4 @@
 import { randItem } from "./util";
-import { openHomework } from "./homeworkTrap";
 import { openTerminal } from "./terminal";
 import { openExplorer } from "./explorer";
 import { openBrowser, openIframe } from "./browser";
@@ -7,6 +6,7 @@ import { openMessenger } from "./messenger";
 import { openVid } from "./videoplayer";
 import { openWinamp } from "./winamp";
 import { openClock } from "./clock";
+import { openNotepad } from "./notepad";
 
 import niceUrls from "./niceUrls";
 
@@ -27,29 +27,33 @@ import minecraftImg from "./img/minecraft.png";
 import plasmaImg from "./img/plasma.png";
 import skiImg from "./img/skifree.png";
 import terminalImg from "./img/terminal.png";
-import homeworkImg from "./img/homework.png";
+import notepadImg from "./img/notepad.png";
 import video from "./vid/video.mp4";
 
 export const programs = [
   {
+    cmd: "explorer.exe",
     icon: fileManagerImg,
     title: "Explorer",
     run: openExplorer(),
   },
   {
+    cmd: "mirc.exe",
     icon: ircImg,
-    title: "IRC",
+    title: "MIRC",
     run: openIframe(
-      "IRC",
+      "MIRC",
       "https://widget.mibbit.com/?server=irc.rizon.net&channel=%23Rizon"
     ),
   },
   {
+    cmd: "messenger.exe",
     icon: imImg,
     title: "Messenger",
     run: openMessenger(),
   },
   {
+    cmd: "iexplore.exe",
     icon: webImg,
     title: "Internet Explorer",
     run: openBrowser("Internet Explorer", () => randItem(niceUrls), {
@@ -58,16 +62,19 @@ export const programs = [
     }),
   },
   {
+    cmd: "clock.exe",
     icon: clockImg,
     title: "Clock",
     run: openClock(),
   },
   {
+    cmd: "calc.exe",
     icon: calcImg,
     title: "Calque",
     run: openIframe("Calque", "https://calque.io/"),
   },
   {
+    cmd: "3dpipes.exe",
     icon: pipesImg,
     title: "3D Pipes",
     run: openIframe("3D Pipes", "https://1j01.github.io/pipes/", {
@@ -76,6 +83,7 @@ export const programs = [
     }),
   },
   {
+    cmd: "snake.exe",
     icon: snakeImg,
     title: "Snake!",
     run: openIframe(
@@ -88,6 +96,7 @@ export const programs = [
     ),
   },
   {
+    cmd: "minesweeper.exe",
     icon: minesweeperImg,
     title: "Minesweeper",
     run: openIframe("Minesweeper", "https://glitchy-minesweeper.netlify.app/", {
@@ -96,6 +105,7 @@ export const programs = [
     }),
   },
   {
+    cmd: "musicsnake.exe",
     icon: musicSnakeImg,
     title: "musicSnake",
     run: openIframe("musicSnake", "https://kaeruct.github.io/musicSnake/", {
@@ -104,6 +114,7 @@ export const programs = [
     }),
   },
   {
+    cmd: "minecraft.exe",
     icon: minecraftImg,
     title: "Minecraft",
     run: openIframe("Minecraft", "https://classic.minecraft.net", {
@@ -112,6 +123,7 @@ export const programs = [
     }),
   },
   {
+    cmd: "plasma.exe",
     icon: plasmaImg,
     title: "Plasma Gun",
     run: openIframe(
@@ -124,6 +136,7 @@ export const programs = [
     ),
   },
   {
+    cmd: "skifree.exe",
     icon: skiImg,
     title: "SkiFree",
     run: openIframe("SkiFree", "https://basicallydan.github.io/skifree.js/", {
@@ -132,6 +145,7 @@ export const programs = [
     }),
   },
   {
+    cmd: "paint.exe",
     icon: paintImg,
     title: "Paint",
     run: openIframe("Paint", "https://jspaint.app", {
@@ -139,12 +153,28 @@ export const programs = [
       height: 600,
     }),
   },
-  { icon: aviImg, title: "Media Player", run: openVid("Media Player", video) },
-  { icon: homeworkImg, title: "Homework", run: openHomework() },
-  { icon: terminalImg, title: "Terminal", run: openTerminal() },
   {
+    cmd: "mplayer.exe",
+    icon: aviImg,
+    title: "Media Player",
+    run: openVid("Media Player", video),
+  },
+  {
+    cmd: "terminal.exe",
+    icon: terminalImg,
+    title: "Terminal",
+    run: openTerminal(),
+  },
+  {
+    cmd: "winamp.exe",
     icon: winampImg,
     title: "Winamp",
     run: openWinamp("Winamp"),
+  },
+  {
+    cmd: "notepad.exe",
+    icon: notepadImg,
+    title: "Notepad",
+    run: openNotepad(),
   },
 ];
