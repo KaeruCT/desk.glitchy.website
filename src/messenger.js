@@ -513,9 +513,9 @@ export function openMessenger() {
 
     win.setTitle("Messenger - " + otherUser.name);
 
-    initChatbot(function () {
-      addMessage(otherUser.name + " says", greeting);
+    addMessage(otherUser.name + " says", greeting);
 
+    initChatbot(function () {
       const buttonSend = win.body.querySelector(
         ".send-message__textfield [type=submit]"
       );

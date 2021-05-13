@@ -1,11 +1,12 @@
 import { readFileSync } from "fs";
 import doom from "./img/doom.jpg";
 import buddha from "./img/buddha.jpg";
+import dc4 from "./img/dc4.png";
 import { randItem } from "./util";
 const creditsText = readFileSync(__dirname + "/CREDITS.txt", "utf-8");
 
 const trollText =
-  "IF YOU'RE READING THIS, YOU'VE BEEN IN A COMA FOR ALMOST 20 YEARS NOW. WE'RE TRYING A NEW TECHNIQUE.\nWE DON'T KNOW WHERE THIS MESSAGE WILL END UP IN YOUR DREAM, BUT WE HOPE WE'RE GETTING THROUGH.";
+  "IF YOU'RE READING THIS, YOU'VE BEEN IN A COMA FOR ALMOST 20 YEARS NOW.\nWE'RE TRYING A NEW TECHNIQUE.\nWE DON'T KNOW WHERE THIS MESSAGE WILL END UP IN YOUR DREAM,\nBUT WE HOPE WE'RE GETTING THROUGH.";
 
 var niceImgs = [
   "https://picsum.photos/{0}/{1}",
@@ -43,13 +44,17 @@ for (let i = 1; i <= 28; i++) {
 
 export const filesystem = {
   home: {
-    try_panpan: {
+    try_nks: {
       Desktop: {
         Images: niaImg,
       },
     },
     try_wolk: {
-      Desktop: {},
+      Desktop: {
+        Images: {
+          "dc4.png": dc4,
+        },
+      },
     },
     try_andy: {
       Images: {
@@ -84,7 +89,7 @@ export const filesystem = {
         "rh_bb.wmv": "https://www.youtube.com/embed/hvf_LemcrcE",
       },
       Documents: {
-        "ImportantAnnouncement.txt": trollText,
+        "IMPORTANT.txt": trollText,
       },
       Desktop: {
         "CREDITS.txt": creditsText,

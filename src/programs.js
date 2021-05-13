@@ -11,6 +11,7 @@ import { openNotepad } from "./notepad";
 import niceUrls from "./niceUrls";
 
 import fileManagerImg from "./img/file-manager.png";
+import vmImg from "./img/vm.png";
 import ircImg from "./img/im-irc.png";
 import imImg from "./img/im-message-new.png";
 import webImg from "./img/web-browser.png";
@@ -72,6 +73,15 @@ export const programs = [
     icon: calcImg,
     title: "Calque",
     run: openIframe("Calque", "https://calque.io/"),
+  },
+  {
+    cmd: "virtualmachine.exe",
+    icon: vmImg,
+    title: "Virtual Machine",
+    run: openIframe("Virtual Machine", "://", {
+      width: 800,
+      height: 600,
+    }),
   },
   {
     cmd: "3dpipes.exe",
