@@ -81,7 +81,7 @@ export const programs = [
     cmd: "virtualmachine.exe",
     icon: vmImg,
     title: "Virtual Machine",
-    run: openIframe("Virtual Machine", "://", {
+    run: openIframe("Virtual Machine", "/", {
       width: 800,
       height: 600,
     }),
