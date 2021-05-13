@@ -2,26 +2,7 @@ import "7.css/dist/7.css";
 import "./styles.css";
 
 import asciiImg from "./img/ascii.png";
-import fileManagerImg from "./img/file-manager.png";
-import ircImg from "./img/im-irc.png";
-import imImg from "./img/im-message-new.png";
-import webImg from "./img/web-browser.png";
-import clockImg from "./img/xclock.png";
-import paintImg from "./img/gimp.png";
-import calcImg from "./img/gcalctool.png";
-import pipesImg from "./img/pipes.png";
-import aviImg from "./img/avidemux.png";
-import winampImg from "./img/winamp.png";
-import snakeImg from "./img/snake.png";
-import minesweeperImg from "./img/minesweeper.png";
-import musicSnakeImg from "./img/musicSnake.png";
-import minecraftImg from "./img/minecraft.png";
-import plasmaImg from "./img/plasma.png";
-import skiImg from "./img/skifree.png";
-import terminalImg from "./img/terminal.png";
-import homeworkImg from "./img/homework.png";
 import petImg from "./img/pet.png";
-import video from "./vid/video.mp4";
 
 import { readFileSync } from "fs";
 const creditsText = readFileSync(__dirname + "/CREDITS.txt", "utf-8");
@@ -30,242 +11,69 @@ import {
   makeStartMenu,
   makeClock,
   makeDesktopIcon,
-  makeWindow,
-  htmlToElement,
   makeDialog,
   closeStartMenu,
 } from "./lib";
-import { initWebamp } from "./webamp";
-import { openBrowser, openIframe } from "./browser";
+
 import { initWallpaper } from "./wallpaper";
-import niceUrls from "./niceUrls";
-import { randItem, shuffle } from "./util";
-import { openHomework } from "./homeworkTrap";
-import { openTerminal } from "./terminal";
-import { openExplorer } from "./explorer";
+import { shuffle } from "./util";
 import { openNotepad } from "./editor";
-import { openMessenger } from "./messenger";
+import { programs } from "./programs";
 
-function openWinamp(title, { width = 0, height = 0 } = {}) {
-  let running = false;
-
-  return function (opts) {
-    if (running) return;
-    running = true;
-
-    const webamp = initWebamp();
-
-    webamp.renderWhenReady(document.querySelector("#drop-full")).then(() => {
-      makeWindow({
-        customEl: document.querySelector("#webamp"),
-        icon: opts.icon,
-        width,
-        height,
-        title,
-        content: (win) => {
-          webamp.onClose(() => {
-            win.close();
-            webamp.dispose();
-            running = false;
-          });
-          webamp.onMinimize(() => {
-            win.toggleMinimize();
-          });
-        },
-      });
-    });
-  };
-}
-
-function openVid(title, src, { width = 400, height = 300 } = {}) {
-  return function (opts) {
-    makeWindow({
-      icon: opts.icon,
-      width,
-      height,
-      title,
-      content: htmlToElement(
-        `<div style="display: flex; justify-content: center; align-items: center;"><video src="${src}" style="max-width: ${
-          width * 0.85
-        }px; max-height: ${height * 0.85}px" controls autoplay loop></div>`
-      ),
-    });
-  };
-}
-
-const winampIcon = {
-  icon: winampImg,
-  title: "Winamp",
-  run: openWinamp("Winamp"),
-};
-const desktopIcons = [
-  {
+function initDesktop() {
+  const desktopIcons = [...programs];
+  shuffle(desktopIcons);
+  desktopIcons.unshift({
     icon: asciiImg,
     title: "CREDITS.txt",
     run: openNotepad("CREDITS.txt", `${creditsText}`),
-  },
-  {
-    icon: fileManagerImg,
-    title: "Explorer",
-    run: openExplorer(),
-  },
-  {
-    icon: ircImg,
-    title: "IRC",
-    run: openIframe(
-      "IRC",
-      "https://widget.mibbit.com/?server=irc.rizon.net&channel=%23Rizon"
-    ),
-  },
-  {
-    icon: imImg,
-    title: "Messenger",
-    run: openMessenger(),
-  },
-  {
-    icon: webImg,
-    title: "Internet Explorer",
-    run: openBrowser("Internet Explorer", () => randItem(niceUrls), {
-      width: 640,
-      height: 480,
-    }),
-  },
-  {
-    icon: clockImg,
-    title: "Clock",
-    run: openIframe("Clock", "https://csb-bbeyl.netlify.app/", {
-      width: 500,
-      height: 500,
-    }),
-  },
-  {
-    icon: calcImg,
-    title: "Calque",
-    run: openIframe("Calque", "https://calque.io/"),
-  },
-  {
-    icon: pipesImg,
-    title: "3D Pipes",
-    run: openIframe("3D Pipes", "https://1j01.github.io/pipes/", {
-      width: 800,
-      height: 600,
-    }),
-  },
-  {
-    icon: snakeImg,
-    title: "Snake!",
-    run: openIframe(
-      "Snake!",
-      "https://kaeruct.github.io/legacy-projects/snake/",
-      {
-        width: 800,
-        height: 600,
-      }
-    ),
-  },
-  {
-    icon: minesweeperImg,
-    title: "Minesweeper",
-    run: openIframe("Minesweeper", "https://glitchy-minesweeper.netlify.app/", {
-      width: 392,
-      height: 392,
-    }),
-  },
-  {
-    icon: musicSnakeImg,
-    title: "musicSnake",
-    run: openIframe("musicSnake", "https://kaeruct.github.io/musicSnake/", {
-      width: 460,
-      height: 680,
-    }),
-  },
-  {
-    icon: minecraftImg,
-    title: "Minecraft",
-    run: openIframe("Minecraft", "https://classic.minecraft.net", {
-      width: 640,
-      height: 480,
-    }),
-  },
-  {
-    icon: plasmaImg,
-    title: "Plasma Gun",
-    run: openIframe(
-      "Plasma Gun",
-      "https://oguzeroglu.github.io/ROYGBIV/demo/plasmaGun/application.html",
-      {
-        width: 640,
-        height: 480,
-      }
-    ),
-  },
-  {
-    icon: skiImg,
-    title: "SkiFree",
-    run: openIframe("SkiFree", "https://basicallydan.github.io/skifree.js/", {
-      width: 640,
-      height: 480,
-    }),
-  },
-  {
-    icon: paintImg,
-    title: "Paint",
-    run: openIframe("Paint", "https://jspaint.app", {
-      width: 800,
-      height: 600,
-    }),
-  },
-  { icon: aviImg, title: "Media Player", run: openVid("DJ Yayo", video) },
-  { icon: homeworkImg, title: "Homework", run: openHomework() },
-  { icon: terminalImg, title: "Terminal", run: openTerminal() },
-  winampIcon,
-];
-shuffle(desktopIcons);
-
-let initial = 40;
-let x = initial;
-let y = -initial;
-
-const rowCnt = window.innerWidth <= 375 ? 3 : 5;
-const xinc = window.innerWidth <= 375 ? 90 : 100;
-const yinc = window.innerWidth <= 375 ? 80 : 100;
-desktopIcons.forEach((di, i) => {
-  if (i % rowCnt === 0) {
-    x = initial;
-    y += yinc;
-  } else {
-    x += xinc;
-  }
-  makeDesktopIcon({
-    x,
-    y,
-    title: di.title,
-    icon: di.icon,
-    run: di.run,
   });
-});
 
-makeStartMenu();
-makeClock();
-initWallpaper();
+  let initial = 40;
+  let x = initial;
+  let y = -initial;
 
-//winampIcon.run(winampIcon);
+  const rowCnt = window.innerWidth <= 375 ? 3 : 5;
+  const xinc = window.innerWidth <= 375 ? 90 : 100;
+  const yinc = window.innerWidth <= 375 ? 80 : 100;
+  desktopIcons.forEach((di, i) => {
+    if (i % rowCnt === 0) {
+      x = initial;
+      y += yinc;
+    } else {
+      x += xinc;
+    }
+    makeDesktopIcon({
+      x,
+      y,
+      title: di.title,
+      icon: di.icon,
+      run: di.run,
+    });
+  });
 
-const shutdown = document.querySelector("#shutdown");
-shutdown.addEventListener("click", function () {
-  closeStartMenu();
-  makeDialog(
-    "Not allowed",
-    "<p>Sorry, you do not have the necessary permissions to shut the system down.</p>"
-  );
-});
+  makeStartMenu();
+  makeClock();
+  initWallpaper();
 
-const shareLink = document.querySelector("#share-link");
-shareLink.addEventListener("click", function () {
-  closeStartMenu();
-  makeDialog(
-    "Share Link",
-    "Copy and paste this link to share with your pals!<br><input onClick='this.setSelectionRange(0, this.value.length)' value='https://desk.glitchy.website/' />",
-    petImg
-  );
-});
+  const shutdown = document.querySelector("#shutdown");
+  shutdown.addEventListener("click", function () {
+    closeStartMenu();
+    makeDialog(
+      "Not allowed",
+      "<p>Sorry, you do not have the necessary permissions to shut the system down.</p>"
+    );
+  });
+
+  const shareLink = document.querySelector("#share-link");
+  shareLink.addEventListener("click", function () {
+    closeStartMenu();
+    makeDialog(
+      "Share Link",
+      "Copy and paste this link to share with your pals!<br><input onClick='this.setSelectionRange(0, this.value.length)' value='https://desk.glitchy.website/' />",
+      petImg
+    );
+  });
+}
+
+initDesktop();
