@@ -30,12 +30,26 @@
 .fe_fileexplorer_item_icon_folder {
   background-image: url(./img/homework.png) !important;
 }
-
 .fe_fileexplorer_item_icon_ext_t {
   background-image: url(./img/ascii.png) !important;
 }
 .fe_fileexplorer_item_icon_ext_u {
   background-image: url(./img/web-browser.png) !important;
+}
+.fe_fileexplorer_item_folder .fe_fileexplorer_item_icon_music {
+  background-image: url(./img/music.png) !important;
+}
+.fe_fileexplorer_item_folder .fe_fileexplorer_item_icon_videos {
+  background-image: url(./img/videos.png) !important;
+}
+.fe_fileexplorer_item_folder .fe_fileexplorer_item_icon_documents {
+  background-image: url(./img/documents.png) !important;
+}
+.fe_fileexplorer_item_folder .fe_fileexplorer_item_icon_images {
+  background-image: url(./img/images.png) !important;
+}
+.fe_fileexplorer_item_folder .fe_fileexplorer_item_icon_desktop {
+  background-image: url(./img/desktop.png) !important;
 }
 .fe_fileexplorer_item_icon_ext_t::after,
 .fe_fileexplorer_item_icon_ext_u::after {

@@ -2752,6 +2752,9 @@
 						node.classList.add('fe_fileexplorer_item_folder');
 
 						itemicon.classList.add('fe_fileexplorer_item_icon_folder');
+
+						const className = entries[x].name.toLowerCase();
+						itemicon.classList.add(`fe_fileexplorer_item_icon_${className}`)
 					}
 					else
 					{
