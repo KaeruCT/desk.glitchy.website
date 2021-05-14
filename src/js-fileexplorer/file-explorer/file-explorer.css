@@ -826,8 +826,8 @@
 .fe_fileexplorer_wrap .fe_fileexplorer_select_box {
   position: absolute;
   box-sizing: border-box;
-  border: 1px solid #0078d7;
-  background-color: rgba(0, 120, 215, 0.33);
+  border: 1px solid #b335e6;
+  background-color: rgba(196, 61, 230, 0.295);
 }
 
 .fe_fileexplorer_wrap .fe_fileexplorer_statusbar_wrap {

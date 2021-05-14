@@ -292,6 +292,7 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
+  touch-action: none;
 }
 
 .icon-container {
@@ -494,14 +495,16 @@ html {
   content: "";
   display: block;
   position: absolute;
-  top: 0;
+  left: 2.5%;
+  top: 0.5%;
   bottom: 0;
-  left: 0;
   right: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.15s;
   opacity: 0;
-  background: #ec1db8;
-  border-radius: 6px;
+  background: rgba(224, 105, 195, 0.7);
+  border-radius: 1px;
+  width: 95%;
+  height: 99%;
 }
 .focus::after {
   opacity: 0.3;
@@ -607,4 +610,12 @@ html {
 
 .spotlight-container {
   display: flex;
+}
+
+#icon-select {
+  border: 1px solid #b335e6;
+  background-color: rgba(196, 61, 230, 0.295);
+  position: absolute;
+  touch-action: none;
+  display: none;
 }

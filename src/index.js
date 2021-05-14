@@ -15,6 +15,7 @@ import {
   makeDialog,
   closeStartMenu,
   makeSpotlight,
+  initIconSelect,
 } from "./lib";
 
 import { initWallpaper } from "./wallpaper";
@@ -64,6 +65,7 @@ function initDesktop() {
   makeSpotlight();
   makeClock();
   initWallpaper();
+  initIconSelect();
 
   const shutdown = document.querySelector("#shutdown");
   shutdown.addEventListener("click", function () {

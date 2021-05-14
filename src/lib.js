@@ -555,22 +555,32 @@ export function makeWindow(opts) {
 
 let focusedIcon;
 function focusIcon(el) {
-  if (focusedIcon) {
-    focusedIcon.classList.remove("focus");
-  }
-  focusedIcon = el;
-  if (focusedIcon) {
+  const icons = document.querySelectorAll(".desktop-icon");
+  icons.forEach((icon) => icon.classList.remove("focus"));
+  if (el) {
+    selectedIcons = [el];
+    focusedIcon = el;
     focusedIcon.classList.add("focus");
+  } else {
+    selectedIcons = [];
   }
 }
 
 iconContainer.addEventListener("mouseup", function (event) {
-  if (event.target === iconContainer) {
+  if (
+    event.target === iconContainer &&
+    lastDragBoxTime + 150 < new Date().getTime()
+  ) {
     focusIcon(undefined);
   }
 });
 
+function getIcons() {
+  return document.querySelectorAll(".desktop-icon");
+}
+
 let iconZIndex = 0;
+let selectedIcons = [];
 export function makeDesktopIcon(opts) {
   const { x, y, title, icon, run } = opts;
   const el = htmlToElement(
@@ -578,10 +588,9 @@ export function makeDesktopIcon(opts) {
   );
   iconContainer.appendChild(el);
 
-  const position = { x, y };
   Object.assign(el.style, {
-    top: `${position.y}px`,
-    left: `${position.x}px`,
+    top: `${y}px`,
+    left: `${x}px`,
   });
 
   function onClick() {
@@ -603,24 +612,51 @@ export function makeDesktopIcon(opts) {
     el.addEventListener("dblclick", onClick);
   }
 
-  el.addEventListener("mousedown", () => focusIcon(el));
-
+  let positions = [];
+  let start = [];
   interact(el).draggable({
     cursorChecker: () => null,
     listeners: {
+      start: function () {
+        if (selectedIcons.length === 0 || !selectedIcons.includes(el))
+          focusIcon(el);
+        positions = selectedIcons.map((icon) => ({
+          x: parseInt(icon.style.left),
+          y: parseInt(icon.style.top),
+        }));
+        start = [...positions.map((p) => ({ ...p }))];
+      },
       move: function (event) {
-        position.x += event.dx;
-        position.y += event.dy;
-        Object.assign(el.style, {
-          top: `${position.y}px`,
-          left: `${position.x}px`,
-          zIndex: iconZIndex++,
+        positions = positions.map((p) => ({
+          x: p.x + event.dx,
+          y: p.y + event.dy,
+        }));
+        selectedIcons.forEach((icon, i) => {
+          Object.assign(icon.style, {
+            top: `${positions[i].y}px`,
+            left: `${positions[i].x}px`,
+            zIndex: iconZIndex++,
+          });
         });
-
-        focusIcon(el);
       },
       end: function () {
         el.lastDragTime = new Date().getTime();
+        const anyIsOutOfBounds = positions.some(
+          (p) =>
+            p.x < 0 ||
+            p.y < 0 ||
+            p.x >= container.clientWidth ||
+            p.y >= container.clientHeight
+        );
+        if (anyIsOutOfBounds) {
+          selectedIcons.forEach((icon, i) => {
+            Object.assign(icon.style, {
+              top: `${start[i].y}px`,
+              left: `${start[i].x}px`,
+              zIndex: iconZIndex++,
+            });
+          });
+        }
       },
     },
     modifiers: [
@@ -628,6 +664,73 @@ export function makeDesktopIcon(opts) {
         restriction: "parent",
       }),
     ],
+  });
+}
+
+function isIconInSelection(icon) {
+  const selectionRect = dragBox.getBoundingClientRect();
+  const rect = icon.getBoundingClientRect();
+  const w = rect.right - rect.left;
+  const h = rect.bottom - rect.top;
+  return (
+    selectionRect.left <= rect.left + w &&
+    selectionRect.top <= rect.top + h &&
+    selectionRect.right >= rect.right - w &&
+    selectionRect.bottom >= rect.bottom - h
+  );
+}
+
+const dragBox = document.querySelector("#icon-select");
+let lastDragBoxTime = 0;
+export function initIconSelect() {
+  let x1 = 0;
+  let y1 = 0;
+  let x2 = 0;
+  let y2 = 0;
+  const icons = getIcons();
+  interact(container).draggable({
+    cursorChecker: () => null,
+    listeners: {
+      start: function (event) {
+        x1 = event.x0;
+        y1 = event.y0;
+        iconZIndex++;
+      },
+      move: function (event) {
+        x2 = event.client.x;
+        y2 = event.client.y;
+        const top = Math.min(y1, y2);
+        const left = Math.min(x1, x2);
+        const bottom = Math.max(y1, y2);
+        const right = Math.max(x1, x2);
+        Object.assign(dragBox.style, {
+          display: "block",
+          top: `${top}px`,
+          left: `${left}px`,
+          height: `${bottom - top}px`,
+          width: `${right - left}px`,
+          zIndex: iconZIndex,
+        });
+        selectedIcons = [];
+        icons.forEach((icon) => {
+          if (isIconInSelection(icon)) {
+            icon.classList.add("focus");
+            selectedIcons.push(icon);
+          } else {
+            icon.classList.remove("focus");
+          }
+        });
+        lastDragBoxTime = new Date().getTime();
+      },
+      end: function () {
+        Object.assign(dragBox.style, {
+          display: "none",
+          height: 0,
+          width: 0,
+        });
+        lastDragBoxTime = new Date().getTime();
+      },
+    },
   });
 }
 
