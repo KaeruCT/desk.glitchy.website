@@ -688,7 +688,7 @@ export function initIconSelect() {
   let x2 = 0;
   let y2 = 0;
   const icons = getIcons();
-  interact(container).draggable({
+  interact(iconContainer).draggable({
     cursorChecker: () => null,
     listeners: {
       start: function (event) {
