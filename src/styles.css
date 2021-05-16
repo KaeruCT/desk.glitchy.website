@@ -16,6 +16,16 @@ html {
 
   min-width: 320px;
 }
+.glass::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  filter: blur(10px);
+  display: block;
+}
 .window-wrapper.snapping {
   transition-property: width, height, top, left, opacity;
   transition-duration: 0.3s;
@@ -346,6 +356,7 @@ html {
 #share-link,
 #change-wallpaper,
 #shutdown {
+  user-select: none;
   padding-left: 16px;
 }
 .start-menu .menu-sidebar .top {
@@ -379,12 +390,18 @@ html {
 }
 .start-menu .menu-sidebar .bottom button {
   border: rgba(255, 255, 255, 0.3) 1px solid;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.49) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.47), 0 16px 0 -5px rgba(255, 255, 255, 0.12) inset,
+    0 26px 15px -20px rgba(255, 255, 255, 0.5) inset;
 }
 .start-menu .menu-sidebar .bottom button::after {
   opacity: 0.5;
 }
 .start-menu .menu-sidebar .bottom button:hover {
   opacity: 1;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.49) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.47), 0 16px 0 -5px rgba(255, 255, 255, 0.12) inset,
+    0 26px 15px -20px rgba(255, 255, 255, 0.5) inset, 0 0 4px 1px white inset;
 }
 .start-menu .menu-sidebar button,
 .start-menu .menu-sidebar .button {
@@ -403,6 +420,9 @@ html {
 .start-menu .menu-sidebar button:hover,
 .start-menu .menu-sidebar .button:hover {
   border: rgba(255, 255, 255, 0.3) 1px solid;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.49) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.74), 0 0 0 2px rgba(255, 255, 255, 0.13),
+    0 20px 0 -5px rgba(255, 255, 255, 0.22) inset, 0 10px 60px -20px white inset;
 }
 .start-menu .menu-sidebar button::after,
 .start-menu .menu-sidebar .button::after {
@@ -432,7 +452,8 @@ html {
   opacity: 1;
 }
 .start-menu .menu-sidebar button:focus,
-.start-menu .menu-sidebar .button:focus {
+.start-menu .menu-sidebar .button:focus,
+.start-menu a:focus {
   outline: 0;
 }
 .start-menu .menu-sidebar button:active,
@@ -508,6 +529,11 @@ html {
 }
 .focus::after {
   opacity: 0.3;
+}
+
+.window-wrapper .window.glass > .title-bar {
+  background-size: contain;
+  background-attachment: fixed;
 }
 
 .colored::before,
