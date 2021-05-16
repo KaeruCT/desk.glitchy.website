@@ -6,6 +6,7 @@ export function openWinamp(title, { width = 0, height = 0 } = {}) {
   let running = false;
 
   return function (opts) {
+    console.log("RUNNING", running);
     if (running) return;
     running = true;
 
@@ -14,7 +15,7 @@ export function openWinamp(title, { width = 0, height = 0 } = {}) {
     webamp.renderWhenReady(document.querySelector("#drop-full")).then(() => {
       const customEl = document.querySelector("#webamp");
       document.querySelector("#container").appendChild(customEl); // so it respects zindex of other windows
-      makeWindow({
+      const win = makeWindow({
         customEl,
         icon: opts.icon,
         width,
@@ -24,13 +25,17 @@ export function openWinamp(title, { width = 0, height = 0 } = {}) {
           webamp.onClose(() => {
             win.close();
             webamp.dispose();
-            running = false;
           });
           webamp.onMinimize(() => {
             win.toggleMinimize();
           });
         },
       });
+      win.onClose = function () {
+        running = false;
+        console.log("ONCLOSE");
+        webamp.dispose();
+      };
     });
   };
 }
