@@ -330,6 +330,7 @@ html {
 }
 .start-menu .title-bar {
   height: 100%;
+  background: transparent !important;
 }
 
 .start-menu .window-body {
