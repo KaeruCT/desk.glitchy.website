@@ -62,7 +62,8 @@ export const filesystem = {
         "aug29.jpg": buddha,
       },
       Homework: {
-        "hot_redhead_solo.mp4": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "hot_redhead_solo.mp4":
+          "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
       },
       Music: {
         ur9tc: {
@@ -80,13 +81,16 @@ export const filesystem = {
       },
       Videos: {
         "the_need_for_escapism.mkv":
-          "https://www.youtube.com/embed/Hp-KX4HcaXo",
-        "two_months.mp4": "https://www.youtube.com/embed/9T_m6Zq3ZKQ",
-        "new_freedom.avi": "https://www.youtube.com/embed/xh8lQU1jSO4",
-        "milk_hun.mp4": "https://www.youtube.com/embed/-NHFNjCe0Eo",
-        "cyan_dot_music.mp4": "https://www.youtube.com/embed/3k_7KhEwJ_0",
-        "cold_blow.avi": "https://www.youtube.com/embed/qQPKlf5NRkc",
-        "rh_bb.wmv": "https://www.youtube.com/embed/hvf_LemcrcE",
+          "https://www.youtube.com/embed/Hp-KX4HcaXo?autoplay=1",
+        "two_months.mp4":
+          "https://www.youtube.com/embed/9T_m6Zq3ZKQ?autoplay=1",
+        "new_freedom.avi":
+          "https://www.youtube.com/embed/xh8lQU1jSO4?autoplay=1",
+        "milk_hun.mp4": "https://www.youtube.com/embed/-NHFNjCe0Eo?autoplay=1",
+        "cyan_dot_music.mp4":
+          "https://www.youtube.com/embed/3k_7KhEwJ_0?autoplay=1",
+        "cold_blow.avi": "https://www.youtube.com/embed/qQPKlf5NRkc?autoplay=1",
+        "rh_bb.wmv": "https://www.youtube.com/embed/hvf_LemcrcE?autoplay=1",
       },
       Documents: {
         "IMPORTANT.txt": trollText,
