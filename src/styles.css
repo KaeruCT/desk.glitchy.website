@@ -30,6 +30,14 @@ html {
   transition-property: width, height, top, left, opacity;
   transition-duration: 0.3s;
 }
+.window-wrapper.fading-in {
+  transition-property: opacity, transform;
+  transition-duration: 0.15s;
+}
+.window-wrapper.fading-out {
+  transition-property: opacity, transform;
+  transition-duration: 0.3s;
+}
 .window {
   display: flex;
   flex-direction: column;

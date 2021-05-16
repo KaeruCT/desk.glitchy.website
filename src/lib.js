@@ -139,6 +139,7 @@ function snap(win, snapEl, minimize) {
 
 let zIndex = 1;
 let windowId = 1;
+const desktop = document.querySelector(".desktop");
 const container = document.querySelector("#container");
 const iconContainer = document.querySelector("#icon-container");
 const taskbar = document.querySelector("#taskbar");
@@ -148,6 +149,8 @@ const dropFull = document.querySelector("#drop-full");
 const windows = {};
 
 export function makeWindow(opts) {
+  desktop.style.cursor = "progress";
+
   const {
     width = 0,
     height = 0,
@@ -229,13 +232,19 @@ export function makeWindow(opts) {
     //   clearInterval(updatePreviewInterval);
     // }
     interact(el).unset();
-    el.parentNode.removeChild(el);
-    taskbar.removeChild(taskbarBtn);
-    win.hidePreview();
-    if (win.onClose) {
-      win.onClose();
-    }
-    delete windows[id];
+    win.element.classList.add("fading-out");
+    win.element.style.opacity = 0;
+    win.element.style.transform = "scale(0.85)";
+    setTimeout(() => {
+      el.parentNode.removeChild(el);
+      taskbar.removeChild(taskbarBtn);
+      win.hidePreview();
+      if (win.onClose) {
+        win.onClose();
+      }
+      delete windows[id];
+    }, 300);
+
     inferActive();
   }
 
@@ -381,6 +390,9 @@ export function makeWindow(opts) {
   });
 
   if (!customEl) {
+    el.style.opacity = 0;
+    el.style.transform = "scale(0.9)";
+    el.classList.add("fading-in");
     container.appendChild(el);
     el.querySelector(".window-body").appendChild(windowContent);
 
@@ -423,6 +435,15 @@ export function makeWindow(opts) {
     snapTo: "",
     status: "",
   });
+
+  el.style.opacity = 1;
+  el.style.transform = "";
+  setTimeout(() => {
+    el.classList.remove("fading-in");
+  }, 200);
+  setTimeout(() => {
+    desktop.style.cursor = "default";
+  }, 400);
 
   const titleBar = el.querySelector(".title-bar");
   if (titleBar) {
