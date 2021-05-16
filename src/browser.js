@@ -101,7 +101,7 @@ export function openIframe(title, src, { width = 460, height = 380 } = {}) {
       title,
       content: htmlToElement(
         `<div style="display: flex;">
-          <iframe allowfullscreen seamless src="${src}" style="width: 100%; height: 100%">
+          <iframe allowfullscreen seamless allow="autoplay" src="${src}" style="width: 100%; height: 100%">
         </div>`
       ),
     });
