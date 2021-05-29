@@ -228,5 +228,3 @@ export function findPrograms(search) {
     return searchValues.some((s) => s.includes(search));
   });
 }
-
-setTimeout(() => openAsteroids()(), 500);
