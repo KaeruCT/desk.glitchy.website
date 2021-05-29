@@ -8,6 +8,7 @@ import { openWinamp } from "./winamp";
 import { openClock } from "./clock";
 import { openNotepad } from "./notepad";
 import { openLetterShooter } from "./lettershooter";
+import { openAsteroids } from "./asteroids";
 
 import niceUrls from "./niceUrls";
 
@@ -26,6 +27,7 @@ import winampImg from "./img/winamp.png";
 import snakeImg from "./img/snake.png";
 import minesweeperImg from "./img/minesweeper.png";
 import letterShooterImg from "./img/lettershooter.png";
+import asteroidsImg from "./img/asteroids.png";
 import musicSnakeImg from "./img/musicSnake.png";
 import minecraftImg from "./img/minecraft.png";
 import plasmaImg from "./img/plasma.png";
@@ -116,6 +118,12 @@ export const programs = [
       width: 392,
       height: 392,
     }),
+  },
+  {
+    cmd: "asteroids.exe",
+    icon: asteroidsImg,
+    title: "Asteroids",
+    run: openAsteroids(),
   },
   {
     cmd: "lettershooter.exe",
@@ -220,3 +228,5 @@ export function findPrograms(search) {
     return searchValues.some((s) => s.includes(search));
   });
 }
+
+setTimeout(() => openAsteroids()(), 500);
