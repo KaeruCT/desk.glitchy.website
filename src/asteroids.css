@@ -1,0 +1,34 @@
+.asteroids-container {
+  overflow: hidden;
+  background: #050505;
+  display: flex;
+  justify-content: center;
+  font-family: monospace;
+}
+
+.asteroids-container .info {
+  position: relative;
+}
+
+.asteroids-container .info-text {
+  float: left;
+  height: 20px;
+  color: #ccc;
+  padding-left: 2px;
+  padding-top: 2px;
+}
+
+.asteroids-container .help-text {
+  float: right;
+  height: 20px;
+  color: #aaa;
+  padding-right: 2px;
+  padding-top: 2px;
+}
+
+.asteroids-container .health-bar {
+  width: 100%;
+  position: absolute;
+  height: 2px;
+  top: 20px;
+}

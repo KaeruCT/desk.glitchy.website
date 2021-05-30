@@ -1,12 +1,13 @@
 import intersects from "intersects";
 import ctk from "./ctk";
 import { htmlToElement, makeWindow } from "./lib";
+import "./asteroids.css";
 import asteroidsImg from "./img/asteroids.png";
 
 export function openAsteroids() {
   return function () {
     const el = htmlToElement(
-      `<div tabindex="0" style="overflow: hidden; background: #050505; display: flex; justify-content: center;"></div>`
+      `<div tabindex="0" class="asteroids-container"></div>`
     );
     const win = makeWindow({
       icon: asteroidsImg,
@@ -27,8 +28,18 @@ export function openAsteroids() {
 function startGame(parent) {
   const el = document.createElement("canvas");
   const info = document.createElement("div");
-  info.style =
-    "height: 20px; color: #ccc; padding-left: 2px; padding-top: 2px;";
+  const infoText = document.createElement("div");
+  const helpText = document.createElement("div");
+  const healthBar = document.createElement("div");
+
+  info.className = "info";
+  info.appendChild(infoText);
+  info.appendChild(helpText);
+  info.appendChild(healthBar);
+  infoText.className = "info-text";
+  helpText.className = "help-text";
+  healthBar.className = "health-bar";
+  helpText.innerText = "Move: arrow keys/WASD; Shoot: space; Teleport: shift";
   el.width = 600;
   el.height = 400;
 
@@ -52,6 +63,10 @@ function startGame(parent) {
   let clock = 0;
   let unlockClock;
   let shooting = false;
+  let minShootingMod = 3;
+  let shootingMod = minShootingMod;
+  let maxShootingMod = 15;
+  const fastShootingMod = 5;
 
   setTimeout(() => parent.focus(), 100);
 
@@ -126,27 +141,51 @@ function startGame(parent) {
   function initialize() {
     paused = false;
     asteroids = [];
-    ship = Ship(canvasWidth / 2, canvasHeight / 2, 14, 200, "rgb(0, 255, 255)");
+    ship = Ship(
+      canvasWidth / 2,
+      canvasHeight / 2,
+      14,
+      100 + Math.random() * 400,
+      "rgb(0, 255, 255)"
+    );
+    bulletsShot = 0;
+    score = 0;
+    maxShootingMod = 20;
+    shootingMod = maxShootingMod;
+    tripleBullet = false;
+    unlockClock = 0;
+    clock = 0;
     createAsteroids();
   }
 
   function createAsteroids() {
     for (let i = 0; i < minAsteroids; i++) {
-      let xPos, yPos;
-      if (i % 2 == 0) {
-        xPos = 0;
-        yPos = Math.ceil(Math.random() * canvasHeight);
-      } else {
-        xPos = Math.ceil(Math.random() * canvasWidth);
-        yPos = 0;
+      let xPos, yPos, ang;
+      switch (i % 4) {
+        case 3:
+          xPos = 4;
+          yPos = Math.ceil(Math.random() * (canvasHeight - 4));
+          ang = 90;
+          break;
+        case 2:
+          xPos = Math.ceil(Math.random() * (canvasWidth - 4));
+          yPos = 4;
+          ang = 180;
+          break;
+        case 1:
+          xPos = canvasWidth - 4;
+          yPos = Math.ceil(Math.random() * (canvasHeight - 4));
+          ang = 270;
+          break;
+        case 0:
+          xPos = Math.ceil(Math.random() * (canvasWidth - 4));
+          yPos = canvasHeight - 4;
+          ang = 0;
+          break;
       }
+      ang += -(20 + Math.random() * 20);
       const aSize = Math.ceil(2 + Math.random() * 2);
-      const newAsteroid = Asteroid(
-        xPos,
-        yPos,
-        aSize,
-        Math.floor(Math.random() * 36)
-      );
+      const newAsteroid = Asteroid(xPos, yPos, aSize, ang);
       asteroids.push(newAsteroid);
     }
   }
@@ -155,18 +194,17 @@ function startGame(parent) {
     if (paused) {
       return;
     }
-    const infoText =
-      "Health: " +
-      ship.health +
-      "; Score: " +
-      score +
-      "; Asteroids: " +
-      asteroids.length +
-      "; Bullets shot: " +
-      bulletsShot;
-    info.innerText = infoText;
+    const text = `Score: ${score}; Shots: ${bulletsShot}`;
+    infoText.innerText = text;
+    const h = ship.health / ship.maxHealth;
+    healthBar.style.width = `${h * 100}%`;
+    healthBar.style.background = `rgb(${255 - h * 255}, ${h * 255}, ${0})`;
     hurt = false;
-    if (score >= 200 && !tripleBullet) {
+    if (score >= 60 && maxShootingMod !== fastShootingMod) {
+      maxShootingMod = fastShootingMod;
+      unlockClock = clock;
+    }
+    if (score >= 250 && !tripleBullet) {
       tripleBullet = true;
       unlockClock = clock;
     }
@@ -187,14 +225,14 @@ function startGame(parent) {
       }
       if (ship.left) {
         ship.rotate(-5);
-        ship.deAc(1.5);
+        ship.deAc(0.5);
       }
       if (ship.right) {
         ship.rotate(5);
-        ship.deAc(1.5);
+        ship.deAc(0.5);
       }
       if (ship.up) {
-        ship.acc(0.5);
+        ship.acc(1);
       } else {
         ship.deAc(0.5);
       }
@@ -202,6 +240,7 @@ function startGame(parent) {
       ship.move();
     }
 
+    const newAsts = [];
     for (let i = asteroids.length - 1; i >= 0; i--) {
       const ast = asteroids[i];
       ast.move();
@@ -216,7 +255,7 @@ function startGame(parent) {
         ast.setPos(ast.x, 1);
       }
       const poly = ast.getPolygon();
-      if (intersects.polygonBox(poly.all, ...ship.getRect())) {
+      if (!ship.isDead && intersects.polygonBox(poly.all, ...ship.getRect())) {
         ship.decHealth(10);
         hurt = true;
       }
@@ -226,11 +265,9 @@ function startGame(parent) {
           asteroids.splice(i, 1);
           bullets.splice(k, 1);
           score += 10;
-          if (ast.length > 1) {
-            const astSon1 = Asteroid(ast.x, ast.y, ast.length, ast.ang - 45);
-            const astSon2 = Asteroid(ast.x, ast.y, ast.length, ast.ang + 45);
-            asteroids.push(astSon1);
-            asteroids.push(astSon2);
+          if (ast.size > 1) {
+            newAsts.push(Asteroid(ast.x, ast.y, ast.size - 1, ast.ang - 27.5));
+            newAsts.push(Asteroid(ast.x, ast.y, ast.size - 1, ast.ang + 27.5));
           }
         }
         if (
@@ -245,9 +282,19 @@ function startGame(parent) {
     }
     bullets.forEach((b) => b.move());
     ship.update();
+    newAsts.forEach((a) => asteroids.push(a));
     clock++;
-    if (clock % 100 == 0) ship.incHealth(1);
-    if (clock % 5 == 0 && shooting) shootBullet();
+    if (clock % 100 === 0 && !ship.isDead) ship.incHealth(10);
+    if (shooting) {
+      if (clock % shootingMod === 0) shootBullet();
+      if (shootingMod === 0) shootingMod = minShootingMod;
+      if (clock % 10 === 0) {
+        shootingMod += 1;
+        if (shootingMod > maxShootingMod) shootingMod = minShootingMod;
+      }
+    } else {
+      shootingMod = 0;
+    }
   }
 
   function shootBullet() {
@@ -262,6 +309,8 @@ function startGame(parent) {
       if (tripleBullet) {
         bullets.push(Bullet(ship.x, ship.y, ship.ang + 30, color));
         bullets.push(Bullet(ship.x, ship.y, ship.ang - 30, color));
+        bulletsShot++;
+        bulletsShot++;
       }
       bulletsShot++;
     }
@@ -282,20 +331,26 @@ function startGame(parent) {
 
     if (ship.isDead) {
       drawCenteredString(
-        "GAME OVER :( - Press 'R' to restart",
+        "GAME OVER - Press 'R' to restart",
         "rgb(255, 0, 255)"
       );
     } else if (paused) {
-      drawCenteredString("PAUSED!", "#fff");
+      drawCenteredString("PAUSED! CLICK TO UNPAUSE!", "#fff");
     } else if (tripleBullet && clock - 100 < unlockClock) {
       drawCenteredString("TRIPLE BULLET UNLOCKED!", "rgb(0, 255, 255)");
+    } else if (
+      maxShootingMod === fastShootingMod &&
+      clock - 100 < unlockClock
+    ) {
+      drawCenteredString("FAST SHOOTING UNLOCKED!", "rgb(0, 255, 255)");
     }
   }
 
   function drawCenteredString(str, c) {
+    graphics.getContext().font = "20px monospace";
     const stringWidth = graphics.getFontMetrics().stringWidth(str);
     graphics.setColor(c);
-    graphics.drawString(str, (canvasWidth - stringWidth) / 2, 32);
+    graphics.drawString(str, (canvasWidth - stringWidth) / 2, canvasHeight / 2);
   }
 
   function startGame() {
@@ -318,7 +373,7 @@ function startGame(parent) {
 }
 
 function Asteroid(x, y, size, ang) {
-  const vel = 2;
+  let vel = 2;
   const nPoints = Math.ceil(8.0 + Math.random() * 8.0);
   let radius = 0;
   let life = 0;
@@ -374,7 +429,8 @@ function Asteroid(x, y, size, ang) {
     x += vel * Math.cos(rad);
     y += vel * Math.sin(rad);
     life++;
-    if (life % 10 == 0) ang += 0.1;
+    if (life % 10 === 0) ang += 0.2;
+    if (life % 50 === 0) vel += 0.5;
   }
 
   return {
@@ -387,6 +443,12 @@ function Asteroid(x, y, size, ang) {
     },
     get y() {
       return y;
+    },
+    get ang() {
+      return ang;
+    },
+    get size() {
+      return size;
     },
   };
 }
@@ -433,7 +495,7 @@ function Ship(x, y, startHeight, mHealth, color) {
   let ang = 0;
   let clock = 0;
 
-  const maxVel = 4;
+  const maxVel = 6;
 
   let telX;
 
@@ -474,7 +536,7 @@ function Ship(x, y, startHeight, mHealth, color) {
       pointsY[i] = y + xOld * Math.sin(rad) + yOld * Math.cos(rad);
     }
     clock++;
-    if (teleporting && clock % 50 == 0) {
+    if (teleporting && clock % 50 === 0) {
       setPos(telX, telY);
       teleporting = false;
     }
@@ -543,12 +605,12 @@ function Ship(x, y, startHeight, mHealth, color) {
 
   function acc(amount) {
     if (movAng != ang) movAng += (ang - movAng) / 30;
-    if (clock % 10 == 0 && vel + amount <= maxVel) vel += amount;
+    if (clock % 10 === 0 && vel + amount <= maxVel) vel += amount;
   }
 
   function deAc(amount) {
     if (movAng != ang) movAng += (ang - movAng) / 20;
-    if (clock % 30 == 0)
+    if (clock % 30 === 0)
       if (vel - amount >= 0) {
         vel -= amount;
       } else {
@@ -589,6 +651,9 @@ function Ship(x, y, startHeight, mHealth, color) {
     getPolygon,
     get health() {
       return health;
+    },
+    get maxHealth() {
+      return maxHealth;
     },
     get x() {
       return x;
