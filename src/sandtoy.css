@@ -1,0 +1,54 @@
+.sandtoy-container {
+  font-family: "Courier New", Courier, monospace;
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: #ddd;
+  justify-content: center !important;
+}
+
+.sandtoy-container .app {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.sandtoy-container canvas {
+  background: #111;
+}
+
+.sandtoy-container .info {
+  display: flex;
+  position: relative;
+  font-size: 14px;
+  padding: 6px;
+}
+
+.sandtoy-container .indicator {
+  margin-right: 4px;
+  text-align: center;
+  line-height: 24px;
+  font-size: 18px;
+  width: 24px;
+  height: 24px;
+  border: transparent 2px solid;
+  user-select: none;
+  cursor: pointer;
+}
+
+.sandtoy-container .indicator.gen {
+  margin-right: 8px;
+  background: #a148a8;
+}
+
+.sandtoy-container .indicator span {
+  color: #fff;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}

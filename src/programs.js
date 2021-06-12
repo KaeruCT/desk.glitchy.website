@@ -9,6 +9,7 @@ import { openClock } from "./clock";
 import { openNotepad } from "./notepad";
 import { openLetterShooter } from "./lettershooter";
 import { openAsteroids } from "./asteroids";
+import { openSandtoy } from "./sandtoy";
 
 import niceUrls from "./niceUrls";
 
@@ -28,6 +29,7 @@ import snakeImg from "./img/snake.png";
 import minesweeperImg from "./img/minesweeper.png";
 import letterShooterImg from "./img/lettershooter.png";
 import asteroidsImg from "./img/asteroids.png";
+import sandtoyImg from "./img/sandtoy.png";
 import musicSnakeImg from "./img/musicSnake.png";
 import minecraftImg from "./img/minecraft.png";
 import plasmaImg from "./img/plasma.png";
@@ -118,6 +120,12 @@ export const programs = [
       width: 392,
       height: 392,
     }),
+  },
+  {
+    cmd: "sandtoy.exe",
+    icon: sandtoyImg,
+    title: "Sand Toy",
+    run: openSandtoy(),
   },
   {
     cmd: "asteroids.exe",
