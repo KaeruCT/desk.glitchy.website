@@ -1,4 +1,6 @@
-# desk.glitchy.website
+# [desk.glitchy.website](https://desk.glitchy.website)
+
+[![desk](https://user-images.githubusercontent.com/1018253/128142121-5713a030-8b5d-4ab9-9ddc-68c32236b88d.png)](https://desk.glitchy.website)
 
 A nostalgic (and not very faithful) recreation of the Windows 7 desktop UI.
 
