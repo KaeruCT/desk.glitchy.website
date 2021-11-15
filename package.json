@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "parcel index.html --open",
-    "build": "parcel build index.html"
+    "build": "parcel build --public-url ./ index.html"
   },
   "dependencies": {
     "7.css": "0.3.0",
