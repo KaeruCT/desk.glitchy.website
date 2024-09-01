@@ -152,7 +152,7 @@ export const programs = [
     cmd: "minecraft.exe",
     icon: minecraftImg,
     title: "Minecraft",
-    run: openIframe("Minecraft", "https://classic.minecraft.net", {
+    run: openIframe("Minecraft", "https://minecraft-threejs.netlify.app/", {
       width: 640,
       height: 480,
     }),

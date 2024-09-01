@@ -15,6 +15,24 @@ export function openHomework() {
     );
     let winImg;
 
+    win.onClose = function () {
+      running = false;
+      if (homeWorkCanvasCtx) {
+        homeWorkCanvasCtx.clearRect(
+          0,
+          0,
+          homeWorkCanvas.width,
+          homeWorkCanvas.height
+        );
+      }
+    };
+
+    win.onDrag = function () {
+      if (winImg && homeWorkCanvas) {
+        homeWorkCanvasCtx.drawImage(winImg, win.state.x, win.state.y);
+      }
+    };
+
     html2canvas(win.element, {
       backgroundColor: null,
       allowTaint: true,
@@ -40,23 +58,5 @@ export function openHomework() {
         win.setActive();
       }
     });
-
-    win.onClose = function () {
-      running = false;
-      if (homeWorkCanvasCtx) {
-        homeWorkCanvasCtx.clearRect(
-          0,
-          0,
-          homeWorkCanvas.width,
-          homeWorkCanvas.height
-        );
-      }
-    };
-
-    win.onDrag = function () {
-      if (winImg && homeWorkCanvas) {
-        homeWorkCanvasCtx.drawImage(winImg, win.state.x, win.state.y);
-      }
-    };
   };
 }

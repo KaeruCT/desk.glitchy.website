@@ -25,7 +25,7 @@ import { programs } from "./programs";
 import { openHomework } from "./homeworkTrap";
 
 function initDesktop() {
-  const desktopIcons = [...programs.filter((p) => p.title !== "Notepad")];
+  const desktopIcons = [...programs];
   shuffle(desktopIcons);
   desktopIcons.unshift({
     icon: asciiImg,

@@ -10,11 +10,12 @@ Snake: https://github.com/KaeruCT/svanac
 musicSnake: https://github.com/KaeruCT/musicSnake
 Plasma Gun: One of many excellent demos for https://github.com/oguzeroglu/ROYGBIV
 SkiFree: https://github.com/basicallydan/skifree.js
-Minecraft: https://classic.minecraft.net
+Minecraft: https://mc.yulei.me/
 Terminal: https://github.com/simonecorsi/termly.js
 File Explorer: https://github.com/cubiclesoft/js-fileexplorer
 MSN Messenger: Heavily modified / inspired from: https://codepen.io/plizet (https://codepen.io/plizet/pen/pozdoQM)
-Default Wallpaper: https://unsplash.com/
+Every other program not explicitly credited: created by yours truly.
+Default Wallpaper: https://picsum.photos/
 Music: Try Andy (https://soundcloud.com/try_andy)
 
-Everything brought together by yours truly
+Everything brought together by yours truly.

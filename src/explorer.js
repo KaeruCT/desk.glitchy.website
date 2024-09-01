@@ -72,8 +72,6 @@ function initExplorer(win, element, startPath) {
   }
 
   const options = {
-    // This allows drag-and-drop and cut/copy/paste to work between windows of the live demo.
-    // Your application should either define the group uniquely for your application or not at all.
     group: "desk.glitchy.website",
 
     capturebrowser: true,

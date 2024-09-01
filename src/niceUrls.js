@@ -10,4 +10,5 @@ export default [
   "https://clubnintendoarchives.neocities.org/",
   "https://tixy.land/",
   "https://href.cool/",
+  "https://kaeruct.github.io/",
 ];
