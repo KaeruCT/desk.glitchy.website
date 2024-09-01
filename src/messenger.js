@@ -35,7 +35,7 @@ function randAvatar() {
     av8,
     av9,
     "https://placekeanu.com/96/96",
-    "https://www.placecage.com/96/96",
+    "https://placecage.deno.dev/96/96",
   ]);
 }
 
@@ -419,7 +419,7 @@ export function openMessenger() {
     const otherUser = getUser();
     const avatar = randAvatar();
     const a = Math.round(94 + Math.random() * 20);
-    const avatarMe = `https://www.placecage.com/${a}/${a}?c=${new Date().getTime()}`;
+    const avatarMe = `https://placecage.deno.dev/${a}/${a}?c=${new Date().getTime()}`;
 
     const greeting = randItem(GREETINGS);
     const isFormal = greeting[0].toUpperCase() === greeting[0];

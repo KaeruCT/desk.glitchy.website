@@ -14,7 +14,7 @@ var niceImgs = [
   "https://placebear.com/{0}/{1}",
   "https://placekitten.com/{0}/{1}",
   "https://placekeanu.com/{0}/{1}",
-  "https://www.placecage.com/{0}/{1}",
+  "https://placecage.deno.dev/{0}/{1}",
 ];
 
 function formatStr(format) {
